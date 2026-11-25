@@ -4,6 +4,11 @@
 
 ![ETS2 Car Enhance Cover](ETS2_Car_Enhance_Cover_Fel1neee.jpg)
 
+### 🎬 Gameplay & Physics Test (YouTube)
+[![ETS2 Car Enhance Showcase](https://img.youtube.com/vi/8Nq802V1-Jo/maxresdefault.jpg)](https://www.youtube.com/watch?v=8Nq802V1-Jo)
+
+> Watch on YouTube: https://www.youtube.com/watch?v=8Nq802V1-Jo
+
 ---
 
 ## 🇬🇧 English
