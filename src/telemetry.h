@@ -50,6 +50,7 @@ struct TelemetryState {
     std::atomic<float> steer{0.0f};
     std::atomic<float> throttle{0.0f};
     std::atomic<float> brake{0.0f};
+    std::atomic<float> clutch{0.0f};
     std::atomic<bool>  paused{true};
     std::atomic<bool>  running{false};
 

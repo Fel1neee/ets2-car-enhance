@@ -114,6 +114,14 @@ static SCSAPI_VOID on_brake_channel(
     }
 }
 
+static SCSAPI_VOID on_clutch_channel(
+    const scs_string_t, const scs_u32_t, const scs_value_t* const value, const scs_context_t)
+{
+    if (value && value->type == SCS_VALUE_TYPE_float) {
+        g_tel.clutch.store(value->value_float.value, std::memory_order_relaxed);
+    }
+}
+
 static SCSAPI_VOID on_game_time_channel(
     const scs_string_t, const scs_u32_t, const scs_value_t* const value, const scs_context_t)
 {
@@ -180,6 +188,13 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
         SCS_VALUE_TYPE_float,
         SCS_TELEMETRY_CHANNEL_FLAG_none,
         on_brake_channel,
+        nullptr);
+    vp->register_for_channel(
+        SCS_TELEMETRY_TRUCK_CHANNEL_effective_clutch,
+        SCS_U32_NIL,
+        SCS_VALUE_TYPE_float,
+        SCS_TELEMETRY_CHANNEL_FLAG_none,
+        on_clutch_channel,
         nullptr);
     vp->register_for_channel(
         SCS_TELEMETRY_CHANNEL_game_time,

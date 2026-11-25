@@ -792,7 +792,7 @@ static void draw_mini_hud() {
     if (s < 0.70f) s = 0.70f;
     if (s > 1.80f) s = 1.80f;
 
-    float hudW = 304.0f * s;
+    float hudW = 336.0f * s;
     float hudH = 132.0f * s;
 
     ImGuiIO& io = ImGui::GetIO();
@@ -862,39 +862,69 @@ static void draw_mini_hud() {
 
         // Horizontal divider under steering strip + 2 vertical column dividers
         dl->AddLine(ImVec2(wp.x + 3.0f * s, wp.y + topH), ImVec2(wp.x + hudW - 3.0f * s, wp.y + topH), IM_COL32(55, 105, 225, 210), 1.6f * s);
-        float col1X = wp.x + 62.0f * s;
-        float col2X = wp.x + 178.0f * s;
+        float col1X = wp.x + 88.0f * s;
+        float col2X = wp.x + 206.0f * s;
         dl->AddLine(ImVec2(col1X, wp.y + topH), ImVec2(col1X, wp.y + hudH - 3.0f * s), IM_COL32(55, 105, 225, 210), 1.6f * s);
         dl->AddLine(ImVec2(col2X, wp.y + topH), ImVec2(col2X, wp.y + hudH - 3.0f * s), IM_COL32(55, 105, 225, 210), 1.6f * s);
 
-        // Column 1: ABS & TC status
-        ImGui::SetCursorPos(ImVec2(10.0f * s, 32.0f * s));
+        // Column 1: ABS & TC status + Clutch / Brake / Throttle vertical bars
+        ImGui::SetCursorPos(ImVec2(9.0f * s, 32.0f * s));
         ImVec4 absCol = (g_cfg.abs_level == 0) ? ImVec4(0.45f, 0.48f, 0.55f, 1.0f)
                       : (absAct ? ImVec4(1.0f, 0.85f, 0.2f, 1.0f) : ImVec4(0.45f, 0.90f, 0.35f, 1.0f));
         ImGui::TextColored(absCol, "ABS");
-        ImGui::SetCursorPos(ImVec2(10.0f * s, 48.0f * s));
+        ImGui::SetCursorPos(ImVec2(9.0f * s, 48.0f * s));
         ImGui::TextColored(absCol, g_cfg.abs_level == 0 ? "OFF" : "L%d", g_cfg.abs_level);
 
-        ImGui::SetCursorPos(ImVec2(10.0f * s, 76.0f * s));
+        ImGui::SetCursorPos(ImVec2(9.0f * s, 76.0f * s));
         ImVec4 tcCol = (g_cfg.esp_level == 0) ? ImVec4(0.45f, 0.48f, 0.55f, 1.0f)
                      : (espAct ? ImVec4(1.0f, 0.65f, 0.2f, 1.0f) : ImVec4(0.45f, 0.90f, 0.35f, 1.0f));
         ImGui::TextColored(tcCol, "TC");
-        ImGui::SetCursorPos(ImVec2(10.0f * s, 92.0f * s));
+        ImGui::SetCursorPos(ImVec2(9.0f * s, 92.0f * s));
         ImGui::TextColored(tcCol, g_cfg.esp_level == 0 ? "OFF" : "L%d", g_cfg.esp_level);
 
+        // Pedal bars: Clutch (blue), Brake (red), Throttle (green)
+        float pedalVals[3] = {
+            g_tel.clutch.load(std::memory_order_relaxed),
+            g_tel.brake.load(std::memory_order_relaxed),
+            g_tel.throttle.load(std::memory_order_relaxed)
+        };
+        ImU32 pedalCols[3] = {
+            IM_COL32(75, 175, 255, 255),
+            IM_COL32(255, 65, 65, 255),
+            IM_COL32(70, 235, 95, 255)
+        };
+        const char* pedalLbls[3] = { "С", "Т", "Г" };
+        float pBarW = 7.0f * s;
+        float pBarY0 = wp.y + 26.0f * s;
+        float pBarY1 = wp.y + 104.0f * s;
+        for (int p = 0; p < 3; ++p) {
+            float px = wp.x + (46.0f + p * 12.0f) * s;
+            float v = pedalVals[p];
+            if (v < 0.0f) v = 0.0f;
+            if (v > 1.0f) v = 1.0f;
+            dl->AddRectFilled(ImVec2(px, pBarY0), ImVec2(px + pBarW, pBarY1), IM_COL32(20, 24, 36, 235), 2.0f * s);
+            if (v > 0.01f) {
+                float fillY = pBarY1 - (pBarY1 - pBarY0) * v;
+                dl->AddRectFilled(ImVec2(px, fillY), ImVec2(px + pBarW, pBarY1), pedalCols[p], 2.0f * s);
+            }
+            dl->AddRect(ImVec2(px, pBarY0), ImVec2(px + pBarW, pBarY1), IM_COL32(70, 95, 145, 160), 2.0f * s, 0, 1.0f * s);
+            ImGui::SetCursorPos(ImVec2((45.5f + p * 12.0f) * s, 107.0f * s));
+            ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(pedalCols[p]), "%s", pedalLbls[p]);
+        }
+
         // Column 2: Tire & Brake temperatures in C
-        ImGui::SetCursorPos(ImVec2(69.0f * s, 29.0f * s));
+        ImGui::SetCursorPos(ImVec2(96.0f * s, 29.0f * s));
         ImGui::TextColored(ImVec4(0.75f, 0.82f, 0.95f, 1.0f), "ШИНЫ");
-        ImGui::SetCursorPos(ImVec2(69.0f * s, 46.0f * s));
+        ImGui::SetCursorPos(ImVec2(96.0f * s, 46.0f * s));
         ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(tire_temp_color(avgTire)), "%.0f C", avgTire);
 
-        ImGui::SetCursorPos(ImVec2(69.0f * s, 74.0f * s));
+        ImGui::SetCursorPos(ImVec2(96.0f * s, 74.0f * s));
         ImGui::TextColored(ImVec4(0.75f, 0.82f, 0.95f, 1.0f), "ТОРМОЗА");
-        ImGui::SetCursorPos(ImVec2(69.0f * s, 91.0f * s));
+        ImGui::SetCursorPos(ImVec2(96.0f * s, 91.0f * s));
         ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(brake_temp_color(maxBrake)), "%.0f C", maxBrake);
 
         // Column 3: Top-down chassis with filled treaded tires, turning front wheels & center G-meter
-        float cx  = wp.x + 241.0f * s;
+        float cx  = wp.x + 271.0f * s;
         float fy  = wp.y + 40.0f * s;
         float ry  = wp.y + 92.0f * s;
         float cy  = 0.5f * (fy + ry);
@@ -989,7 +1019,7 @@ static void draw_mini_hud() {
         dl->AddCircleFilled(ballPos, 3.8f * s, ballCol, 16);
 
         // Clean G-value placed below the rear axle (no overlap with axle line!)
-        ImGui::SetCursorPos(ImVec2(226.0f * s, 108.0f * s));
+        ImGui::SetCursorPos(ImVec2(256.0f * s, 108.0f * s));
         ImGui::TextColored(ImVec4(0.82f, 0.90f, 1.0f, 1.0f), "%.1f G", gMag);
     }
     ImGui::End();
