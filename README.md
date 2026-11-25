@@ -30,11 +30,21 @@ Native C++ / DX11 plugin for **Euro Truck Simulator 2** that transforms passenge
   - **Draggable Mini Telemetry HUD** (scalable `0.70x – 1.80x`): steering angle strip, `ABS`/`TC` status, tire & brake temps, 4-wheel chassis diagram with tread patterns, turning front wheels, and center **G-Force meter**.
 
 ### Installation (For Players — No SDK Required)
-1. Download `ets2_car_enhance.dll` from [Releases](https://github.com/Fel1neee/ets2-car-enhance/releases).
+1. Download `ets2_car_enhance.dll` from [Releases](https://github.com/Fel1neee/ets2-car-enhance/releases) (single standalone `.dll`, no extra frameworks or SDK needed).
 2. Copy `ets2_car_enhance.dll` into:
    `<ETS2_DIR>\bin\win_x64\plugins\`
-3. Launch ETS2 (64-bit, DirectX 11).
+3. Launch ETS2 (64-bit, DirectX 11) with any passenger car mod.
 4. Press **`Insert`** or **`F6`** (or bind any steering wheel button in the menu) to open the overlay.
+
+### Tested Car Mods
+Works best and tested primarily on high-quality car mods by **DN Modding** and **Nimit**:
+- `Lamborghini Huracán LP 580-2`
+- `Lamborghini Countach`
+- `Chevrolet Corvette`
+- `BMW M5`
+- `Lexus LS500`
+- `Volkswagen Golf 7.5`
+- `Dodge Challenger / Charger Hellcat`
 
 ### Building from Source
 All required headers/libraries (`SCS Telemetry SDK`, `MinHook`, `ImGui`) are already included in `third_party/`.
@@ -72,12 +82,22 @@ To compile, you only need **llvm-mingw** (`g++` / `clang++` for Windows x64):
   - **Перетаскиваемый мини-HUD** (масштаб `0.70x – 1.80x`): верхняя полоса угла руля с точкой, индикаторы `ABS`/`TC`, температуры в °C, схема 4 колёс с протектором, поворот передних колёс и **G-метр с шариком** в центре шасси.
 
 ### Установка (Для игроков — SDK скачивать НЕ нужно)
-1. Скачай готовый файл `ets2_car_enhance.dll` из раздела [Releases](https://github.com/Fel1neee/ets2-car-enhance/releases).
+1. Скачай готовый файл `ets2_car_enhance.dll` из раздела [Releases](https://github.com/Fel1neee/ets2-car-enhance/releases) (достаточно **одного этого `.dll` файла**, никакие фреймворки или SDK не нужны).
 2. Скопируй `ets2_car_enhance.dll` в папку:
    `<Папка_ETS2>\bin\win_x64\plugins\`
    *(если папки `plugins` нет — создай её вручную)*.
-3. Запусти ETS2 (64-bit, DirectX 11).
+3. Запусти ETS2 (64-bit, DirectX 11) с любым модом на легковую машину.
 4. Открой меню клавишей **`Insert`** или **`F6`** (или назначь любую кнопку на руле прямо в футере меню).
+
+### Проверенные моды авто
+Адекватнее всего плагин работает и тестировался на модах от **DN Modding** и **Nimit**:
+- `Lamborghini Huracán LP 580-2`
+- `Lamborghini Countach`
+- `Chevrolet Corvette`
+- `BMW M5`
+- `Lexus LS500`
+- `Volkswagen Golf 7.5`
+- `Dodge Challenger / Charger Hellcat`
 
 ### Сборка из исходников (для разработчиков)
 Все библиотеки (`SCS Telemetry SDK`, `MinHook`, `ImGui`) уже лежат в репозитории в папке `third_party/`.
