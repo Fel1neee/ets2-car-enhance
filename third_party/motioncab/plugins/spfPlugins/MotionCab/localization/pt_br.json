@@ -1,0 +1,612 @@
+{
+  "language": {
+    "en": "Inglês    [English]",
+    "uk": "Ucraniano    [Українська]",
+    "de": "Alemão    [Deutsch]",
+    "fr": "Francês    [Français]",
+    "es": "Espanhol    [Español]",
+    "pl": "Polonês    [Polski]",
+    "ru": "Russo    [Русский]",
+    "pt_br": "Português (Brasil)",
+    "it": "Italiano    [Italiano]",
+    "nl": "Holandês    [Nederlands]",
+    "tr": "Turco    [Türkçe]",
+    "cs": "Tcheco    [Čeština]",
+    "zh": "Chinês (simplificado)    [简体中文]",
+    "ja": "Japonês    [日本語]",
+    "ko": "Coreano    [한국어]"
+  },
+  "plugin": {
+    "description": "Movimento dinâmico da cabeça para ETS2 e ATS"
+  },
+  "window": {
+    "title": "Configurações rápidas do MotionCab",
+    "desc": "Acesso rápido às configurações de cada efeito, como alternativa à aba Configurações personalizadas."
+  },
+  "keybinds": {
+    "ui_toggle": {
+      "title": "Mostrar/ocultar a janela de configurações",
+      "desc": "Mostra ou oculta a janela de configurações rápidas do MotionCab."
+    },
+    "look_left": {
+      "title": "Olhar para a esquerda",
+      "desc": "Gira suavemente a cabeça bem para a esquerda, para verificar o tráfego cruzado."
+    },
+    "look_right": {
+      "title": "Olhar para a direita",
+      "desc": "Gira suavemente a cabeça bem para a direita, para verificar o tráfego cruzado."
+    },
+    "glance_left": {
+      "title": "Espiar o espelho esquerdo",
+      "desc": "Dá suavemente uma espiada no espelho esquerdo, por exemplo ao entrar na rodovia."
+    },
+    "glance_right": {
+      "title": "Espiar o espelho direito",
+      "desc": "Dá suavemente uma espiada no espelho direito, por exemplo ao entrar na rodovia."
+    },
+    "look_forward": {
+      "title": "Olhar para a frente",
+      "desc": "Gira suavemente a cabeça de volta para a frente, encerrando qualquer olhada."
+    },
+    "zoom": {
+      "title": "Zoom",
+      "desc": "Aproxima suavemente e depois volta suavemente ao normal."
+    },
+    "blindspot_viewer": {
+      "title": "Visão do ponto cego",
+      "desc": "Inclina-se suavemente para ver atrás da coluna do para-brisa."
+    },
+    "cabin_walk": {
+      "stand_sit": {
+        "title": "Levantar / Sentar",
+        "desc": "Levanta do banco. Toque para sentar no lugar para onde você olha, segure para voltar ao volante."
+      },
+      "forward": {
+        "title": "Andar para frente",
+        "desc": "Anda para frente enquanto você está de pé na cabine."
+      },
+      "back": {
+        "title": "Andar para trás",
+        "desc": "Anda para trás enquanto você está de pé na cabine."
+      },
+      "left": {
+        "title": "Passo à esquerda",
+        "desc": "Dá um passo lateral para a esquerda enquanto você está de pé na cabine."
+      },
+      "right": {
+        "title": "Passo à direita",
+        "desc": "Dá um passo lateral para a direita enquanto você está de pé na cabine."
+      },
+      "crouch": {
+        "title": "Agachar",
+        "desc": "Agacha quando de pé."
+      }
+    }
+  },
+  "settings": {
+    "enabled_desc": "Liga ou desliga este efeito.",
+    "paused_by": "Pausado por {effects}.",
+    "pauses": "Quando ativado, pausa o(s) seguinte(s) efeito(s):",
+    "paused_in_use": "Pausado enquanto {effects} está em uso.",
+    "driving": {
+      "title": "Direção",
+      "head_motion": {
+        "title": "Movimento da cabeça",
+        "sway_strength": {
+          "title": "Força do balanço",
+          "desc": "Quanto sua cabeça é empurrada ao acelerar, frear ou fazer uma curva."
+        },
+        "tilt_strength": {
+          "title": "Força da inclinação",
+          "desc": "Quanto sua cabeça se inclina quando a cabine tomba ou balança."
+        },
+        "smoothing_time": {
+          "title": "Suavização",
+          "desc": "Com que rapidez sua cabeça se estabiliza. Mais alto = mais lento e suave, mais baixo = mais ágil."
+        }
+      },
+      "body_dynamics": {
+        "title": "Dinâmica do corpo",
+        "lean_strength": {
+          "title": "Força da inclinação lateral",
+          "desc": "Quanto sua cabeça se inclina para dentro de uma curva."
+        },
+        "nod_strength": {
+          "title": "Força do aceno",
+          "desc": "Quanto sua cabeça cai para a frente ao frear e recua ao acelerar."
+        },
+        "smoothing_time": {
+          "title": "Suavização",
+          "desc": "Com que rapidez a inclinação e o aceno se estabilizam. Mais baixo = mais ágil."
+        }
+      },
+      "steering_camera": {
+        "title": "Câmera de direção",
+        "rotation_left_deg": {
+          "title": "Quantidade de rotação à esquerda",
+          "desc": "Quanto a câmera gira quando você esterça o volante até o fim para a esquerda."
+        },
+        "rotation_right_deg": {
+          "title": "Quantidade de rotação à direita",
+          "desc": "Quanto a câmera gira quando você esterça o volante até o fim para a direita."
+        },
+        "center_zone_pct": {
+          "title": "Zona central",
+          "desc": "Quanto você pode girar o volante mantendo o mesmo giro da câmera dos dois lados, como parte do esterçamento total. Além disso, cada lado gira conforme sua própria quantidade de rotação."
+        },
+        "smoothing_time": {
+          "title": "Suavização",
+          "desc": "Quão suave é o giro da câmera depois que começa. Mais alto = mais suave e lento."
+        },
+        "delay_seconds": {
+          "title": "Atraso de reação",
+          "desc": "Quanto tempo a câmera espera depois que você gira o volante antes de começar a se mover."
+        },
+        "disable_in_reverse": {
+          "title": "Desativar na marcha à ré",
+          "desc": "Mantém a câmera centralizada enquanto o caminhão está em marcha à ré."
+        },
+        "disable_when_stopped": {
+          "title": "Desativar com o caminhão parado",
+          "desc": "Mantém a câmera centralizada até o caminhão andar para a frente."
+        }
+      }
+    },
+    "road": {
+      "title": "Estrada",
+      "suspension": {
+        "title": "Suspensão",
+        "vertical_strength": {
+          "title": "Força vertical",
+          "desc": "Quanto os buracos da estrada fazem a câmera quicar e inclinar."
+        },
+        "reactivity": {
+          "title": "Reatividade",
+          "desc": "Com que rapidez o banco se estabiliza após um buraco. Mais baixo = mais firme e ágil."
+        },
+        "grade_strength": {
+          "title": "Acompanhar a inclinação",
+          "desc": "Levanta sua cabeça nas descidas e abaixa nas subidas."
+        }
+      },
+      "road_irregularity": {
+        "title": "Irregularidade do piso",
+        "intensity": {
+          "title": "Intensidade",
+          "desc": "Quão forte é a trepidação do piso e o balanço fora de estrada."
+        },
+        "reactivity": {
+          "title": "Reatividade",
+          "desc": "Quão seca e vibrante é a trepidação do piso. Mais baixo = mais seca."
+        }
+      },
+      "speed_shake": {
+        "title": "Tremor de velocidade",
+        "intensity": {
+          "title": "Intensidade",
+          "desc": "Força geral do tremor que você sente ao dirigir rápido."
+        },
+        "smoothing_time": {
+          "title": "Suavização",
+          "desc": "Como o tremor se comporta ao longo do tempo. Mais alto = mais lento e suave, mais baixo = mais brusco e nervoso."
+        },
+        "rotation": {
+          "title": "Rotação",
+          "desc": "Quanto sua visão se inclina/gira como parte do tremor, em vez de apenas se mover de um lado para o outro. Defina 0 para manter só o movimento lateral."
+        },
+        "vertical": {
+          "title": "Vertical",
+          "desc": "Quanto quique vertical é misturado ao tremor."
+        },
+        "roughness": {
+          "title": "Irregularidade",
+          "desc": "Quão irregular o tremor é ao longo do tempo. 0 o mantém constante; valores mais altos alternam trechos calmos e agitados."
+        }
+      }
+    },
+    "cabin": {
+      "title": "Cabine",
+      "idle_breathing": {
+        "title": "Respiração parada",
+        "vertical_amplitude": {
+          "title": "Amplitude vertical",
+          "desc": "Quanto a câmera sobe e desce a cada respiração."
+        },
+        "pitch_amplitude_deg": {
+          "title": "Amplitude do aceno",
+          "desc": "Quanto sua cabeça se inclina para a frente/trás a cada respiração."
+        },
+        "breathing_rate_bpm": {
+          "title": "Frequência respiratória",
+          "desc": "Com que rapidez a respiração acontece."
+        },
+        "fade_start_kmh": {
+          "title": "Velocidade de início do esmaecimento",
+          "desc": "A velocidade a partir da qual este efeito começa a desaparecer conforme você acelera."
+        },
+        "fade_end_kmh": {
+          "title": "Velocidade de fim do esmaecimento",
+          "desc": "A velocidade em que este efeito desaparece por completo."
+        }
+      },
+      "engine_vibration": {
+        "title": "Vibração do motor",
+        "intensity": {
+          "title": "Intensidade",
+          "desc": "Quão forte é o ronco do motor."
+        }
+      },
+      "engine_start_stop": {
+        "title": "Partida/parada do motor",
+        "intensity": {
+          "title": "Intensidade",
+          "desc": "Quão forte é o tranco quando o motor liga ou desliga."
+        },
+        "duration": {
+          "title": "Duração",
+          "desc": "Quanto dura o tranco da partida. O da parada é mais curto e suave."
+        }
+      },
+      "natural_head_movement": {
+        "title": "Movimento natural da cabeça",
+        "sway_intensity": {
+          "title": "Balanço",
+          "desc": "O quanto sua cabeça balança lentamente sozinha, mesmo quando você a mantém parada."
+        },
+        "micro_intensity": {
+          "title": "Microajustes",
+          "desc": "O quanto sua cabeça se move ao fazer um pequeno ajuste."
+        },
+        "micro_interval": {
+          "title": "Intervalo de microajustes",
+          "desc": "Por quanto tempo sua cabeça espera entre dois pequenos ajustes."
+        },
+        "posture_intensity": {
+          "title": "Mudanças de postura",
+          "desc": "O quanto sua cabeça se desloca ao assumir uma nova posição."
+        },
+        "posture_interval": {
+          "title": "Intervalo de postura",
+          "desc": "Por quanto tempo sua cabeça mantém uma posição antes de assumir outra."
+        },
+        "roll_scale": {
+          "title": "Inclinação lateral",
+          "desc": "O quanto sua cabeça se inclina para os lados, em todos os movimentos exceto a inclinação nas curvas."
+        },
+        "steering_tilt": {
+          "title": "Inclinação ao esterçar",
+          "desc": "O quanto sua cabeça se inclina para dentro da curva: quanto mais rápido você a faz, mais ela se inclina."
+        }
+      },
+      "cabin_audio": {
+        "title": "Áudio da cabine",
+        "width": {
+          "title": "Amplitude",
+          "desc": "Quanto mais alto o ouvido voltado para um alto-falante o ouve em relação ao outro ouvido."
+        },
+        "head_shadow": {
+          "title": "Direcionalidade",
+          "desc": "Quanto um alto-falante soa abafado para o ouvido virado para o outro lado, coberto pela sua cabeça."
+        },
+        "muffle": {
+          "title": "Abafamento",
+          "desc": "Quanto o rádio fica abafado e baixo quando está atrás de você."
+        },
+        "bass": {
+          "title": "Graves",
+          "desc": "Quanto os alto-falantes da cabine cortam o grave, como pequenos alto-falantes de porta."
+        },
+        "mid": {
+          "title": "Médios",
+          "desc": "Quanto vozes e instrumentos se destacam."
+        },
+        "treble": {
+          "title": "Agudos",
+          "desc": "Quão brilhantes soam os alto-falantes da cabine."
+        },
+        "blend": {
+          "title": "Mistura dos alto-falantes",
+          "desc": "Quanto cada alto-falante de porta também toca o outro canal."
+        },
+        "reverb": {
+          "title": "Eco da cabine",
+          "desc": "Quanto as paredes e o para-brisa da cabine refletem o rádio."
+        },
+        "room_size": {
+          "title": "Tamanho da cabine",
+          "desc": "Quanto duram as reflexões na cabine."
+        },
+        "radio_volume": {
+          "title": "Volume do rádio",
+          "desc": "O volume do rádio, além do volume do jogo."
+        },
+        "gps": {
+          "title": "Voz do GPS",
+          "desc": "Toca a voz do GPS pelos alto-falantes da cabine como o rádio, também acompanhando sua cabeça."
+        },
+        "gps_low_cut": {
+          "title": "Corte de graves da voz",
+          "desc": "Quantos graves a voz do GPS perde: mais alto soa mais fina, como um alto-falante pequeno."
+        },
+        "gps_high_cut": {
+          "title": "Corte de agudos da voz",
+          "desc": "Onde terminam os agudos da voz do GPS: mais baixo soa mais abafada."
+        },
+        "gps_tone": {
+          "title": "Timbre da voz",
+          "desc": "Qual parte da voz do GPS o realce destaca: mais baixo soa como caixa, mais alto anasalado."
+        },
+        "gps_tone_boost": {
+          "title": "Realce do timbre",
+          "desc": "Quanto essa parte da voz do GPS se destaca: abaixo de zero a suaviza."
+        },
+        "gps_volume": {
+          "title": "Volume da voz",
+          "desc": "O volume da voz do GPS, além do volume do jogo."
+        },
+        "duck": {
+          "title": "Atenuação",
+          "desc": "Quanto o rádio abaixa enquanto a voz do GPS fala, como num app de navegação."
+        },
+        "outside": {
+          "title": "Exterior",
+          "desc": "Quanto o rádio fica abafado de fora da cabine, nas visões externas."
+        }
+      }
+    },
+    "manual": {
+      "title": "Manual",
+      "manual_look": {
+        "title": "Olhar lateral",
+        "hint": "Teclas próprias, separadas do jogo. O olhar com a seta requer as teclas de seta do jogo.",
+        "look_left_deg": {
+          "title": "Ângulo do olhar à esquerda",
+          "desc": "Quanto sua cabeça gira ao olhar para a esquerda."
+        },
+        "look_right_deg": {
+          "title": "Ângulo do olhar à direita",
+          "desc": "Quanto sua cabeça gira ao olhar para a direita."
+        },
+        "glance_left_deg": {
+          "title": "Ângulo da espiada à esquerda",
+          "desc": "Quanto sua cabeça gira ao espiar o espelho esquerdo."
+        },
+        "glance_right_deg": {
+          "title": "Ângulo da espiada à direita",
+          "desc": "Quanto sua cabeça gira ao espiar o espelho direito."
+        },
+        "glance_left_pitch_deg": {
+          "title": "Inclinação da espiada à esquerda",
+          "desc": "Quanto sua cabeça se inclina ao espiar o espelho esquerdo. Positivo = para cima, negativo = para baixo."
+        },
+        "glance_right_pitch_deg": {
+          "title": "Inclinação da espiada à direita",
+          "desc": "Quanto sua cabeça se inclina ao espiar o espelho direito. Positivo = para cima, negativo = para baixo."
+        },
+        "glance_left_fov_deg": {
+          "title": "FOV da espiada à esquerda",
+          "desc": "Quanto o campo de visão se amplia ao espiar o espelho esquerdo. Negativo = mais estreito (zoom)."
+        },
+        "glance_right_fov_deg": {
+          "title": "FOV da espiada à direita",
+          "desc": "Quanto o campo de visão se amplia ao espiar o espelho direito. Negativo = mais estreito (zoom)."
+        },
+        "smoothing_time": {
+          "title": "Suavização",
+          "desc": "Quão suave é o movimento de ida e volta do olhar."
+        },
+        "pause_steering_camera": {
+          "title": "Pausar a câmera de direção",
+          "desc": "Pausa a câmera de direção enquanto você olha, para a visão ficar no que você está olhando."
+        },
+        "mirror_on_signal": {
+          "title": "Olhar com a seta",
+          "desc": "Olha para o espelho do lado da seta enquanto ela estiver ligada."
+        },
+        "require_stationary": {
+          "title": "Somente parado",
+          "desc": "Só olha para o espelho com a seta quando o caminhão está parado."
+        },
+        "ignore_after_moving_signal": {
+          "title": "Ignorar em movimento",
+          "desc": "Não olhar o espelho por uma seta ligada em movimento, mesmo depois de parar."
+        }
+      },
+      "manual_zoom": {
+        "title": "Zoom manual",
+        "hint": "Esta tecla é separada da tecla nativa do jogo \"Zoom na câmera interna\".",
+        "zoom_fov_deg": {
+          "title": "Nível de zoom",
+          "desc": "Quanto a visão se aproxima enquanto você segura a tecla de zoom. Mais baixo = mais zoom."
+        },
+        "smoothing_time": {
+          "title": "Suavização",
+          "desc": "Quão suave é a entrada e a saída do zoom."
+        }
+      },
+      "blindspot_viewer": {
+        "title": "Visão do ponto cego",
+        "pos_x": {
+          "title": "Deslocamento lateral",
+          "desc": "Quanto a cabeça se move para a esquerda ou direita durante a espiada."
+        },
+        "pos_y": {
+          "title": "Altura",
+          "desc": "Quanto a cabeça se move para cima ou para baixo durante a espiada."
+        },
+        "pos_z": {
+          "title": "Inclinação para frente",
+          "desc": "Quanto a cabeça se move para frente durante a espiada. Negativo = para frente."
+        },
+        "yaw_deg": {
+          "title": "Giro",
+          "desc": "Quanto a cabeça gira para a esquerda ou direita durante a espiada."
+        },
+        "pitch_deg": {
+          "title": "Inclinação",
+          "desc": "Quanto a cabeça se inclina para cima ou para baixo durante a espiada."
+        },
+        "roll_deg": {
+          "title": "Rolagem",
+          "desc": "Quanto a cabeça tomba para o lado durante a espiada."
+        },
+        "fov_offset_deg": {
+          "title": "Variação do FOV",
+          "desc": "Quanto o campo de visão se amplia durante a espiada. Negativo = mais estreito."
+        },
+        "smoothing_time": {
+          "title": "Suavização",
+          "desc": "Quão suave é o movimento de ida e volta ao se inclinar."
+        }
+      },
+      "cabin_walk": {
+        "title": "Caminhar na cabine",
+        "hint": "Os layouts padrão são ajustados para a menor cabine leito de cada caminhão. Outras cabines podem precisar de ajuste.",
+        "require_parking_brake": {
+          "title": "Exigir freio de estacionamento",
+          "desc": "Ativado: exige o freio de estacionamento, soltá-lo leva você de volta. Desativado: basta parar."
+        }
+      }
+    }
+  },
+  "ui": {
+    "enabled": "Ativado",
+    "cancel": "Cancelar",
+    "slider_reset_hint": "Clique com o botão direito em um controle deslizante para redefini-lo.",
+    "truck_badge": "Configurações de {name}",
+    "no_truck": "Nenhum caminhão carregado",
+    "no_truck_hint": "Entre em um caminhão para alterar as configurações dele.",
+    "paused": "Jogo pausado",
+    "paused_hint": "Retome o jogo para alterar as configurações.",
+    "trucks": {
+      "section": "Caminhões ajustados ({count})",
+      "changed": "{count} configurações alteradas",
+      "none": "Nenhum caminhão tem configurações próprias ainda.",
+      "reset_tip": "Redefinir as configurações deste caminhão para os valores padrão."
+    },
+    "search": {
+      "hint": "Pesquisar configurações...",
+      "no_results": "Nenhuma configuração corresponde a \"{query}\".",
+      "clear_tip": "Limpar a pesquisa."
+    },
+    "tabs": {
+      "settings": "Configurações",
+      "about": "Sobre"
+    },
+    "keybind": {
+      "section": "Atalhos",
+      "toggle_window": "Mostrar janela",
+      "unbound": "(não atribuído)",
+      "rebind_tip": "Clique para reatribuir.",
+      "options_tip": "Opções do atalho (segurar/alternar, zona morta, ...).",
+      "add_tip": "Adicionar outro atalho."
+    },
+    "reset": {
+      "section": "Zona de perigo",
+      "button": "Redefinir este caminhão",
+      "title": "Confirmar redefinição",
+      "message": "Redefinir todas as configurações de {truck}?",
+      "confirm": "Sim, redefinir",
+      "done_toast": "Configurações de {truck} redefinidas."
+    },
+    "about": {
+      "details": "Detalhes",
+      "version": "Versão: **{version}**",
+      "developer": "Desenvolvedor: **{author}**",
+      "links": "Links",
+      "website": "Site",
+      "website_desc": "Documentação",
+      "discord": "Discord",
+      "discord_desc": "Comunidade e suporte",
+      "github": "GitHub",
+      "github_desc": "Versões e relatórios de bugs",
+      "youtube": "YouTube",
+      "youtube_desc": "Vídeos e demonstrações",
+      "support": "Apoio",
+      "support_text": "Se você gosta do MotionCab, pode apoiar o seu desenvolvimento.",
+      "donate": "Doar com PayPal",
+      "donate_desc": "Apoiar o MotionCab no PayPal",
+      "tips": "Dicas",
+      "tip_reset": "Clique com o botão direito em qualquer controle deslizante para voltar ao valor padrão.",
+      "tip_per_truck": "As configurações são salvas por caminhão: uma mudança vale só para o caminhão que você está dirigindo.",
+      "tip_interior": "Todos os efeitos funcionam apenas na câmera interna.",
+      "credits": "Créditos",
+      "credits_text": "SPF Framework e colaboradores."
+    },
+    "units": {
+      "speed_system": "metric",
+      "kmh": "km/h",
+      "mph": "mph"
+    },
+    "cabin_walk": {
+      "needs_parking_brake": "Acione o freio de estacionamento para sair do banco.",
+      "needs_stop": "Pare o caminhão para sair do banco.",
+      "back_to_wheel": "De volta ao volante: o caminhão não está mais estacionado.",
+      "layout": {
+        "no_truck": "Entre em um caminhão para configurar a cabine dele.",
+        "truck": "Caminhão",
+        "tip": {
+          "floor_z_min": "Até onde você pode avançar, em direção ao para-brisa.",
+          "floor_z_max": "Até onde você pode recuar, em direção à parede traseira.",
+          "floor_x_min": "Até onde você pode ir em direção à porta do motorista.",
+          "floor_x_max": "Até onde você pode ir em direção à porta do passageiro.",
+          "stand_y": "A altura dos seus olhos em pé.",
+          "crouch_depth": "O quanto a cabeça desce ao agachar.",
+          "passenger_dx": "Para o lado a partir do reflexo do seu banco.",
+          "passenger_dy": "Mais alto ou mais baixo que o seu banco.",
+          "passenger_dz": "Mais à frente ou atrás que o seu banco.",
+          "bunk_sit_x": "Onde você senta ao longo da cama.",
+          "bunk_sit_y": "A altura dos seus olhos sentado na cama.",
+          "bunk_sit_z": "Quão para trás fica a borda da cama.",
+          "yaw": "Para onde você olha depois de sentado.",
+          "pitch": "Quanto você olha para cima ou para baixo depois de sentado.",
+          "has_passenger": "Desmarque se o banco do passageiro dobra ou não existe.",
+          "has_bunk": "Desmarque para uma cabine curta sem cama.",
+          "has_aisle": "Marque se o piso tem degraus, como o corredor de um ônibus.",
+          "aisle_step_count": "Quantas vezes a altura do piso muda ao longo do corredor.",
+          "aisle_step_z": "A que distância para trás fica a borda do degrau.",
+          "aisle_step_height": "Quanto o piso sobe depois dele (negativo: desce)."
+        },
+        "group": {
+          "walkway": "Área de circulação",
+          "heights": "Altura em pé",
+          "passenger": "Banco do passageiro",
+          "bunk": "Cama",
+          "steps": "Degraus"
+        },
+        "go": "Ir até lá",
+        "usable": "Utilizável",
+        "advanced": "Avançado",
+        "reset": "Redefinir disposição",
+        "reset_title": "Redefinir disposição da cabine",
+        "reset_message": "Voltar à disposição padrão para {truck}?",
+        "reset_confirm": "Sim, redefinir",
+        "floor_x_min": "Limite esquerdo",
+        "floor_x_max": "Limite direito",
+        "floor_z_min": "Limite dianteiro",
+        "floor_z_max": "Limite traseiro",
+        "stand_y": "Altura",
+        "crouch_depth": "Profundidade ao agachar",
+        "passenger_dx": "Lado",
+        "passenger_dy": "Altura",
+        "passenger_dz": "Profundidade",
+        "passenger_yaw": "Giro",
+        "passenger_pitch": "Inclinação",
+        "bunk_sit_x": "Lado",
+        "bunk_sit_y": "Altura",
+        "bunk_sit_z": "Profundidade",
+        "bunk_sit_yaw": "Giro",
+        "bunk_sit_pitch": "Inclinação",
+        "aisle_step_count": "Quantidade",
+        "aisle_step_z": "Profundidade degrau {n}",
+        "aisle_step_height": "Altura degrau {n}"
+      }
+    },
+    "modified": "Alterado em relação ao padrão.",
+    "cabin_audio": {
+      "test_voice": "Tocar uma frase do GPS",
+      "test_voice_hint": "Toca uma das frases do GPS do jogo, uma diferente a cada vez, para ajustar a voz sem dirigir.",
+      "test_voice_missing": "Nenhuma voz do GPS encontrada nos sons do jogo."
+    }
+  }
+}

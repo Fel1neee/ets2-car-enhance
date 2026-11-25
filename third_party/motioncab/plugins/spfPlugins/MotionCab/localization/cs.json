@@ -1,0 +1,612 @@
+{
+  "language": {
+    "en": "Angličtina    [English]",
+    "uk": "Ukrajinština    [Українська]",
+    "de": "Němčina    [Deutsch]",
+    "fr": "Francouzština    [Français]",
+    "es": "Španělština    [Español]",
+    "pl": "Polština    [Polski]",
+    "ru": "Ruština    [Русский]",
+    "pt_br": "Brazilská portugalština    [Português (Brasil)]",
+    "it": "Italština    [Italiano]",
+    "nl": "Nizozemština    [Nederlands]",
+    "tr": "Turečtina    [Türkçe]",
+    "cs": "Čeština",
+    "zh": "Čínština (zjednodušená)    [简体中文]",
+    "ja": "Japonština    [日本語]",
+    "ko": "Korejština    [한국어]"
+  },
+  "plugin": {
+    "description": "Dynamický pohyb hlavy pro ETS2 a ATS"
+  },
+  "window": {
+    "title": "Rychlé nastavení MotionCab",
+    "desc": "Rychlý přístup k nastavení všech efektů jako alternativa k záložce Vlastní nastavení."
+  },
+  "keybinds": {
+    "ui_toggle": {
+      "title": "Zobrazit/skrýt okno nastavení",
+      "desc": "Zobrazí nebo skryje okno rychlého nastavení MotionCab."
+    },
+    "look_left": {
+      "title": "Podívat se doleva",
+      "desc": "Plynule otočí hlavu daleko doleva, ke kontrole příčného provozu."
+    },
+    "look_right": {
+      "title": "Podívat se doprava",
+      "desc": "Plynule otočí hlavu daleko doprava, ke kontrole příčného provozu."
+    },
+    "glance_left": {
+      "title": "Pohled do levého zrcátka",
+      "desc": "Plynule se podívá do levého zrcátka, např. při připojování."
+    },
+    "glance_right": {
+      "title": "Pohled do pravého zrcátka",
+      "desc": "Plynule se podívá do pravého zrcátka, např. při připojování."
+    },
+    "look_forward": {
+      "title": "Podívat se dopředu",
+      "desc": "Plynule otočí hlavu zpět přímo dopředu a ukončí jakýkoli pohled."
+    },
+    "zoom": {
+      "title": "Přiblížení",
+      "desc": "Plynule přiblíží a pak se plynule vrátí do normálu."
+    },
+    "blindspot_viewer": {
+      "title": "Pohled do mrtvého úhlu",
+      "desc": "Plynule se nakloní, aby bylo vidět za sloupek čelního skla."
+    },
+    "cabin_walk": {
+      "stand_sit": {
+        "title": "Vstát / Sednout",
+        "desc": "Vstane ze sedadla. Klepnutím si sednete na místo, kam se díváte, podržením se vrátíte za volant."
+      },
+      "forward": {
+        "title": "Jít dopředu",
+        "desc": "Jde dopředu, když stojíte v kabině."
+      },
+      "back": {
+        "title": "Jít dozadu",
+        "desc": "Jde dozadu, když stojíte v kabině."
+      },
+      "left": {
+        "title": "Krok doleva",
+        "desc": "Udělá úkrok doleva, když stojíte v kabině."
+      },
+      "right": {
+        "title": "Krok doprava",
+        "desc": "Udělá úkrok doprava, když stojíte v kabině."
+      },
+      "crouch": {
+        "title": "Přikrčit se",
+        "desc": "Přikrčí se vestoje."
+      }
+    }
+  },
+  "settings": {
+    "enabled_desc": "Zapne nebo vypne tento efekt.",
+    "paused_by": "Pozastaveno efektem: {effects}.",
+    "pauses": "Po zapnutí pozastaví následující efekt(y):",
+    "paused_in_use": "Pozastaveno během použití {effects}.",
+    "driving": {
+      "title": "Jízda",
+      "head_motion": {
+        "title": "Pohyb hlavy",
+        "sway_strength": {
+          "title": "Síla kývání",
+          "desc": "Jak moc je hlava vychylována při zrychlení, brzdění nebo v zatáčce."
+        },
+        "tilt_strength": {
+          "title": "Síla náklonu",
+          "desc": "Jak moc se hlava naklání, když se kabina naklání nebo houpe."
+        },
+        "smoothing_time": {
+          "title": "Vyhlazení",
+          "desc": "Jak rychle se hlava ustálí. Vyšší = pomalejší a plynulejší, nižší = svižnější."
+        }
+      },
+      "body_dynamics": {
+        "title": "Dynamika těla",
+        "lean_strength": {
+          "title": "Síla náklonu do strany",
+          "desc": "Jak moc se hlava naklání do zatáčky."
+        },
+        "nod_strength": {
+          "title": "Síla kývnutí",
+          "desc": "Jak moc hlava klesne dopředu při brzdění a ucukne dozadu při zrychlení."
+        },
+        "smoothing_time": {
+          "title": "Vyhlazení",
+          "desc": "Jak rychle se náklon a kývnutí ustálí. Nižší = svižnější."
+        }
+      },
+      "steering_camera": {
+        "title": "Kamera řízení",
+        "rotation_left_deg": {
+          "title": "Rozsah otočení vlevo",
+          "desc": "Jak daleko se kamera otočí, když volant vytočíte na doraz doleva."
+        },
+        "rotation_right_deg": {
+          "title": "Rozsah otočení vpravo",
+          "desc": "Jak daleko se kamera otočí, když volant vytočíte na doraz doprava."
+        },
+        "center_zone_pct": {
+          "title": "Středová zóna",
+          "desc": "Jak daleko můžete otočit volantem, aby se kamera otáčela na obě strany stejně, jako podíl plného rejdu. Dál se každá strana otáčí podle vlastního rozsahu."
+        },
+        "smoothing_time": {
+          "title": "Vyhlazení",
+          "desc": "Jak plynulé je otáčení kamery, jakmile se rozjede. Vyšší = plynulejší a pomalejší."
+        },
+        "delay_seconds": {
+          "title": "Zpoždění reakce",
+          "desc": "Jak dlouho kamera po otočení volantem čeká, než se začne pohybovat."
+        },
+        "disable_in_reverse": {
+          "title": "Vypnout při couvání",
+          "desc": "Udrží kameru uprostřed, když je zařazená zpátečka."
+        },
+        "disable_when_stopped": {
+          "title": "Vypnout při stání",
+          "desc": "Udrží kameru uprostřed, dokud se kamion nerozjede dopředu."
+        }
+      }
+    },
+    "road": {
+      "title": "Silnice",
+      "suspension": {
+        "title": "Odpružení",
+        "vertical_strength": {
+          "title": "Svislá síla",
+          "desc": "Jak moc nerovnosti na silnici nadhazují a naklánějí kameru."
+        },
+        "reactivity": {
+          "title": "Reaktivita",
+          "desc": "Jak rychle se sedadlo po nerovnosti ustálí. Nižší = tužší a svižnější."
+        },
+        "grade_strength": {
+          "title": "Sledování sklonu",
+          "desc": "Zvedá hlavu při jízdě z kopce a snižuje ji při jízdě do kopce."
+        }
+      },
+      "road_irregularity": {
+        "title": "Nerovnosti vozovky",
+        "intensity": {
+          "title": "Intenzita",
+          "desc": "Jak silné je drnčení povrchu a kolébání v terénu."
+        },
+        "reactivity": {
+          "title": "Reaktivita",
+          "desc": "Jak ostré a bzučivé je drnčení povrchu. Nižší = ostřejší."
+        }
+      },
+      "speed_shake": {
+        "title": "Třes od rychlosti",
+        "intensity": {
+          "title": "Intenzita",
+          "desc": "Celková síla třesu při rychlé jízdě."
+        },
+        "smoothing_time": {
+          "title": "Vyhlazení",
+          "desc": "Jak se třes projevuje v čase. Vyšší = pomalejší a plynulejší, nižší = trhanější a nervóznější."
+        },
+        "rotation": {
+          "title": "Rotace",
+          "desc": "Jak moc se pohled v rámci třesu naklání/otáčí, místo aby se jen posouval do stran. Nastavte 0 pro zachování pouze bočního pohybu."
+        },
+        "vertical": {
+          "title": "Svisle",
+          "desc": "Kolik svislého poskakování je přimícháno do třesu."
+        },
+        "roughness": {
+          "title": "Nepravidelnost",
+          "desc": "Jak nerovnoměrný je třes v čase. 0 jej drží konstantní; vyšší hodnoty střídají klidné a neklidné úseky."
+        }
+      }
+    },
+    "cabin": {
+      "title": "Kabina",
+      "idle_breathing": {
+        "title": "Dýchání v klidu",
+        "vertical_amplitude": {
+          "title": "Svislá amplituda",
+          "desc": "Jak moc kamera stoupá a klesá s každým nádechem."
+        },
+        "pitch_amplitude_deg": {
+          "title": "Amplituda kývnutí",
+          "desc": "Jak moc se hlava s každým nádechem naklání dopředu/dozadu."
+        },
+        "breathing_rate_bpm": {
+          "title": "Rychlost dýchání",
+          "desc": "Jak rychle probíhá dýchání."
+        },
+        "fade_start_kmh": {
+          "title": "Rychlost začátku vytrácení",
+          "desc": "Rychlost, od které se tento efekt při zrychlování začne vytrácet."
+        },
+        "fade_end_kmh": {
+          "title": "Rychlost konce vytrácení",
+          "desc": "Rychlost, při které tento efekt úplně zmizí."
+        }
+      },
+      "engine_vibration": {
+        "title": "Vibrace motoru",
+        "intensity": {
+          "title": "Intenzita",
+          "desc": "Jak silné je dunění motoru."
+        }
+      },
+      "engine_start_stop": {
+        "title": "Start/stop motoru",
+        "intensity": {
+          "title": "Intenzita",
+          "desc": "Jak silné je škubnutí při startu nebo vypnutí motoru."
+        },
+        "duration": {
+          "title": "Doba trvání",
+          "desc": "Jak dlouho trvá škubnutí při startu. Škubnutí při vypnutí je kratší a jemnější."
+        }
+      },
+      "natural_head_movement": {
+        "title": "Přirozený pohyb hlavy",
+        "sway_intensity": {
+          "title": "Pohupování",
+          "desc": "Jak moc se hlava sama od sebe pomalu pohupuje, i když ji držíte v klidu."
+        },
+        "micro_intensity": {
+          "title": "Mikropohyby",
+          "desc": "Jak daleko se hlava pohne při drobné korekci."
+        },
+        "micro_interval": {
+          "title": "Interval mikropohybů",
+          "desc": "Jak dlouho hlava čeká mezi dvěma drobnými pohyby."
+        },
+        "posture_intensity": {
+          "title": "Změny držení",
+          "desc": "Jak daleko se hlava posune, když zaujme novou polohu."
+        },
+        "posture_interval": {
+          "title": "Interval držení",
+          "desc": "Jak dlouho hlava drží jednu polohu, než zaujme novou."
+        },
+        "roll_scale": {
+          "title": "Boční náklon",
+          "desc": "Jak moc se hlava naklání do strany, u všech pohybů kromě náklonu do zatáčky."
+        },
+        "steering_tilt": {
+          "title": "Náklon při zatáčení",
+          "desc": "Jak moc se hlava nakloní do zatáčky: čím rychleji ji projíždíte, tím víc."
+        }
+      },
+      "cabin_audio": {
+        "title": "Zvuk v kabině",
+        "width": {
+          "title": "Šířka",
+          "desc": "O kolik hlasitěji slyší reproduktor ucho k němu otočené než druhé ucho."
+        },
+        "head_shadow": {
+          "title": "Směrovost",
+          "desc": "Jak dutě zní reproduktor uchu odvrácenému od něj, zakrytému tvou hlavou."
+        },
+        "muffle": {
+          "title": "Tlumení",
+          "desc": "Jak moc rádio zní dutě a tiše, když je za vámi."
+        },
+        "bass": {
+          "title": "Basy",
+          "desc": "Jak moc reproduktory kabiny potlačují basy, jako malé reproduktory ve dveřích."
+        },
+        "mid": {
+          "title": "Středy",
+          "desc": "Jak moc vyniknou hlasy a nástroje."
+        },
+        "treble": {
+          "title": "Výšky",
+          "desc": "Jak jasně znějí reproduktory kabiny."
+        },
+        "blend": {
+          "title": "Mísení reproduktorů",
+          "desc": "Jak moc každý reproduktor ve dveřích hraje i druhý kanál."
+        },
+        "reverb": {
+          "title": "Ozvěna kabiny",
+          "desc": "Jak moc stěny a čelní sklo kabiny odrážejí rádio."
+        },
+        "room_size": {
+          "title": "Velikost kabiny",
+          "desc": "Jak dlouho trvají odrazy v kabině."
+        },
+        "radio_volume": {
+          "title": "Hlasitost rádia",
+          "desc": "Jak hlasité je rádio, navíc k hlasitosti hry."
+        },
+        "gps": {
+          "title": "Hlas GPS",
+          "desc": "Přehrává hlas GPS z reproduktorů kabiny jako rádio, také podle tvé hlavy."
+        },
+        "gps_low_cut": {
+          "title": "Oříznutí basů hlasu",
+          "desc": "Kolik basů hlas GPS ztratí: výš zní tenčeji, jako malý reproduktor."
+        },
+        "gps_high_cut": {
+          "title": "Oříznutí výšek hlasu",
+          "desc": "Kde končí výšky hlasu GPS: níž zní dutěji."
+        },
+        "gps_tone": {
+          "title": "Barva hlasu",
+          "desc": "Kterou část hlasu GPS zdůraznění vytáhne: níž zní krabicově, výš nosově."
+        },
+        "gps_tone_boost": {
+          "title": "Zdůraznění barvy",
+          "desc": "Jak moc tato část hlasu GPS vynikne: pod nulou ji zjemní."
+        },
+        "gps_volume": {
+          "title": "Hlasitost hlasu",
+          "desc": "Jak hlasitý je hlas GPS, navíc k hlasitosti hry."
+        },
+        "duck": {
+          "title": "Ztlumení",
+          "desc": "Jak moc rádio ztichne, když mluví hlas GPS, jako v navigační aplikaci."
+        },
+        "outside": {
+          "title": "Venku",
+          "desc": "Jak moc je rádio utlumené zvenku kabiny, ve vnějších pohledech."
+        }
+      }
+    },
+    "manual": {
+      "title": "Ruční",
+      "manual_look": {
+        "title": "Pohled do strany",
+        "hint": "Vlastní klávesy, nezávislé na hře. Pohled při blinkru vyžaduje klávesy blinkrů ve hře.",
+        "look_left_deg": {
+          "title": "Úhel pohledu doleva",
+          "desc": "Jak daleko se hlava otočí při pohledu doleva."
+        },
+        "look_right_deg": {
+          "title": "Úhel pohledu doprava",
+          "desc": "Jak daleko se hlava otočí při pohledu doprava."
+        },
+        "glance_left_deg": {
+          "title": "Úhel pohledu do levého zrcátka",
+          "desc": "Jak daleko se hlava otočí při pohledu do levého zrcátka."
+        },
+        "glance_right_deg": {
+          "title": "Úhel pohledu do pravého zrcátka",
+          "desc": "Jak daleko se hlava otočí při pohledu do pravého zrcátka."
+        },
+        "glance_left_pitch_deg": {
+          "title": "Sklon při pohledu do levého zrcátka",
+          "desc": "Jak moc se hlava při pohledu do levého zrcátka nakloní. Kladné = nahoru, záporné = dolů."
+        },
+        "glance_right_pitch_deg": {
+          "title": "Sklon při pohledu do pravého zrcátka",
+          "desc": "Jak moc se hlava při pohledu do pravého zrcátka nakloní. Kladné = nahoru, záporné = dolů."
+        },
+        "glance_left_fov_deg": {
+          "title": "FOV při pohledu do levého zrcátka",
+          "desc": "O kolik se při pohledu do levého zrcátka rozšíří zorné pole. Záporné = užší (přiblížení)."
+        },
+        "glance_right_fov_deg": {
+          "title": "FOV při pohledu do pravého zrcátka",
+          "desc": "O kolik se při pohledu do pravého zrcátka rozšíří zorné pole. Záporné = užší (přiblížení)."
+        },
+        "smoothing_time": {
+          "title": "Vyhlazení",
+          "desc": "Jak plynulý je pohyb pohledu tam a zpět."
+        },
+        "pause_steering_camera": {
+          "title": "Pozastavit kameru řízení",
+          "desc": "Během pohledu pozastaví kameru řízení, aby pohled zůstal na tom, kam se díváte."
+        },
+        "mirror_on_signal": {
+          "title": "Pohled při blinkru",
+          "desc": "Při zapnutém blinkru se podívá do zrcátka na jeho straně."
+        },
+        "require_stationary": {
+          "title": "Pouze na místě",
+          "desc": "Do zrcátka se při blinkru podívá jen tehdy, když kamion stojí."
+        },
+        "ignore_after_moving_signal": {
+          "title": "Ignorovat za jízdy",
+          "desc": "Nedívat se do zrcátka kvůli blinkru zapnutému za jízdy, a to ani po zastavení."
+        }
+      },
+      "manual_zoom": {
+        "title": "Ruční přiblížení",
+        "hint": "Tato klávesa je nezávislá na herní klávese „Přiblížit vnitřní kameru“.",
+        "zoom_fov_deg": {
+          "title": "Úroveň přiblížení",
+          "desc": "Jak moc se pohled přiblíží při držení klávesy přiblížení. Nižší = větší přiblížení."
+        },
+        "smoothing_time": {
+          "title": "Vyhlazení",
+          "desc": "Jak plynulé je přibližování a oddalování."
+        }
+      },
+      "blindspot_viewer": {
+        "title": "Pohled do mrtvého úhlu",
+        "pos_x": {
+          "title": "Posun do strany",
+          "desc": "Jak daleko se hlava při náklonu posune doleva nebo doprava."
+        },
+        "pos_y": {
+          "title": "Výška",
+          "desc": "Jak daleko se hlava při náklonu posune nahoru nebo dolů."
+        },
+        "pos_z": {
+          "title": "Náklon dopředu",
+          "desc": "Jak daleko se hlava při náklonu posune dopředu. Záporné = dopředu."
+        },
+        "yaw_deg": {
+          "title": "Otočení",
+          "desc": "Jak moc se hlava při náklonu otočí doleva nebo doprava."
+        },
+        "pitch_deg": {
+          "title": "Sklon",
+          "desc": "Jak moc se hlava při náklonu skloní nahoru nebo dolů."
+        },
+        "roll_deg": {
+          "title": "Náklon do strany",
+          "desc": "Jak moc se hlava při náklonu nakloní do strany."
+        },
+        "fov_offset_deg": {
+          "title": "Změna FOV",
+          "desc": "O kolik se při náklonu rozšíří zorné pole. Záporné = užší."
+        },
+        "smoothing_time": {
+          "title": "Vyhlazení",
+          "desc": "Jak plynulý je pohyb náklonu tam a zpět."
+        }
+      },
+      "cabin_walk": {
+        "title": "Chůze po kabině",
+        "hint": "Výchozí rozvržení jsou nastavena pro nejmenší kabinu s lůžkem každého tahače. Jiné kabiny může být nutné upravit.",
+        "require_parking_brake": {
+          "title": "Vyžadovat parkovací brzdu",
+          "desc": "Zapnuto: nutná parkovací brzda, její uvolnění vás vrátí zpět. Vypnuto: stačí zastavit."
+        }
+      }
+    }
+  },
+  "ui": {
+    "enabled": "Zapnuto",
+    "cancel": "Zrušit",
+    "slider_reset_hint": "Pravým kliknutím na posuvník jej obnovíte.",
+    "truck_badge": "Nastavení: {name}",
+    "no_truck": "Není načten žádný tahač",
+    "no_truck_hint": "Nastup do tahače, abys mohl změnit jeho nastavení.",
+    "paused": "Hra pozastavena",
+    "paused_hint": "Pro změnu nastavení pokračuj ve hře.",
+    "trucks": {
+      "section": "Nastavené tahače ({count})",
+      "changed": "Změněná nastavení: {count}",
+      "none": "Žádný tahač zatím nemá vlastní nastavení.",
+      "reset_tip": "Obnovit nastavení tohoto tahače na výchozí hodnoty."
+    },
+    "search": {
+      "hint": "Hledat nastavení...",
+      "no_results": "Žádné nastavení neodpovídá „{query}“.",
+      "clear_tip": "Vymazat hledání."
+    },
+    "tabs": {
+      "settings": "Nastavení",
+      "about": "O pluginu"
+    },
+    "keybind": {
+      "section": "Klávesové zkratky",
+      "toggle_window": "Zobrazit okno",
+      "unbound": "(nepřiřazeno)",
+      "rebind_tip": "Kliknutím přiřadíte znovu.",
+      "options_tip": "Možnosti přiřazení (držení/přepínání, mrtvá zóna, ...).",
+      "add_tip": "Přidat další přiřazení."
+    },
+    "reset": {
+      "section": "Nebezpečná zóna",
+      "button": "Obnovit tento tahač",
+      "title": "Potvrdit obnovení",
+      "message": "Obnovit všechna nastavení pro {truck}?",
+      "confirm": "Ano, obnovit",
+      "done_toast": "Nastavení pro {truck} byla obnovena."
+    },
+    "about": {
+      "details": "Podrobnosti",
+      "version": "Verze: **{version}**",
+      "developer": "Vývojář: **{author}**",
+      "links": "Odkazy",
+      "website": "Web",
+      "website_desc": "Dokumentace",
+      "discord": "Discord",
+      "discord_desc": "Komunita a podpora",
+      "github": "GitHub",
+      "github_desc": "Vydání a hlášení chyb",
+      "youtube": "YouTube",
+      "youtube_desc": "Videa a ukázky",
+      "support": "Podpora",
+      "support_text": "Pokud se vám MotionCab líbí, můžete podpořit jeho vývoj.",
+      "donate": "Přispět přes PayPal",
+      "donate_desc": "Podpořit MotionCab přes PayPal",
+      "tips": "Tipy",
+      "tip_reset": "Pravým kliknutím na libovolný posuvník obnovíte jeho výchozí hodnotu.",
+      "tip_per_truck": "Nastavení se ukládají pro každý tahač zvlášť: změna platí jen pro tahač, který právě řídíte.",
+      "tip_interior": "Všechny efekty fungují pouze ve vnitřní kameře.",
+      "credits": "Poděkování",
+      "credits_text": "SPF Framework a přispěvatelé."
+    },
+    "units": {
+      "speed_system": "metric",
+      "kmh": "km/h",
+      "mph": "mph"
+    },
+    "cabin_walk": {
+      "needs_parking_brake": "Zatáhněte parkovací brzdu, abyste mohli opustit sedadlo.",
+      "needs_stop": "Zastavte kamion, abyste mohli opustit sedadlo.",
+      "back_to_wheel": "Zpět za volant: kamion už není zaparkovaný.",
+      "layout": {
+        "no_truck": "Nastupte do kamionu, abyste mohli nastavit jeho kabinu.",
+        "truck": "Tahač",
+        "tip": {
+          "floor_z_min": "Jak daleko můžete jít dopředu, k čelnímu sklu.",
+          "floor_z_max": "Jak daleko můžete jít dozadu, k zadní stěně.",
+          "floor_x_min": "Jak daleko můžete jít ke dveřím řidiče.",
+          "floor_x_max": "Jak daleko můžete jít ke dveřím spolujezdce.",
+          "stand_y": "Výška vašich očí ve stoje.",
+          "crouch_depth": "O kolik klesne hlava, když se přikrčíte.",
+          "passenger_dx": "Do strany od zrcadlového obrazu vašeho sedadla.",
+          "passenger_dy": "Výš nebo níž než vaše sedadlo.",
+          "passenger_dz": "Víc vpředu nebo vzadu než vaše sedadlo.",
+          "bunk_sit_x": "Kde sedíte podél lůžka.",
+          "bunk_sit_y": "Výška vašich očí při sezení na lůžku.",
+          "bunk_sit_z": "Jak daleko vzadu je okraj lůžka.",
+          "yaw": "Kam se díváte vsedě.",
+          "pitch": "Jak moc se vsedě díváte nahoru nebo dolů.",
+          "has_passenger": "Zrušte, pokud se sedadlo spolujezdce sklápí nebo chybí.",
+          "has_bunk": "Zrušte u krátké kabiny bez lůžka.",
+          "has_aisle": "Zaškrtněte, pokud má podlaha schody, jako ulička autobusu.",
+          "aisle_step_count": "Kolikrát se podél uličky mění výška podlahy.",
+          "aisle_step_z": "Jak daleko vzadu je hrana schodu.",
+          "aisle_step_height": "O kolik podlaha za ním stoupá (záporně: klesá)."
+        },
+        "group": {
+          "walkway": "Prostor pro chůzi",
+          "heights": "Výška vestoje",
+          "passenger": "Sedadlo spolujezdce",
+          "bunk": "Lůžko",
+          "steps": "Schody"
+        },
+        "go": "Přejít tam",
+        "usable": "Použitelné",
+        "advanced": "Pokročilé",
+        "reset": "Obnovit uspořádání",
+        "reset_title": "Obnovit uspořádání kabiny",
+        "reset_message": "Vrátit se k výchozímu uspořádání pro {truck}?",
+        "reset_confirm": "Ano, obnovit",
+        "floor_x_min": "Levá hranice",
+        "floor_x_max": "Pravá hranice",
+        "floor_z_min": "Přední hranice",
+        "floor_z_max": "Zadní hranice",
+        "stand_y": "Výška",
+        "crouch_depth": "Hloubka přikrčení",
+        "passenger_dx": "Do strany",
+        "passenger_dy": "Výška",
+        "passenger_dz": "Hloubka",
+        "passenger_yaw": "Otočení",
+        "passenger_pitch": "Náklon",
+        "bunk_sit_x": "Do strany",
+        "bunk_sit_y": "Výška",
+        "bunk_sit_z": "Hloubka",
+        "bunk_sit_yaw": "Otočení",
+        "bunk_sit_pitch": "Náklon",
+        "aisle_step_count": "Počet",
+        "aisle_step_z": "Hloubka schodu {n}",
+        "aisle_step_height": "Výška schodu {n}"
+      }
+    },
+    "modified": "Změněno oproti výchozí hodnotě.",
+    "cabin_audio": {
+      "test_voice": "Přehrát hlášku GPS",
+      "test_voice_hint": "Přehraje jednu z hlášek GPS ze hry, pokaždé jinou, abys mohl hlas doladit bez jízdy.",
+      "test_voice_missing": "Ve zvucích hry nebyl nalezen žádný hlas GPS."
+    }
+  }
+}

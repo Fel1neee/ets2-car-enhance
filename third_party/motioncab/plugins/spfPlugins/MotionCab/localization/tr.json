@@ -1,0 +1,612 @@
+{
+  "language": {
+    "en": "İngilizce    [English]",
+    "uk": "Ukraynaca    [Українська]",
+    "de": "Almanca    [Deutsch]",
+    "fr": "Fransızca    [Français]",
+    "es": "İspanyolca    [Español]",
+    "pl": "Lehçe    [Polski]",
+    "ru": "Rusça    [Русский]",
+    "pt_br": "Brezilya Portekizcesi    [Português (Brasil)]",
+    "it": "İtalyanca    [Italiano]",
+    "nl": "Hollandaca    [Nederlands]",
+    "tr": "Türkçe",
+    "cs": "Çekçe    [Čeština]",
+    "zh": "Çince (Basitleştirilmiş)    [简体中文]",
+    "ja": "Japonca    [日本語]",
+    "ko": "Korece    [한국어]"
+  },
+  "plugin": {
+    "description": "ETS2 ve ATS için dinamik kafa hareketi"
+  },
+  "window": {
+    "title": "MotionCab Hızlı Ayarlar",
+    "desc": "Özel Ayarlar sekmesine alternatif olarak her efektin ayarlarına hızlı erişim."
+  },
+  "keybinds": {
+    "ui_toggle": {
+      "title": "Ayarlar penceresini göster/gizle",
+      "desc": "MotionCab Hızlı Ayarlar penceresini gösterir veya gizler."
+    },
+    "look_left": {
+      "title": "Sola bak",
+      "desc": "Kavşaktaki trafiği kontrol etmek için kafanızı yumuşakça sola doğru geniş çevirir."
+    },
+    "look_right": {
+      "title": "Sağa bak",
+      "desc": "Kavşaktaki trafiği kontrol etmek için kafanızı yumuşakça sağa doğru geniş çevirir."
+    },
+    "glance_left": {
+      "title": "Sol aynaya göz at",
+      "desc": "Örneğin şeride girerken yumuşakça sol aynaya göz atar."
+    },
+    "glance_right": {
+      "title": "Sağ aynaya göz at",
+      "desc": "Örneğin şeride girerken yumuşakça sağ aynaya göz atar."
+    },
+    "look_forward": {
+      "title": "İleri bak",
+      "desc": "Başınızı yumuşakça yeniden tam karşıya çevirir ve her bakışı sonlandırır."
+    },
+    "zoom": {
+      "title": "Yakınlaştırma",
+      "desc": "Yumuşakça yakınlaştırır, sonra yumuşakça normale döner."
+    },
+    "blindspot_viewer": {
+      "title": "Kör nokta görüşü",
+      "desc": "Ön cam direğinin arkasını görmek için yumuşak bir şekilde öne eğilir."
+    },
+    "cabin_walk": {
+      "stand_sit": {
+        "title": "Kalk / Otur",
+        "desc": "Koltuktan kalkar. Baktığın yere oturmak için dokun, direksiyona dönmek için basılı tut."
+      },
+      "forward": {
+        "title": "İleri Yürü",
+        "desc": "Kabinde ayaktayken ileri yürür."
+      },
+      "back": {
+        "title": "Geri Yürü",
+        "desc": "Kabinde ayaktayken geri yürür."
+      },
+      "left": {
+        "title": "Sola Adım",
+        "desc": "Kabinde ayaktayken sola yan adım atar."
+      },
+      "right": {
+        "title": "Sağa Adım",
+        "desc": "Kabinde ayaktayken sağa yan adım atar."
+      },
+      "crouch": {
+        "title": "Çömel",
+        "desc": "Ayaktayken çömelir."
+      }
+    }
+  },
+  "settings": {
+    "enabled_desc": "Bu efekti açar veya kapatır.",
+    "paused_by": "{effects} tarafından duraklatıldı.",
+    "pauses": "Açıldığında şu efekt(ler)i duraklatır:",
+    "paused_in_use": "{effects} kullanılırken duraklatılır.",
+    "driving": {
+      "title": "Sürüş",
+      "head_motion": {
+        "title": "Kafa hareketi",
+        "sway_strength": {
+          "title": "Sallanma gücü",
+          "desc": "Hızlanırken, fren yaparken veya viraja girerken kafanızın ne kadar itildiği."
+        },
+        "tilt_strength": {
+          "title": "Eğilme gücü",
+          "desc": "Kabin yattığında veya sallandığında kafanızın ne kadar eğildiği."
+        },
+        "smoothing_time": {
+          "title": "Yumuşatma",
+          "desc": "Kafanızın ne kadar hızlı yerine oturduğu. Yüksek = daha yavaş ve yumuşak, düşük = daha çevik."
+        }
+      },
+      "body_dynamics": {
+        "title": "Vücut dinamikleri",
+        "lean_strength": {
+          "title": "Yatma gücü",
+          "desc": "Kafanızın virajın içine doğru ne kadar yattığı."
+        },
+        "nod_strength": {
+          "title": "Öne eğilme gücü",
+          "desc": "Fren yaparken kafanızın ne kadar öne düştüğü ve hızlanırken ne kadar geri çekildiği."
+        },
+        "smoothing_time": {
+          "title": "Yumuşatma",
+          "desc": "Yatma ve eğilmenin ne kadar hızlı durulduğu. Düşük = daha çevik."
+        }
+      },
+      "steering_camera": {
+        "title": "Direksiyon kamerası",
+        "rotation_left_deg": {
+          "title": "Sola dönüş miktarı",
+          "desc": "Direksiyonu sonuna kadar sola çevirdiğinizde kameranın ne kadar döndüğü."
+        },
+        "rotation_right_deg": {
+          "title": "Sağa dönüş miktarı",
+          "desc": "Direksiyonu sonuna kadar sağa çevirdiğinizde kameranın ne kadar döndüğü."
+        },
+        "center_zone_pct": {
+          "title": "Orta bölge",
+          "desc": "Kameranın her iki yöne de aynı dönmesini korurken direksiyonu ne kadar çevirebileceğiniz, tam kilidin bir payı olarak. Ötesinde her taraf kendi dönüş miktarıyla döner."
+        },
+        "smoothing_time": {
+          "title": "Yumuşatma",
+          "desc": "Kamera dönüşünün başladıktan sonra ne kadar yumuşak hissettirdiği. Yüksek = daha yumuşak ve yavaş."
+        },
+        "delay_seconds": {
+          "title": "Tepki gecikmesi",
+          "desc": "Direksiyonu çevirdikten sonra kameranın hareket etmeden önce ne kadar beklediği."
+        },
+        "disable_in_reverse": {
+          "title": "Geri viteste devre dışı bırak",
+          "desc": "Kamyon geri vitesteyken kamerayı ortada tutar."
+        },
+        "disable_when_stopped": {
+          "title": "Dururken devre dışı bırak",
+          "desc": "Kamyon ileri gidene kadar kamerayı ortada tutar."
+        }
+      }
+    },
+    "road": {
+      "title": "Yol",
+      "suspension": {
+        "title": "Süspansiyon",
+        "vertical_strength": {
+          "title": "Dikey güç",
+          "desc": "Yoldaki tümseklerin kamerayı ne kadar zıplattığı ve yatırdığı."
+        },
+        "reactivity": {
+          "title": "Tepkisellik",
+          "desc": "Koltuğun bir tümsekten sonra ne kadar hızlı dengelendiği. Düşük = daha sert ve çevik."
+        },
+        "grade_strength": {
+          "title": "Eğimi takip et",
+          "desc": "Yokuş aşağı kafanızı kaldırır, yokuş yukarı indirir."
+        }
+      },
+      "road_irregularity": {
+        "title": "Yol pürüzlülüğü",
+        "intensity": {
+          "title": "Yoğunluk",
+          "desc": "Yol dokusu titreşiminin ve arazideki sallanmanın ne kadar güçlü hissettirdiği."
+        },
+        "reactivity": {
+          "title": "Tepkisellik",
+          "desc": "Yol dokusu titreşiminin ne kadar keskin ve vızıltılı hissettirdiği. Düşük = daha keskin."
+        }
+      },
+      "speed_shake": {
+        "title": "Hız sarsıntısı",
+        "intensity": {
+          "title": "Yoğunluk",
+          "desc": "Hızlı sürerken hissettiğiniz sarsıntının genel gücü."
+        },
+        "smoothing_time": {
+          "title": "Yumuşatma",
+          "desc": "Sarsıntının zaman içinde nasıl hissettirdiği. Yüksek = daha yavaş ve yumuşak, düşük = daha kesik ve gergin."
+        },
+        "rotation": {
+          "title": "Dönme",
+          "desc": "Görüşünüzün sadece yana kaymak yerine sarsıntının bir parçası olarak ne kadar eğildiği/döndüğü. Sadece yana hareketi korumak için 0 yapın."
+        },
+        "vertical": {
+          "title": "Dikey",
+          "desc": "Sarsıntıya ne kadar aşağı yukarı zıplama karıştırıldığı."
+        },
+        "roughness": {
+          "title": "Düzensizlik",
+          "desc": "Sarsıntının zaman içinde ne kadar düzensiz hissettirdiği. 0 sabit tutar; yüksek değerler sakin ve hareketli bölümler oluşturur."
+        }
+      }
+    },
+    "cabin": {
+      "title": "Kabin",
+      "idle_breathing": {
+        "title": "Beklerken nefes alma",
+        "vertical_amplitude": {
+          "title": "Dikey genlik",
+          "desc": "Kameranın her nefeste ne kadar yükselip alçaldığı."
+        },
+        "pitch_amplitude_deg": {
+          "title": "Baş eğme genliği",
+          "desc": "Kafanızın her nefeste ne kadar öne/arkaya eğildiği."
+        },
+        "breathing_rate_bpm": {
+          "title": "Nefes hızı",
+          "desc": "Nefes almanın ne kadar hızlı olduğu."
+        },
+        "fade_start_kmh": {
+          "title": "Solma başlangıç hızı",
+          "desc": "Hızlandıkça bu efektin kaybolmaya başladığı hız."
+        },
+        "fade_end_kmh": {
+          "title": "Solma bitiş hızı",
+          "desc": "Bu efektin tamamen kaybolduğu hız."
+        }
+      },
+      "engine_vibration": {
+        "title": "Motor titreşimi",
+        "intensity": {
+          "title": "Yoğunluk",
+          "desc": "Motor uğultusunun ne kadar güçlü hissettirdiği."
+        }
+      },
+      "engine_start_stop": {
+        "title": "Motor çalıştırma/durdurma",
+        "intensity": {
+          "title": "Yoğunluk",
+          "desc": "Motor çalışırken veya dururken sarsıntının ne kadar güçlü hissettirdiği."
+        },
+        "duration": {
+          "title": "Süre",
+          "desc": "Çalıştırma sarsıntısının ne kadar sürdüğü. Durdurma sarsıntısı bundan daha kısa ve yumuşaktır."
+        }
+      },
+      "natural_head_movement": {
+        "title": "Doğal Baş Hareketi",
+        "sway_intensity": {
+          "title": "Salınım",
+          "desc": "Başınızın, sabit tutarken bile kendi kendine ne kadar yavaşça salındığı."
+        },
+        "micro_intensity": {
+          "title": "Mikro Ayarlar",
+          "desc": "Küçük bir ayarlamada başınızın ne kadar hareket ettiği."
+        },
+        "micro_interval": {
+          "title": "Mikro Ayar Aralığı",
+          "desc": "Başınızın iki küçük ayar arasında ne kadar beklediği."
+        },
+        "posture_intensity": {
+          "title": "Duruş Değişimleri",
+          "desc": "Başınızın yeni bir pozisyona geçerken ne kadar kaydığı."
+        },
+        "posture_interval": {
+          "title": "Duruş Aralığı",
+          "desc": "Başınızın yeni bir pozisyona geçmeden önce bir pozisyonu ne kadar koruduğu."
+        },
+        "roll_scale": {
+          "title": "Yana Eğim",
+          "desc": "Viraj eğimi dışındaki tüm hareketlerde başınızın yana ne kadar eğildiği."
+        },
+        "steering_tilt": {
+          "title": "Viraj Eğimi",
+          "desc": "Başınızın virajın içine ne kadar eğildiği: virajı ne kadar hızlı alırsanız o kadar çok eğilir."
+        }
+      },
+      "cabin_audio": {
+        "title": "Kabin Sesi",
+        "width": {
+          "title": "Genişlik",
+          "desc": "Bir hoparlöre dönük kulağın onu diğer kulağa göre ne kadar yüksek duyduğu."
+        },
+        "head_shadow": {
+          "title": "Yönlülük",
+          "desc": "Bir hoparlörün, başınızın gölgelediği ve ondan uzağa dönük kulağa ne kadar boğuk geldiği."
+        },
+        "muffle": {
+          "title": "Boğukluk",
+          "desc": "Radyo arkanızda kaldığında ne kadar boğuk ve kısık duyulduğu."
+        },
+        "bass": {
+          "title": "Bas",
+          "desc": "Kabin hoparlörlerinin bası ne kadar kıstığı, küçük kapı hoparlörleri gibi."
+        },
+        "mid": {
+          "title": "Orta",
+          "desc": "Seslerin ve enstrümanların ne kadar öne çıktığı."
+        },
+        "treble": {
+          "title": "Tiz",
+          "desc": "Kabin hoparlörlerinin ne kadar parlak duyulduğu."
+        },
+        "blend": {
+          "title": "Hoparlör karışımı",
+          "desc": "Her kapı hoparlörünün diğer kanalı da ne kadar çaldığı."
+        },
+        "reverb": {
+          "title": "Kabin yankısı",
+          "desc": "Kabinin duvarlarının ve ön camının radyoyu ne kadar yansıttığı."
+        },
+        "room_size": {
+          "title": "Kabin boyutu",
+          "desc": "Kabindeki yansımaların ne kadar sürdüğü."
+        },
+        "radio_volume": {
+          "title": "Radyo ses seviyesi",
+          "desc": "Radyonun, oyunun kendi ses seviyesinin üstüne ne kadar yüksek olduğu."
+        },
+        "gps": {
+          "title": "GPS sesi",
+          "desc": "GPS sesini radyo gibi kabin hoparlörlerinden çalar, o da başınızı takip eder."
+        },
+        "gps_low_cut": {
+          "title": "Ses bas kesimi",
+          "desc": "GPS sesinin ne kadar bas kaybettiği: daha yüksek, küçük bir hoparlör gibi daha ince duyulur."
+        },
+        "gps_high_cut": {
+          "title": "Ses tiz kesimi",
+          "desc": "GPS sesinin tizlerinin nerede bittiği: daha düşük daha boğuk duyulur."
+        },
+        "gps_tone": {
+          "title": "Ses tınısı",
+          "desc": "Tını yükseltmenin GPS sesinin hangi kısmını öne çıkardığı: daha düşük kutu gibi, daha yüksek genizden duyulur."
+        },
+        "gps_tone_boost": {
+          "title": "Tını yükseltme",
+          "desc": "GPS sesinin o kısmının ne kadar öne çıktığı: sıfırın altı onu yumuşatır."
+        },
+        "gps_volume": {
+          "title": "Ses seviyesi",
+          "desc": "GPS sesinin, oyunun kendi ses seviyesinin üstüne ne kadar yüksek olduğu."
+        },
+        "duck": {
+          "title": "Kısma",
+          "desc": "GPS sesi konuşurken radyonun ne kadar kısıldığı, bir navigasyon uygulamasındaki gibi."
+        },
+        "outside": {
+          "title": "Dışarıda",
+          "desc": "Dış görünümlerde radyonun kabinin dışından ne kadar boğuk duyulduğu."
+        }
+      }
+    },
+    "manual": {
+      "title": "Manuel",
+      "manual_look": {
+        "title": "Yana bakış",
+        "hint": "Kendi tuşları, oyundan bağımsız. Sinyalde aynaya bakış için oyunun sinyal tuşları atanmış olmalı.",
+        "look_left_deg": {
+          "title": "Sola bakış açısı",
+          "desc": "Sola baktığınızda kafanızın ne kadar döndüğü."
+        },
+        "look_right_deg": {
+          "title": "Sağa bakış açısı",
+          "desc": "Sağa baktığınızda kafanızın ne kadar döndüğü."
+        },
+        "glance_left_deg": {
+          "title": "Sol göz atma açısı",
+          "desc": "Sol aynaya göz attığınızda kafanızın ne kadar döndüğü."
+        },
+        "glance_right_deg": {
+          "title": "Sağ göz atma açısı",
+          "desc": "Sağ aynaya göz attığınızda kafanızın ne kadar döndüğü."
+        },
+        "glance_left_pitch_deg": {
+          "title": "Sol göz atma eğimi",
+          "desc": "Sol aynaya göz atarken kafanızın ne kadar eğildiği. Pozitif = yukarı, negatif = aşağı."
+        },
+        "glance_right_pitch_deg": {
+          "title": "Sağ göz atma eğimi",
+          "desc": "Sağ aynaya göz atarken kafanızın ne kadar eğildiği. Pozitif = yukarı, negatif = aşağı."
+        },
+        "glance_left_fov_deg": {
+          "title": "Sol göz atma FOV",
+          "desc": "Sol aynaya göz atarken görüş alanının ne kadar genişlediği. Negatif = daha dar (yakınlaştırma)."
+        },
+        "glance_right_fov_deg": {
+          "title": "Sağ göz atma FOV",
+          "desc": "Sağ aynaya göz atarken görüş alanının ne kadar genişlediği. Negatif = daha dar (yakınlaştırma)."
+        },
+        "smoothing_time": {
+          "title": "Yumuşatma",
+          "desc": "Bakıp geri dönme hareketinin ne kadar yumuşak olduğu."
+        },
+        "pause_steering_camera": {
+          "title": "Direksiyon kamerasını duraklat",
+          "desc": "Bakarken direksiyon kamerasını duraklatır, böylece görüş baktığınız yerde kalır."
+        },
+        "mirror_on_signal": {
+          "title": "Sinyalde aynaya bak",
+          "desc": "Sinyal açıkken o taraftaki aynaya bakar."
+        },
+        "require_stationary": {
+          "title": "Sadece dururken",
+          "desc": "Sinyalde aynaya yalnızca tır dururken bakar."
+        },
+        "ignore_after_moving_signal": {
+          "title": "Hareket halinde yok say",
+          "desc": "Sürüş sırasında açılan bir sinyal için, durduktan sonra bile aynaya bakma."
+        }
+      },
+      "manual_zoom": {
+        "title": "Manuel yakınlaştırma",
+        "hint": "Bu tuş, oyunun \"İç Kamera Yakınlaştırma\" tuşundan bağımsızdır.",
+        "zoom_fov_deg": {
+          "title": "Yakınlaştırma seviyesi",
+          "desc": "Yakınlaştırma tuşunu basılı tutarken görüntünün ne kadar yakınlaştığı. Düşük = daha fazla yakınlaştırma."
+        },
+        "smoothing_time": {
+          "title": "Yumuşatma",
+          "desc": "Yakınlaştırma ve uzaklaştırmanın ne kadar yumuşak hissettirdiği."
+        }
+      },
+      "blindspot_viewer": {
+        "title": "Kör nokta görüşü",
+        "pos_x": {
+          "title": "Yana kayma",
+          "desc": "Bakış sırasında başınızın sola veya sağa ne kadar kaydığı."
+        },
+        "pos_y": {
+          "title": "Yükseklik",
+          "desc": "Bakış sırasında başınızın yukarı veya aşağı ne kadar hareket ettiği."
+        },
+        "pos_z": {
+          "title": "Öne eğilme",
+          "desc": "Bakış sırasında başınızın öne ne kadar hareket ettiği. Negatif = öne."
+        },
+        "yaw_deg": {
+          "title": "Dönüş",
+          "desc": "Bakış sırasında başınızın sola veya sağa ne kadar döndüğü."
+        },
+        "pitch_deg": {
+          "title": "Eğim",
+          "desc": "Bakış sırasında başınızın yukarı veya aşağı ne kadar eğildiği."
+        },
+        "roll_deg": {
+          "title": "Yatma",
+          "desc": "Bakış sırasında başınızın yana ne kadar yattığı."
+        },
+        "fov_offset_deg": {
+          "title": "FOV değişimi",
+          "desc": "Bakış sırasında görüş alanının ne kadar genişlediği. Negatif = daha dar."
+        },
+        "smoothing_time": {
+          "title": "Yumuşatma",
+          "desc": "Öne eğilip geri dönme hareketinin ne kadar yumuşak olduğu."
+        }
+      },
+      "cabin_walk": {
+        "title": "Kabinde Yürüme",
+        "hint": "Varsayılan düzenler her kamyonun en küçük yataklı kabinine göre ayarlanmıştır. Diğer kabinlerin ayarlanması gerekebilir.",
+        "require_parking_brake": {
+          "title": "El Freni Gereksin",
+          "desc": "Açık: el freni gerekir, indirmek seni geri gönderir. Kapalı: durmak yeterlidir."
+        }
+      }
+    }
+  },
+  "ui": {
+    "enabled": "Etkin",
+    "cancel": "İptal",
+    "slider_reset_hint": "Sıfırlamak için bir kaydırıcıya sağ tıklayın.",
+    "truck_badge": "{name} ayarları",
+    "no_truck": "Yüklü tır yok",
+    "no_truck_hint": "Ayarlarını değiştirmek için bir tıra bin.",
+    "paused": "Oyun duraklatıldı",
+    "paused_hint": "Ayarları değiştirmek için oyuna devam et.",
+    "trucks": {
+      "section": "Ayarlanmış tırlar ({count})",
+      "changed": "{count} ayar değiştirildi",
+      "none": "Henüz kendi ayarları olan bir tır yok.",
+      "reset_tip": "Bu tırın ayarlarını varsayılan değerlere sıfırla."
+    },
+    "search": {
+      "hint": "Ayarlarda ara...",
+      "no_results": "\"{query}\" ile eşleşen ayar yok.",
+      "clear_tip": "Aramayı temizle."
+    },
+    "tabs": {
+      "settings": "Ayarlar",
+      "about": "Hakkında"
+    },
+    "keybind": {
+      "section": "Tuş atamaları",
+      "toggle_window": "Pencereyi göster",
+      "unbound": "(atanmamış)",
+      "rebind_tip": "Yeniden atamak için tıklayın.",
+      "options_tip": "Atama seçenekleri (basılı tut/geçiş, ölü bölge, ...).",
+      "add_tip": "Başka bir atama ekle."
+    },
+    "reset": {
+      "section": "Tehlikeli bölge",
+      "button": "Bu tırı sıfırla",
+      "title": "Sıfırlamayı onayla",
+      "message": "{truck} için tüm ayarlar sıfırlansın mı?",
+      "confirm": "Evet, sıfırla",
+      "done_toast": "{truck} ayarları sıfırlandı."
+    },
+    "about": {
+      "details": "Ayrıntılar",
+      "version": "Sürüm: **{version}**",
+      "developer": "Geliştirici: **{author}**",
+      "links": "Bağlantılar",
+      "website": "Web sitesi",
+      "website_desc": "Belgeler",
+      "discord": "Discord",
+      "discord_desc": "Topluluk ve destek",
+      "github": "GitHub",
+      "github_desc": "Sürümler ve hata bildirimleri",
+      "youtube": "YouTube",
+      "youtube_desc": "Videolar ve tanıtımlar",
+      "support": "Destek",
+      "support_text": "MotionCab'i beğendiyseniz geliştirilmesini destekleyebilirsiniz.",
+      "donate": "PayPal ile bağış yap",
+      "donate_desc": "MotionCab'i PayPal üzerinden destekle",
+      "tips": "İpuçları",
+      "tip_reset": "Varsayılan değerine sıfırlamak için herhangi bir kaydırıcıya sağ tıklayın.",
+      "tip_per_truck": "Ayarlar tır başına kaydedilir: bir değişiklik yalnızca sürdüğünüz tıra uygulanır.",
+      "tip_interior": "Tüm efektler yalnızca iç kamerada çalışır.",
+      "credits": "Emeği geçenler",
+      "credits_text": "SPF Framework ve katkıda bulunanlar."
+    },
+    "units": {
+      "speed_system": "metric",
+      "kmh": "km/sa",
+      "mph": "mil/sa"
+    },
+    "cabin_walk": {
+      "needs_parking_brake": "Koltuktan kalkmak için el frenini çek.",
+      "needs_stop": "Koltuktan kalkmak için tırı durdur.",
+      "back_to_wheel": "Direksiyona dönüldü: tır artık park halinde değil.",
+      "layout": {
+        "no_truck": "Kabinini ayarlamak için bir tıra bin.",
+        "truck": "Kamyon",
+        "tip": {
+          "floor_z_min": "Ne kadar ileri yürüyebileceğin, ön cama doğru.",
+          "floor_z_max": "Ne kadar geri yürüyebileceğin, arka duvara doğru.",
+          "floor_x_min": "Sürücü kapısına doğru ne kadar gidebileceğin.",
+          "floor_x_max": "Yolcu kapısına doğru ne kadar gidebileceğin.",
+          "stand_y": "Ayaktayken göz yüksekliğin.",
+          "crouch_depth": "Çömeldiğinde başının ne kadar alçaldığı.",
+          "passenger_dx": "Koltuğunun yansımasından yana doğru.",
+          "passenger_dy": "Koltuğundan daha yukarı veya aşağı.",
+          "passenger_dz": "Koltuğundan daha ileri veya geri.",
+          "bunk_sit_x": "Yatak boyunca nereye oturduğun.",
+          "bunk_sit_y": "Yatakta otururken göz yüksekliğin.",
+          "bunk_sit_z": "Yatak kenarının ne kadar geride olduğu.",
+          "yaw": "Oturunca nereye baktığın.",
+          "pitch": "Oturunca ne kadar yukarı veya aşağı baktığın.",
+          "has_passenger": "Yolcu koltuğu katlanıyorsa veya yoksa işareti kaldır.",
+          "has_bunk": "Yataksız kısa kabin için işareti kaldır.",
+          "has_aisle": "Zeminde basamaklar varsa işaretle, otobüs koridoru gibi.",
+          "aisle_step_count": "Zemin yüksekliğinin koridor boyunca kaç kez değiştiği.",
+          "aisle_step_z": "Basamağın kenarının ne kadar geride olduğu.",
+          "aisle_step_height": "Zeminin ondan sonra ne kadar yükseldiği (negatif: alçaldığı)."
+        },
+        "group": {
+          "walkway": "Yürüme Alanı",
+          "heights": "Ayakta Yükseklik",
+          "passenger": "Yolcu Koltuğu",
+          "bunk": "Yatak",
+          "steps": "Basamaklar"
+        },
+        "go": "Oraya git",
+        "usable": "Kullanılabilir",
+        "advanced": "Gelişmiş",
+        "reset": "Düzeni Sıfırla",
+        "reset_title": "Kabin Düzenini Sıfırla",
+        "reset_message": "{truck} için varsayılan düzene dönülsün mü?",
+        "reset_confirm": "Evet, Sıfırla",
+        "floor_x_min": "Sol Sınır",
+        "floor_x_max": "Sağ Sınır",
+        "floor_z_min": "Ön Sınır",
+        "floor_z_max": "Arka Sınır",
+        "stand_y": "Yükseklik",
+        "crouch_depth": "Çömelme Derinliği",
+        "passenger_dx": "Yan",
+        "passenger_dy": "Yükseklik",
+        "passenger_dz": "Derinlik",
+        "passenger_yaw": "Dönüş",
+        "passenger_pitch": "Eğim",
+        "bunk_sit_x": "Yan",
+        "bunk_sit_y": "Yükseklik",
+        "bunk_sit_z": "Derinlik",
+        "bunk_sit_yaw": "Dönüş",
+        "bunk_sit_pitch": "Eğim",
+        "aisle_step_count": "Sayı",
+        "aisle_step_z": "Basamak {n} derinliği",
+        "aisle_step_height": "Basamak {n} yüksekliği"
+      }
+    },
+    "modified": "Varsayılan değerden değiştirildi.",
+    "cabin_audio": {
+      "test_voice": "GPS cümlesi çal",
+      "test_voice_hint": "Sesi sürmeden ayarlamak için oyunun GPS cümlelerinden birini, her seferinde farklı birini çalar.",
+      "test_voice_missing": "Oyunun seslerinde GPS sesi bulunamadı."
+    }
+  }
+}

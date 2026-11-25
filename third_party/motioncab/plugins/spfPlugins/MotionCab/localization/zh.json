@@ -1,0 +1,612 @@
+{
+  "language": {
+    "en": "英语    [English]",
+    "uk": "乌克兰语    [Українська]",
+    "de": "德语    [Deutsch]",
+    "fr": "法语    [Français]",
+    "es": "西班牙语    [Español]",
+    "pl": "波兰语    [Polski]",
+    "ru": "俄语    [Русский]",
+    "pt_br": "巴西葡萄牙语    [Português (Brasil)]",
+    "it": "意大利语    [Italiano]",
+    "nl": "荷兰语    [Nederlands]",
+    "tr": "土耳其语    [Türkçe]",
+    "cs": "捷克语    [Čeština]",
+    "zh": "中文（简体）",
+    "ja": "日语    [日本語]",
+    "ko": "韩语    [한국어]"
+  },
+  "plugin": {
+    "description": "适用于 ETS2 和 ATS 的动态头部运动"
+  },
+  "window": {
+    "title": "MotionCab 快速设置",
+    "desc": "快速访问每个效果的设置，可替代“自定义设置”选项卡。"
+  },
+  "keybinds": {
+    "ui_toggle": {
+      "title": "显示/隐藏设置窗口",
+      "desc": "显示或隐藏 MotionCab 快速设置窗口。"
+    },
+    "look_left": {
+      "title": "向左看",
+      "desc": "平滑地将头大幅转向左侧，以查看横向来车。"
+    },
+    "look_right": {
+      "title": "向右看",
+      "desc": "平滑地将头大幅转向右侧，以查看横向来车。"
+    },
+    "glance_left": {
+      "title": "瞥一眼左后视镜",
+      "desc": "平滑地瞥一眼左后视镜，例如在汇入车流时。"
+    },
+    "glance_right": {
+      "title": "瞥一眼右后视镜",
+      "desc": "平滑地瞥一眼右后视镜，例如在汇入车流时。"
+    },
+    "look_forward": {
+      "title": "向前看",
+      "desc": "平滑地将头部转回正前方，结束任何视线。"
+    },
+    "zoom": {
+      "title": "缩放",
+      "desc": "平滑放大，之后平滑恢复正常。"
+    },
+    "blindspot_viewer": {
+      "title": "盲区视野",
+      "desc": "平滑地身体前倾，看清挡风玻璃立柱后方。"
+    },
+    "cabin_walk": {
+      "stand_sit": {
+        "title": "起身 / 坐下",
+        "desc": "从座位起身。点按坐到你看着的座位，按住回到方向盘前。"
+      },
+      "forward": {
+        "title": "向前走",
+        "desc": "在驾驶室内站立时向前走。"
+      },
+      "back": {
+        "title": "向后走",
+        "desc": "在驾驶室内站立时向后走。"
+      },
+      "left": {
+        "title": "向左迈步",
+        "desc": "在驾驶室内站立时向左横移一步。"
+      },
+      "right": {
+        "title": "向右迈步",
+        "desc": "在驾驶室内站立时向右横移一步。"
+      },
+      "crouch": {
+        "title": "下蹲",
+        "desc": "站立时下蹲。"
+      }
+    }
+  },
+  "settings": {
+    "enabled_desc": "开启或关闭此效果。",
+    "paused_by": "已被{effects}暂停。",
+    "pauses": "启用后，将暂停以下效果：",
+    "paused_in_use": "使用 {effects} 时暂停。",
+    "driving": {
+      "title": "驾驶",
+      "head_motion": {
+        "title": "头部运动",
+        "sway_strength": {
+          "title": "摆动强度",
+          "desc": "加速、刹车或转弯时头部被推动的幅度。"
+        },
+        "tilt_strength": {
+          "title": "倾斜强度",
+          "desc": "驾驶室倾斜或晃动时头部倾斜的幅度。"
+        },
+        "smoothing_time": {
+          "title": "平滑",
+          "desc": "头部回到原位的速度。越高 = 越慢越平滑，越低 = 越灵敏。"
+        }
+      },
+      "body_dynamics": {
+        "title": "身体动态",
+        "lean_strength": {
+          "title": "侧倾强度",
+          "desc": "转弯时头部向内侧倾斜的幅度。"
+        },
+        "nod_strength": {
+          "title": "点头强度",
+          "desc": "刹车时头部前倾、加速时后仰的幅度。"
+        },
+        "smoothing_time": {
+          "title": "平滑",
+          "desc": "侧倾和点头恢复平稳的速度。越低 = 越灵敏。"
+        }
+      },
+      "steering_camera": {
+        "title": "转向镜头",
+        "rotation_left_deg": {
+          "title": "向左旋转幅度",
+          "desc": "方向盘向左打满时镜头转动的角度。"
+        },
+        "rotation_right_deg": {
+          "title": "向右旋转幅度",
+          "desc": "方向盘向右打满时镜头转动的角度。"
+        },
+        "center_zone_pct": {
+          "title": "中心区域",
+          "desc": "在摄像机左右旋转保持一致的前提下方向盘可转动的范围（占满舵的比例）。超出后，每一侧按其自身的旋转幅度转动。"
+        },
+        "smoothing_time": {
+          "title": "平滑",
+          "desc": "镜头开始转动后的平滑程度。越高 = 越平滑越慢。"
+        },
+        "delay_seconds": {
+          "title": "反应延迟",
+          "desc": "转动方向盘后镜头开始移动前的等待时间。"
+        },
+        "disable_in_reverse": {
+          "title": "倒车时禁用",
+          "desc": "卡车挂倒挡时保持镜头居中。"
+        },
+        "disable_when_stopped": {
+          "title": "停车时禁用",
+          "desc": "卡车前进之前保持镜头居中。"
+        }
+      }
+    },
+    "road": {
+      "title": "道路",
+      "suspension": {
+        "title": "悬挂",
+        "vertical_strength": {
+          "title": "垂直强度",
+          "desc": "路面颠簸让镜头弹动和倾斜的幅度。"
+        },
+        "reactivity": {
+          "title": "响应速度",
+          "desc": "颠簸后座椅稳定下来的速度。越低 = 越硬、越灵敏。"
+        },
+        "grade_strength": {
+          "title": "跟随坡度",
+          "desc": "下坡时抬高头部，上坡时降低头部。"
+        }
+      },
+      "road_irregularity": {
+        "title": "路面不平",
+        "intensity": {
+          "title": "强度",
+          "desc": "路面纹理震动和越野摇晃的强度。"
+        },
+        "reactivity": {
+          "title": "响应速度",
+          "desc": "路面纹理震动的尖锐与嗡鸣程度。越低 = 越尖锐。"
+        }
+      },
+      "speed_shake": {
+        "title": "速度抖动",
+        "intensity": {
+          "title": "强度",
+          "desc": "高速行驶时感受到的抖动总体强度。"
+        },
+        "smoothing_time": {
+          "title": "平滑",
+          "desc": "抖动随时间的感觉。越高 = 越慢越平滑，越低 = 越跳跃越急促。"
+        },
+        "rotation": {
+          "title": "旋转",
+          "desc": "抖动中视角倾斜/转动的程度，而不仅是左右移动。设为 0 则只保留左右移动。"
+        },
+        "vertical": {
+          "title": "垂直",
+          "desc": "抖动中混入的上下弹动量。"
+        },
+        "roughness": {
+          "title": "不规则度",
+          "desc": "抖动随时间的不均匀程度。0 保持恒定；更高的值会交替出现平静与剧烈的片段。"
+        }
+      }
+    },
+    "cabin": {
+      "title": "驾驶室",
+      "idle_breathing": {
+        "title": "静止呼吸",
+        "vertical_amplitude": {
+          "title": "垂直幅度",
+          "desc": "每次呼吸时镜头升降的幅度。"
+        },
+        "pitch_amplitude_deg": {
+          "title": "点头幅度",
+          "desc": "每次呼吸时头部前后倾斜的幅度。"
+        },
+        "breathing_rate_bpm": {
+          "title": "呼吸频率",
+          "desc": "呼吸的快慢。"
+        },
+        "fade_start_kmh": {
+          "title": "淡出起始速度",
+          "desc": "加速时此效果开始淡出的速度。"
+        },
+        "fade_end_kmh": {
+          "title": "淡出结束速度",
+          "desc": "此效果完全消失时的速度。"
+        }
+      },
+      "engine_vibration": {
+        "title": "发动机振动",
+        "intensity": {
+          "title": "强度",
+          "desc": "发动机轰鸣的强度。"
+        }
+      },
+      "engine_start_stop": {
+        "title": "发动机启动/熄火",
+        "intensity": {
+          "title": "强度",
+          "desc": "发动机启动或熄火时抖动的强度。"
+        },
+        "duration": {
+          "title": "持续时间",
+          "desc": "启动抖动持续的时间。熄火抖动更短、更柔和。"
+        }
+      },
+      "natural_head_movement": {
+        "title": "自然头部运动",
+        "sway_intensity": {
+          "title": "摇晃",
+          "desc": "即使保持不动，头部自行缓慢摇晃的幅度。"
+        },
+        "micro_intensity": {
+          "title": "微调",
+          "desc": "头部做小幅调整时移动的幅度。"
+        },
+        "micro_interval": {
+          "title": "微调间隔",
+          "desc": "头部两次小幅调整之间间隔多久。"
+        },
+        "posture_intensity": {
+          "title": "姿势变化",
+          "desc": "头部换到新姿势时的移动幅度。"
+        },
+        "posture_interval": {
+          "title": "姿势间隔",
+          "desc": "头部保持一个姿势多久后再换到新姿势。"
+        },
+        "roll_scale": {
+          "title": "侧向倾斜幅度",
+          "desc": "头部向侧面倾斜的幅度，适用于除转向倾斜外的所有动作。"
+        },
+        "steering_tilt": {
+          "title": "转向倾斜",
+          "desc": "过弯时头部向弯道内侧倾斜的幅度：过弯越快，倾斜越大。"
+        }
+      },
+      "cabin_audio": {
+        "title": "驾驶室音频",
+        "width": {
+          "title": "宽度",
+          "desc": "朝向扬声器的耳朵比另一只耳朵听得响多少。"
+        },
+        "head_shadow": {
+          "title": "方向感",
+          "desc": "被头部遮挡、背对扬声器的耳朵听到的声音有多闷。"
+        },
+        "muffle": {
+          "title": "闷音",
+          "desc": "收音机在你身后时，声音变闷变小的程度。"
+        },
+        "bass": {
+          "title": "低音",
+          "desc": "驾驶室扬声器削减低音的程度，就像车门上的小扬声器。"
+        },
+        "mid": {
+          "title": "中音",
+          "desc": "人声和乐器有多突出。"
+        },
+        "treble": {
+          "title": "高音",
+          "desc": "驾驶室扬声器听起来有多明亮。"
+        },
+        "blend": {
+          "title": "扬声器混合",
+          "desc": "每个车门扬声器同时播放另一声道的程度。"
+        },
+        "reverb": {
+          "title": "驾驶室回声",
+          "desc": "驾驶室的墙壁和挡风玻璃对收音机声音的反射程度。"
+        },
+        "room_size": {
+          "title": "驾驶室大小",
+          "desc": "驾驶室内反射持续的时间。"
+        },
+        "radio_volume": {
+          "title": "收音机音量",
+          "desc": "在游戏自身音量之上，收音机的响度。"
+        },
+        "gps": {
+          "title": "GPS 语音",
+          "desc": "像收音机一样通过驾驶室扬声器播放 GPS 语音，同样随头部方向变化。"
+        },
+        "gps_low_cut": {
+          "title": "语音低频切除",
+          "desc": "GPS 语音损失多少低音：越高越细，像小扬声器。"
+        },
+        "gps_high_cut": {
+          "title": "语音高频切除",
+          "desc": "GPS 语音的高音在哪里停止：越低越闷。"
+        },
+        "gps_tone": {
+          "title": "语音音色",
+          "desc": "音色增益突出 GPS 语音的哪个部分：越低越有箱体感，越高越有鼻音。"
+        },
+        "gps_tone_boost": {
+          "title": "音色增益",
+          "desc": "GPS 语音的该部分有多突出：低于零会使其柔和。"
+        },
+        "gps_volume": {
+          "title": "语音音量",
+          "desc": "在游戏自身音量之上，GPS 语音的响度。"
+        },
+        "duck": {
+          "title": "避让",
+          "desc": "GPS 语音播报时，像导航应用一样把收音机调低多少。"
+        },
+        "outside": {
+          "title": "车外",
+          "desc": "在外部视角中，从驾驶室外听到的收音机有多闷。"
+        }
+      }
+    },
+    "manual": {
+      "title": "手动",
+      "manual_look": {
+        "title": "侧向观察",
+        "hint": "按键独立于游戏。转向灯时看后视镜需要游戏的转向灯按键。",
+        "look_left_deg": {
+          "title": "向左观察角度",
+          "desc": "向左看时头部转动的角度。"
+        },
+        "look_right_deg": {
+          "title": "向右观察角度",
+          "desc": "向右看时头部转动的角度。"
+        },
+        "glance_left_deg": {
+          "title": "左后视镜瞥视角度",
+          "desc": "瞥一眼左后视镜时头部转动的角度。"
+        },
+        "glance_right_deg": {
+          "title": "右后视镜瞥视角度",
+          "desc": "瞥一眼右后视镜时头部转动的角度。"
+        },
+        "glance_left_pitch_deg": {
+          "title": "左后视镜瞥视俯仰",
+          "desc": "瞥一眼左后视镜时头部倾斜的幅度。正值 = 向上，负值 = 向下。"
+        },
+        "glance_right_pitch_deg": {
+          "title": "右后视镜瞥视俯仰",
+          "desc": "瞥一眼右后视镜时头部倾斜的幅度。正值 = 向上，负值 = 向下。"
+        },
+        "glance_left_fov_deg": {
+          "title": "左后视镜瞥视视野",
+          "desc": "瞥一眼左后视镜时视野扩大的幅度。负值 = 变窄（放大）。"
+        },
+        "glance_right_fov_deg": {
+          "title": "右后视镜瞥视视野",
+          "desc": "瞥一眼右后视镜时视野扩大的幅度。负值 = 变窄（放大）。"
+        },
+        "smoothing_time": {
+          "title": "平滑",
+          "desc": "观察与回正动作的平滑程度。"
+        },
+        "pause_steering_camera": {
+          "title": "暂停转向镜头",
+          "desc": "查看时暂停转向镜头，让视角停留在你看的地方。"
+        },
+        "mirror_on_signal": {
+          "title": "转向灯时看后视镜",
+          "desc": "转向灯亮着时，看向该侧的后视镜。"
+        },
+        "require_stationary": {
+          "title": "仅在静止时",
+          "desc": "仅在卡车停下时，打转向灯才看后视镜。"
+        },
+        "ignore_after_moving_signal": {
+          "title": "行驶中忽略",
+          "desc": "对于行驶中打开的转向灯，即使停车后也不查看后视镜。"
+        }
+      },
+      "manual_zoom": {
+        "title": "手动缩放",
+        "hint": "此按键独立于游戏原生的“放大/缩小车内视角”按键。",
+        "zoom_fov_deg": {
+          "title": "缩放级别",
+          "desc": "按住缩放键时视角放大的程度。越低 = 放大越多。"
+        },
+        "smoothing_time": {
+          "title": "平滑",
+          "desc": "放大和缩小的平滑程度。"
+        }
+      },
+      "blindspot_viewer": {
+        "title": "盲区视野",
+        "pos_x": {
+          "title": "左右偏移",
+          "desc": "探视时头部向左或向右移动的距离。"
+        },
+        "pos_y": {
+          "title": "高度",
+          "desc": "探视时头部向上或向下移动的距离。"
+        },
+        "pos_z": {
+          "title": "前倾",
+          "desc": "探视时头部向前移动的距离。负值 = 向前。"
+        },
+        "yaw_deg": {
+          "title": "转向",
+          "desc": "探视时头部向左或向右转动的角度。"
+        },
+        "pitch_deg": {
+          "title": "俯仰",
+          "desc": "探视时头部向上或向下倾斜的角度。"
+        },
+        "roll_deg": {
+          "title": "侧倾",
+          "desc": "探视时头部向一侧倾斜的角度。"
+        },
+        "fov_offset_deg": {
+          "title": "视野变化",
+          "desc": "探视时视野扩大的幅度。负值 = 变窄。"
+        },
+        "smoothing_time": {
+          "title": "平滑",
+          "desc": "前倾与回位动作的平滑程度。"
+        }
+      },
+      "cabin_walk": {
+        "title": "驾驶室漫步",
+        "hint": "默认布局按每辆卡车最小的卧铺驾驶室设定。其他驾驶室可能需要调整。",
+        "require_parking_brake": {
+          "title": "需要驻车制动",
+          "desc": "开启：需要拉上驻车制动，松开会让你回去。关闭：停车即可。"
+        }
+      }
+    }
+  },
+  "ui": {
+    "enabled": "已启用",
+    "cancel": "取消",
+    "slider_reset_hint": "右键单击滑块可将其重置为默认值。",
+    "truck_badge": "{name} 的设置",
+    "no_truck": "未加载卡车",
+    "no_truck_hint": "进入一辆卡车以更改它的设置。",
+    "paused": "游戏已暂停",
+    "paused_hint": "继续游戏以更改设置。",
+    "trucks": {
+      "section": "已设置的卡车 ({count})",
+      "changed": "已更改 {count} 项设置",
+      "none": "还没有卡车拥有自己的设置。",
+      "reset_tip": "将此卡车的设置重置为默认值。"
+    },
+    "search": {
+      "hint": "搜索设置...",
+      "no_results": "没有与“{query}”匹配的设置。",
+      "clear_tip": "清除搜索"
+    },
+    "tabs": {
+      "settings": "设置",
+      "about": "关于"
+    },
+    "keybind": {
+      "section": "按键绑定",
+      "toggle_window": "切换窗口",
+      "unbound": "（未绑定）",
+      "rebind_tip": "单击以重新绑定。",
+      "options_tip": "绑定选项（按住/切换、死区等）。",
+      "add_tip": "添加另一个绑定。"
+    },
+    "reset": {
+      "section": "危险区域",
+      "button": "重置此卡车",
+      "title": "确认重置",
+      "message": "将 {truck} 的设置全部重置？",
+      "confirm": "是，重置",
+      "done_toast": "已重置 {truck} 的设置。"
+    },
+    "about": {
+      "details": "详情",
+      "version": "版本：**{version}**",
+      "developer": "开发者：**{author}**",
+      "links": "链接",
+      "website": "网站",
+      "website_desc": "文档",
+      "discord": "Discord",
+      "discord_desc": "社区与支持",
+      "github": "GitHub",
+      "github_desc": "版本发布与错误报告",
+      "youtube": "YouTube",
+      "youtube_desc": "视频与演示",
+      "support": "支持",
+      "support_text": "如果你喜欢 MotionCab，可以支持它的开发。",
+      "donate": "通过 PayPal 捐赠",
+      "donate_desc": "在 PayPal 上支持 MotionCab",
+      "tips": "提示",
+      "tip_reset": "右键单击任意滑块可将其恢复为默认值。",
+      "tip_per_truck": "设置按卡车保存：更改只对你正在驾驶的卡车生效。",
+      "tip_interior": "所有效果仅在车内视角下生效。",
+      "credits": "致谢",
+      "credits_text": "SPF Framework 及其贡献者。"
+    },
+    "units": {
+      "speed_system": "metric",
+      "kmh": "公里/小时",
+      "mph": "英里/小时"
+    },
+    "cabin_walk": {
+      "needs_parking_brake": "拉上驻车制动才能离开座位。",
+      "needs_stop": "停下卡车才能离开座位。",
+      "back_to_wheel": "已回到方向盘前：卡车不再处于停车状态。",
+      "layout": {
+        "no_truck": "上一辆卡车来设置它的驾驶室。",
+        "truck": "卡车",
+        "tip": {
+          "floor_z_min": "你能向前走多远，朝向挡风玻璃。",
+          "floor_z_max": "你能向后走多远，朝向后壁。",
+          "floor_x_min": "你能朝驾驶员车门走多远。",
+          "floor_x_max": "你能朝乘客车门走多远。",
+          "stand_y": "站立时的眼睛高度。",
+          "crouch_depth": "下蹲时头部降低的距离。",
+          "passenger_dx": "相对于你座椅的镜像位置横向偏移。",
+          "passenger_dy": "比你的座椅高或低。",
+          "passenger_dz": "比你的座椅靠前或靠后。",
+          "bunk_sit_x": "你沿卧铺坐的位置。",
+          "bunk_sit_y": "坐在卧铺上时的眼睛高度。",
+          "bunk_sit_z": "卧铺边缘在多靠后的位置。",
+          "yaw": "坐下后看向的方向。",
+          "pitch": "坐下后向上或向下看的程度。",
+          "has_passenger": "如果副驾驶座可折叠或不存在，请取消勾选。",
+          "has_bunk": "对于没有卧铺的短驾驶室，请取消勾选。",
+          "has_aisle": "如果地板有台阶（如大巴过道），请勾选。",
+          "aisle_step_count": "沿过道地板高度变化的次数。",
+          "aisle_step_z": "台阶边缘向后有多远。",
+          "aisle_step_height": "越过台阶后地板升高多少（负值为降低）。"
+        },
+        "group": {
+          "walkway": "行走区域",
+          "heights": "站立高度",
+          "passenger": "副驾驶座",
+          "bunk": "卧铺",
+          "steps": "台阶"
+        },
+        "go": "前往",
+        "usable": "可用",
+        "advanced": "高级",
+        "reset": "重置布局",
+        "reset_title": "重置驾驶室布局",
+        "reset_message": "将 {truck} 恢复为默认布局？",
+        "reset_confirm": "是，重置",
+        "floor_x_min": "左边界",
+        "floor_x_max": "右边界",
+        "floor_z_min": "前边界",
+        "floor_z_max": "后边界",
+        "stand_y": "高度",
+        "crouch_depth": "下蹲深度",
+        "passenger_dx": "左右",
+        "passenger_dy": "高度",
+        "passenger_dz": "前后",
+        "passenger_yaw": "转向",
+        "passenger_pitch": "倾斜",
+        "bunk_sit_x": "左右",
+        "bunk_sit_y": "高度",
+        "bunk_sit_z": "前后",
+        "bunk_sit_yaw": "转向",
+        "bunk_sit_pitch": "倾斜",
+        "aisle_step_count": "数量",
+        "aisle_step_z": "台阶 {n} 深度",
+        "aisle_step_height": "台阶 {n} 高度"
+      }
+    },
+    "modified": "已更改默认值。",
+    "cabin_audio": {
+      "test_voice": "播放一句 GPS 语音",
+      "test_voice_hint": "播放游戏中的一句 GPS 语音，每次不同，无需驾驶即可调整语音。",
+      "test_voice_missing": "在游戏声音中未找到 GPS 语音。"
+    }
+  }
+}

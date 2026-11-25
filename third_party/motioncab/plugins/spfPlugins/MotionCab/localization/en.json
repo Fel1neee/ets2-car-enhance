@@ -1,0 +1,612 @@
+{
+  "language": {
+    "en": "English",
+    "uk": "Ukrainian    [Українська]",
+    "de": "German    [Deutsch]",
+    "fr": "French    [Français]",
+    "es": "Spanish    [Español]",
+    "pl": "Polish    [Polski]",
+    "ru": "Russian    [Русский]",
+    "pt_br": "Brazilian Portuguese    [Português (Brasil)]",
+    "it": "Italian    [Italiano]",
+    "nl": "Dutch    [Nederlands]",
+    "tr": "Turkish    [Türkçe]",
+    "cs": "Czech    [Čeština]",
+    "zh": "Chinese (Simplified)    [简体中文]",
+    "ja": "Japanese    [日本語]",
+    "ko": "Korean    [한국어]"
+  },
+  "plugin": {
+    "description": "Dynamic Head-Motion for ETS2 and ATS"
+  },
+  "window": {
+    "title": "MotionCab Quick Settings",
+    "desc": "Quick access to every effect's settings, as an alternative to the Custom Settings tab."
+  },
+  "keybinds": {
+    "ui_toggle": {
+      "title": "Toggle Settings Window",
+      "desc": "Shows or hides the MotionCab Quick Settings window."
+    },
+    "look_left": {
+      "title": "Look Left",
+      "desc": "Smoothly turns your head wide to the left, to check cross traffic."
+    },
+    "look_right": {
+      "title": "Look Right",
+      "desc": "Smoothly turns your head wide to the right, to check cross traffic."
+    },
+    "glance_left": {
+      "title": "Glance at Left Mirror",
+      "desc": "Smoothly glances at the left mirror, e.g. when merging."
+    },
+    "glance_right": {
+      "title": "Glance at Right Mirror",
+      "desc": "Smoothly glances at the right mirror, e.g. when merging."
+    },
+    "look_forward": {
+      "title": "Look Forward",
+      "desc": "Smoothly turns your head back to straight ahead, ending any look."
+    },
+    "zoom": {
+      "title": "Zoom",
+      "desc": "Smoothly zooms in, then eases back to normal."
+    },
+    "blindspot_viewer": {
+      "title": "Blindspot Viewer",
+      "desc": "Smoothly leans forward to see past the windshield pillar."
+    },
+    "cabin_walk": {
+      "stand_sit": {
+        "title": "Stand Up / Sit Down",
+        "desc": "Gets up from the seat. Tap to sit at the seat you look at, hold to go back to the wheel."
+      },
+      "forward": {
+        "title": "Walk Forward",
+        "desc": "Walks forward while standing in the cabin."
+      },
+      "back": {
+        "title": "Walk Backward",
+        "desc": "Walks backward while standing in the cabin."
+      },
+      "left": {
+        "title": "Step Left",
+        "desc": "Steps to the left while standing in the cabin."
+      },
+      "right": {
+        "title": "Step Right",
+        "desc": "Steps to the right while standing in the cabin."
+      },
+      "crouch": {
+        "title": "Crouch",
+        "desc": "Crouches while standing."
+      }
+    }
+  },
+  "settings": {
+    "enabled_desc": "Turn this effect on or off.",
+    "paused_by": "Paused by {effects}.",
+    "pauses": "When enabled, this pauses the following effect(s):",
+    "paused_in_use": "Paused while {effects} is in use.",
+    "driving": {
+      "title": "Driving",
+      "head_motion": {
+        "title": "Head Motion",
+        "sway_strength": {
+          "title": "Sway Strength",
+          "desc": "How much your head gets pushed around when you speed up, brake, or take a turn."
+        },
+        "tilt_strength": {
+          "title": "Tilt Strength",
+          "desc": "How much your head tilts when the cab leans or rocks."
+        },
+        "smoothing_time": {
+          "title": "Smoothing",
+          "desc": "How quickly your head settles into place. Higher = slower and smoother, lower = snappier."
+        }
+      },
+      "body_dynamics": {
+        "title": "Body Dynamics",
+        "lean_strength": {
+          "title": "Lean Strength",
+          "desc": "How much your head leans into a turn."
+        },
+        "nod_strength": {
+          "title": "Nod Strength",
+          "desc": "How much your head dips forward when braking and pulls back when accelerating."
+        },
+        "smoothing_time": {
+          "title": "Smoothing",
+          "desc": "How quickly the lean and nod settle. Lower = snappier."
+        }
+      },
+      "steering_camera": {
+        "title": "Steering Camera",
+        "rotation_left_deg": {
+          "title": "Left Rotation Amount",
+          "desc": "How far the camera turns when you crank the wheel all the way to the left."
+        },
+        "rotation_right_deg": {
+          "title": "Right Rotation Amount",
+          "desc": "How far the camera turns when you crank the wheel all the way to the right."
+        },
+        "center_zone_pct": {
+          "title": "Center Zone",
+          "desc": "How much of the wheel's turn keeps the camera turning equally in both directions. Past it, each side turns at its own rotation amount."
+        },
+        "smoothing_time": {
+          "title": "Smoothing",
+          "desc": "How smooth the camera turn feels once it gets going. Higher = smoother and slower."
+        },
+        "delay_seconds": {
+          "title": "Reaction Delay",
+          "desc": "How long the camera waits after you turn the wheel before it starts moving."
+        },
+        "disable_in_reverse": {
+          "title": "Disable in Reverse",
+          "desc": "Keep the camera centered while the truck is in reverse gear."
+        },
+        "disable_when_stopped": {
+          "title": "Disable When Stopped",
+          "desc": "Keep the camera centered until the truck moves forward."
+        }
+      }
+    },
+    "road": {
+      "title": "Road",
+      "suspension": {
+        "title": "Suspension",
+        "vertical_strength": {
+          "title": "Vertical Strength",
+          "desc": "How much bumps in the road bounce and tilt the camera."
+        },
+        "reactivity": {
+          "title": "Reactivity",
+          "desc": "How quickly the seat settles after a bump. Lower = firmer and snappier."
+        },
+        "grade_strength": {
+          "title": "Grade Follow",
+          "desc": "Raises your head on downhill stretches and lowers it on uphill ones."
+        }
+      },
+      "road_irregularity": {
+        "title": "Road Irregularity",
+        "intensity": {
+          "title": "Intensity",
+          "desc": "How strong the road-texture shake and off-road rocking feel."
+        },
+        "reactivity": {
+          "title": "Reactivity",
+          "desc": "How sharp and buzzy the road-texture shake feels. Lower = sharper."
+        }
+      },
+      "speed_shake": {
+        "title": "Speed Shake",
+        "intensity": {
+          "title": "Intensity",
+          "desc": "Overall strength of the shake you feel from driving fast."
+        },
+        "smoothing_time": {
+          "title": "Smoothing",
+          "desc": "How the shake feels over time. Higher = slower and smoother, lower = jumpier and more nervous."
+        },
+        "rotation": {
+          "title": "Rotation",
+          "desc": "How much your view tilts/turns as part of the shake, versus just moving side to side. Set to 0 to keep only the side-to-side motion."
+        },
+        "vertical": {
+          "title": "Vertical",
+          "desc": "How much up-and-down bounce is mixed into the shake."
+        },
+        "roughness": {
+          "title": "Roughness",
+          "desc": "How uneven the shake feels over time. 0 keeps it constant; higher gives bursts of calm and rough stretches."
+        }
+      }
+    },
+    "cabin": {
+      "title": "Cabin",
+      "idle_breathing": {
+        "title": "Idle Breathing",
+        "vertical_amplitude": {
+          "title": "Vertical Amount",
+          "desc": "How far the camera rises and falls with each breath."
+        },
+        "pitch_amplitude_deg": {
+          "title": "Head Nod Amount",
+          "desc": "How much your head tips forward/back with each breath."
+        },
+        "breathing_rate_bpm": {
+          "title": "Breathing Rate",
+          "desc": "How fast the breathing happens."
+        },
+        "fade_start_kmh": {
+          "title": "Fade Start Speed",
+          "desc": "The speed at which this effect starts fading away as you speed up."
+        },
+        "fade_end_kmh": {
+          "title": "Fade End Speed",
+          "desc": "The speed at which this effect has completely faded away."
+        }
+      },
+      "engine_vibration": {
+        "title": "Engine Vibration",
+        "intensity": {
+          "title": "Intensity",
+          "desc": "How strong the engine rumble feels."
+        }
+      },
+      "engine_start_stop": {
+        "title": "Engine Start/Stop",
+        "intensity": {
+          "title": "Intensity",
+          "desc": "How strong the shudder feels when the engine starts or stops."
+        },
+        "duration": {
+          "title": "Duration",
+          "desc": "How long the start-up shudder lasts. The stop shudder is shorter and gentler than this."
+        }
+      },
+      "natural_head_movement": {
+        "title": "Natural Head Movement",
+        "sway_intensity": {
+          "title": "Sway",
+          "desc": "How much your head sways slowly on its own, even when holding still."
+        },
+        "micro_intensity": {
+          "title": "Micro-Adjustments",
+          "desc": "How far your head moves when it makes a small adjustment."
+        },
+        "micro_interval": {
+          "title": "Micro-Adjustment Interval",
+          "desc": "How long your head waits between two small adjustments."
+        },
+        "posture_intensity": {
+          "title": "Posture Changes",
+          "desc": "How far your head shifts when it settles into a new position."
+        },
+        "posture_interval": {
+          "title": "Posture Interval",
+          "desc": "How long your head holds a position before settling into a new one."
+        },
+        "roll_scale": {
+          "title": "Side Tilt Amount",
+          "desc": "How much your head tilts to the side, for every movement except the tilt into turns."
+        },
+        "steering_tilt": {
+          "title": "Steering Tilt",
+          "desc": "How much your head tilts into a turn: the faster you take it, the more it tilts."
+        }
+      },
+      "cabin_audio": {
+        "title": "Cabin Audio",
+        "width": {
+          "title": "Width",
+          "desc": "How much louder the ear facing a speaker hears it than the other ear."
+        },
+        "head_shadow": {
+          "title": "Directionality",
+          "desc": "How dull a speaker sounds to the ear turned away from it, as your head shades it."
+        },
+        "muffle": {
+          "title": "Muffle",
+          "desc": "How dull and quiet the radio gets once it's behind you."
+        },
+        "bass": {
+          "title": "Bass",
+          "desc": "How much the cabin's speakers cut the bass, like small door speakers."
+        },
+        "mid": {
+          "title": "Midrange",
+          "desc": "How much voices and instruments stand out."
+        },
+        "treble": {
+          "title": "Treble",
+          "desc": "How bright the cabin's speakers sound."
+        },
+        "blend": {
+          "title": "Speaker blend",
+          "desc": "How much each door speaker also plays the other channel."
+        },
+        "reverb": {
+          "title": "Cabin echo",
+          "desc": "How much the cabin's walls and windshield reflect the radio."
+        },
+        "room_size": {
+          "title": "Cabin size",
+          "desc": "How long the cabin's reflections last."
+        },
+        "radio_volume": {
+          "title": "Radio volume",
+          "desc": "How loud the radio is, on top of the game's own volume."
+        },
+        "gps": {
+          "title": "GPS voice",
+          "desc": "Plays the GPS voice through the cabin's speakers like the radio, following your head too."
+        },
+        "gps_low_cut": {
+          "title": "Voice low cut",
+          "desc": "How much of the GPS voice's lows go: higher sounds thinner, like a small speaker."
+        },
+        "gps_high_cut": {
+          "title": "Voice high cut",
+          "desc": "Where the GPS voice's highs stop: lower sounds duller."
+        },
+        "gps_tone": {
+          "title": "Voice tone",
+          "desc": "Which part of the GPS voice the tone boost brings out: lower sounds boxy, higher nasal."
+        },
+        "gps_tone_boost": {
+          "title": "Voice tone boost",
+          "desc": "How much that part of the GPS voice stands out: below zero softens it."
+        },
+        "gps_volume": {
+          "title": "Voice volume",
+          "desc": "How loud the GPS voice is, on top of the game's own volume."
+        },
+        "duck": {
+          "title": "Ducking",
+          "desc": "How much the radio quiets while the GPS voice speaks, as in a navigation app."
+        },
+        "outside": {
+          "title": "Outside",
+          "desc": "How muffled the radio sounds from outside the cabin, in the exterior views."
+        }
+      }
+    },
+    "manual": {
+      "title": "Manual",
+      "manual_look": {
+        "title": "Side Look",
+        "hint": "Its keys are separate from the game's. The turn signal glance needs the game's turn indicator keys assigned.",
+        "look_left_deg": {
+          "title": "Look Left Angle",
+          "desc": "How far your head turns when you look left."
+        },
+        "look_right_deg": {
+          "title": "Look Right Angle",
+          "desc": "How far your head turns when you look right."
+        },
+        "glance_left_deg": {
+          "title": "Left Glance Angle",
+          "desc": "How far your head turns when you glance at the left mirror."
+        },
+        "glance_right_deg": {
+          "title": "Right Glance Angle",
+          "desc": "How far your head turns when you glance at the right mirror."
+        },
+        "glance_left_pitch_deg": {
+          "title": "Left Glance Pitch",
+          "desc": "How much your head tilts while glancing at the left mirror. Positive = up, negative = down."
+        },
+        "glance_right_pitch_deg": {
+          "title": "Right Glance Pitch",
+          "desc": "How much your head tilts while glancing at the right mirror. Positive = up, negative = down."
+        },
+        "glance_left_fov_deg": {
+          "title": "Left Glance FOV",
+          "desc": "How much the field of view widens while glancing at the left mirror. Negative = narrower (zoom in)."
+        },
+        "glance_right_fov_deg": {
+          "title": "Right Glance FOV",
+          "desc": "How much the field of view widens while glancing at the right mirror. Negative = narrower (zoom in)."
+        },
+        "smoothing_time": {
+          "title": "Smoothing",
+          "desc": "How smooth the look-and-return motion is."
+        },
+        "pause_steering_camera": {
+          "title": "Pause Steering Camera",
+          "desc": "Pause Steering Camera while looking, so the view stays on what you look at."
+        },
+        "mirror_on_signal": {
+          "title": "Glance on Turn Signal",
+          "desc": "Glance at the mirror on the side of the turn signal while it's on."
+        },
+        "require_stationary": {
+          "title": "Only When Stationary",
+          "desc": "Only glance at the mirror for a turn signal when the truck is stopped."
+        },
+        "ignore_after_moving_signal": {
+          "title": "Ignore While Moving",
+          "desc": "Don't check the mirror for a turn signal you switched on while already driving, even after you stop."
+        }
+      },
+      "manual_zoom": {
+        "title": "Manual Zoom",
+        "hint": "This key is separate from the game's native \"Zoom Interior Camera\" key.",
+        "zoom_fov_deg": {
+          "title": "Zoom Level",
+          "desc": "How zoomed in the view gets while holding the zoom key. Lower = more zoomed in."
+        },
+        "smoothing_time": {
+          "title": "Smoothing",
+          "desc": "How smooth the zoom in/out feels."
+        }
+      },
+      "blindspot_viewer": {
+        "title": "Blindspot Viewer",
+        "pos_x": {
+          "title": "Sideways Lean",
+          "desc": "How far your head moves left or right while peeking."
+        },
+        "pos_y": {
+          "title": "Height",
+          "desc": "How far your head moves up or down while peeking."
+        },
+        "pos_z": {
+          "title": "Forward Lean",
+          "desc": "How far your head moves forward while peeking. Negative = forward."
+        },
+        "yaw_deg": {
+          "title": "Turn",
+          "desc": "How far your head turns left or right while peeking."
+        },
+        "pitch_deg": {
+          "title": "Tilt",
+          "desc": "How far your head tilts up or down while peeking."
+        },
+        "roll_deg": {
+          "title": "Roll",
+          "desc": "How far your head tilts to the side while peeking."
+        },
+        "fov_offset_deg": {
+          "title": "FOV Change",
+          "desc": "How much the field of view widens while peeking. Negative = narrower."
+        },
+        "smoothing_time": {
+          "title": "Smoothing",
+          "desc": "How smooth the lean-and-return motion is."
+        }
+      },
+      "cabin_walk": {
+        "title": "Cabin Walk",
+        "hint": "Default layouts are set for each truck's smallest sleeper cabin. Other cabins may need adjustments.",
+        "require_parking_brake": {
+          "title": "Require Parking Brake",
+          "desc": "On: needs the parking brake; releasing it sends you back. Off: stopping is enough."
+        }
+      }
+    }
+  },
+  "ui": {
+    "enabled": "Enabled",
+    "cancel": "Cancel",
+    "slider_reset_hint": "Right-click a slider to reset it to default.",
+    "truck_badge": "{name} settings",
+    "no_truck": "No truck loaded",
+    "no_truck_hint": "Get in a truck to change its settings.",
+    "paused": "Game paused",
+    "paused_hint": "Resume the game to change the settings.",
+    "trucks": {
+      "section": "Tuned trucks ({count})",
+      "changed": "{count} settings changed",
+      "none": "No truck has settings of its own yet.",
+      "reset_tip": "Reset this truck's settings to their defaults."
+    },
+    "search": {
+      "hint": "Search settings...",
+      "no_results": "No setting matches \"{query}\".",
+      "clear_tip": "Clear the search."
+    },
+    "tabs": {
+      "settings": "Settings",
+      "about": "About"
+    },
+    "keybind": {
+      "section": "Keybinds",
+      "toggle_window": "Toggle Window",
+      "unbound": "(unbound)",
+      "rebind_tip": "Click to rebind.",
+      "options_tip": "Binding options (hold/toggle, deadzone, ...).",
+      "add_tip": "Add another binding."
+    },
+    "reset": {
+      "section": "Danger Zone",
+      "button": "Reset This Truck",
+      "title": "Confirm Reset",
+      "message": "Reset every setting of the {truck}?",
+      "confirm": "Yes, Reset",
+      "done_toast": "Reset the settings of {truck}."
+    },
+    "about": {
+      "details": "Details",
+      "version": "Version: **{version}**",
+      "developer": "Developer: **{author}**",
+      "links": "Links",
+      "website": "Website",
+      "website_desc": "Documentation",
+      "discord": "Discord",
+      "discord_desc": "Community and support",
+      "github": "GitHub",
+      "github_desc": "Releases and bug reports",
+      "youtube": "YouTube",
+      "youtube_desc": "Videos and showcases",
+      "support": "Support",
+      "support_text": "If you enjoy MotionCab, you can support its development.",
+      "donate": "Donate with PayPal",
+      "donate_desc": "Support MotionCab on PayPal",
+      "tips": "Tips",
+      "tip_reset": "Right-click any slider to reset it to its default value.",
+      "tip_per_truck": "Settings are saved per truck: a change applies only to the truck you're driving.",
+      "tip_interior": "Every effect works in the interior camera only.",
+      "credits": "Credits",
+      "credits_text": "SPF Framework and contributors."
+    },
+    "units": {
+      "speed_system": "imperial",
+      "kmh": "km/h",
+      "mph": "mph"
+    },
+    "cabin_walk": {
+      "needs_parking_brake": "Engage the parking brake to leave the seat.",
+      "needs_stop": "Stop the truck to leave the seat.",
+      "back_to_wheel": "Back to the wheel: the truck is no longer parked.",
+      "layout": {
+        "no_truck": "Get in a truck to set up its cabin.",
+        "truck": "Truck",
+        "tip": {
+          "floor_z_min": "How far forward you can walk, toward the windshield.",
+          "floor_z_max": "How far back you can walk, toward the back wall.",
+          "floor_x_min": "How far you can walk toward the driver's door.",
+          "floor_x_max": "How far you can walk toward the passenger door.",
+          "stand_y": "Your eye height when standing.",
+          "crouch_depth": "How far your head drops when crouching.",
+          "passenger_dx": "Sideways from your own seat's mirror image.",
+          "passenger_dy": "Up or down from your own seat's height.",
+          "passenger_dz": "Forward or back from your own seat's depth.",
+          "bunk_sit_x": "Where you sit along the bunk.",
+          "bunk_sit_y": "Your eye height when sitting on the bunk.",
+          "bunk_sit_z": "How far back the bunk's edge is.",
+          "yaw": "Where you look once seated.",
+          "pitch": "How far up or down you look once seated.",
+          "has_passenger": "Untick if the passenger seat folds up or is missing.",
+          "has_bunk": "Untick for a day cab without a bunk.",
+          "has_aisle": "Tick if the floor has steps, like a bus's aisle.",
+          "aisle_step_count": "How many times the floor changes height along the aisle.",
+          "aisle_step_z": "How far back the step's edge is.",
+          "aisle_step_height": "How far the floor goes up past it (negative: down)."
+        },
+        "group": {
+          "walkway": "Walkway",
+          "heights": "Standing Height",
+          "passenger": "Passenger Seat",
+          "bunk": "Bunk",
+          "steps": "Steps"
+        },
+        "go": "Go There",
+        "usable": "Usable",
+        "advanced": "Advanced",
+        "reset": "Reset Layout",
+        "reset_title": "Reset Cabin Layout",
+        "reset_message": "Go back to the default layout for {truck}?",
+        "reset_confirm": "Yes, Reset",
+        "floor_x_min": "Left Limit",
+        "floor_x_max": "Right Limit",
+        "floor_z_min": "Front Limit",
+        "floor_z_max": "Back Limit",
+        "stand_y": "Height",
+        "crouch_depth": "Crouch Depth",
+        "passenger_dx": "Side",
+        "passenger_dy": "Height",
+        "passenger_dz": "Depth",
+        "passenger_yaw": "Turn",
+        "passenger_pitch": "Tilt",
+        "bunk_sit_x": "Side",
+        "bunk_sit_y": "Height",
+        "bunk_sit_z": "Depth",
+        "bunk_sit_yaw": "Turn",
+        "bunk_sit_pitch": "Tilt",
+        "aisle_step_count": "Count",
+        "aisle_step_z": "Step {n} Depth",
+        "aisle_step_height": "Step {n} Height"
+      }
+    },
+    "modified": "Changed from its default.",
+    "cabin_audio": {
+      "test_voice": "Play a GPS line",
+      "test_voice_hint": "Plays one of the game's GPS lines, to tune the voice without driving.",
+      "test_voice_missing": "No GPS voice found in the game's sounds."
+    }
+  }
+}

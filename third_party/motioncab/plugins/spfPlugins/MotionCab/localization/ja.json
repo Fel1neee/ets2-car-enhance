@@ -1,0 +1,612 @@
+{
+  "language": {
+    "en": "英語    [English]",
+    "uk": "ウクライナ語    [Українська]",
+    "de": "ドイツ語    [Deutsch]",
+    "fr": "フランス語    [Français]",
+    "es": "スペイン語    [Español]",
+    "pl": "ポーランド語    [Polski]",
+    "ru": "ロシア語    [Русский]",
+    "pt_br": "ポルトガル語（ブラジル）    [Português (Brasil)]",
+    "it": "イタリア語    [Italiano]",
+    "nl": "オランダ語    [Nederlands]",
+    "tr": "トルコ語    [Türkçe]",
+    "cs": "チェコ語    [Čeština]",
+    "zh": "中国語（簡体字）    [简体中文]",
+    "ja": "日本語",
+    "ko": "韓国語    [한국어]"
+  },
+  "plugin": {
+    "description": "ETS2・ATS 向けのダイナミックな頭の動き"
+  },
+  "window": {
+    "title": "MotionCab クイック設定",
+    "desc": "「カスタム設定」タブの代わりに、各エフェクトの設定へすばやくアクセスできます。"
+  },
+  "keybinds": {
+    "ui_toggle": {
+      "title": "設定ウィンドウの表示/非表示",
+      "desc": "MotionCab クイック設定ウィンドウを表示または非表示にします。"
+    },
+    "look_left": {
+      "title": "左を見る",
+      "desc": "交差する車両を確認するため、なめらかに頭を左へ大きく向けます。"
+    },
+    "look_right": {
+      "title": "右を見る",
+      "desc": "交差する車両を確認するため、なめらかに頭を右へ大きく向けます。"
+    },
+    "glance_left": {
+      "title": "左ミラーをちらっと見る",
+      "desc": "合流時などに、左のミラーをなめらかにちらっと見ます。"
+    },
+    "glance_right": {
+      "title": "右ミラーをちらっと見る",
+      "desc": "合流時などに、右のミラーをなめらかにちらっと見ます。"
+    },
+    "look_forward": {
+      "title": "前を見る",
+      "desc": "頭をなめらかに正面へ戻し、あらゆる視線を終了します。"
+    },
+    "zoom": {
+      "title": "ズーム",
+      "desc": "なめらかにズームし、その後なめらかに元に戻ります。"
+    },
+    "blindspot_viewer": {
+      "title": "死角ビュー",
+      "desc": "なめらかに身を乗り出して、フロントガラス横の柱の先を確認します。"
+    },
+    "cabin_walk": {
+      "stand_sit": {
+        "title": "立つ / 座る",
+        "desc": "席から立ち上がります。押すと見ている席に座り、長押しすると運転席に戻ります。"
+      },
+      "forward": {
+        "title": "前へ歩く",
+        "desc": "キャビン内で立っているときに前へ歩きます。"
+      },
+      "back": {
+        "title": "後ろへ歩く",
+        "desc": "キャビン内で立っているときに後ろへ歩きます。"
+      },
+      "left": {
+        "title": "左へステップ",
+        "desc": "キャビン内で立っているときに左へ横歩きします。"
+      },
+      "right": {
+        "title": "右へステップ",
+        "desc": "キャビン内で立っているときに右へ横歩きします。"
+      },
+      "crouch": {
+        "title": "しゃがむ",
+        "desc": "立っているときにしゃがみます。"
+      }
+    }
+  },
+  "settings": {
+    "enabled_desc": "このエフェクトのオン/オフを切り替えます。",
+    "paused_by": "{effects}により一時停止中です。",
+    "pauses": "オンにすると、次のエフェクトを一時停止します：",
+    "paused_in_use": "{effects} の使用中は一時停止します。",
+    "driving": {
+      "title": "運転",
+      "head_motion": {
+        "title": "頭の動き",
+        "sway_strength": {
+          "title": "揺れの強さ",
+          "desc": "加速、ブレーキ、カーブのときに頭がどれだけ押されるか。"
+        },
+        "tilt_strength": {
+          "title": "傾きの強さ",
+          "desc": "キャビンが傾いたり揺れたりしたときに頭がどれだけ傾くか。"
+        },
+        "smoothing_time": {
+          "title": "スムージング",
+          "desc": "頭が元の位置に落ち着く速さ。高い = ゆっくりなめらか、低い = 機敏。"
+        }
+      },
+      "body_dynamics": {
+        "title": "体の動き",
+        "lean_strength": {
+          "title": "傾きの強さ",
+          "desc": "カーブで頭が内側にどれだけ傾くか。"
+        },
+        "nod_strength": {
+          "title": "うなずきの強さ",
+          "desc": "ブレーキ時に頭がどれだけ前に沈み、加速時にどれだけ後ろに下がるか。"
+        },
+        "smoothing_time": {
+          "title": "スムージング",
+          "desc": "傾きとうなずきが落ち着く速さ。低い = 機敏。"
+        }
+      },
+      "steering_camera": {
+        "title": "ステアリングカメラ",
+        "rotation_left_deg": {
+          "title": "左の回転量",
+          "desc": "ハンドルを左にいっぱいに切ったときにカメラがどれだけ回るか。"
+        },
+        "rotation_right_deg": {
+          "title": "右の回転量",
+          "desc": "ハンドルを右にいっぱいに切ったときにカメラがどれだけ回るか。"
+        },
+        "center_zone_pct": {
+          "title": "センターゾーン",
+          "desc": "カメラの回転を左右同じに保ったままハンドルを切れる範囲（フルロックに対する割合）。それを超えると、左右それぞれの回転量で回ります。"
+        },
+        "smoothing_time": {
+          "title": "スムージング",
+          "desc": "カメラが回り始めてからの動きのなめらかさ。高い = なめらかでゆっくり。"
+        },
+        "delay_seconds": {
+          "title": "反応の遅れ",
+          "desc": "ハンドルを切ってからカメラが動き始めるまでの待ち時間。"
+        },
+        "disable_in_reverse": {
+          "title": "バック時に無効化",
+          "desc": "トラックがバックギアに入っている間はカメラを中央に保ちます。"
+        },
+        "disable_when_stopped": {
+          "title": "停車中は無効化",
+          "desc": "トラックが前進するまでカメラを中央に保ちます。"
+        }
+      }
+    },
+    "road": {
+      "title": "路面",
+      "suspension": {
+        "title": "サスペンション",
+        "vertical_strength": {
+          "title": "上下の強さ",
+          "desc": "路面の凹凸でカメラがどれだけ跳ねたり傾いたりするか。"
+        },
+        "reactivity": {
+          "title": "反応速度",
+          "desc": "段差の後にシートが落ち着く速さ。低い = 硬めで機敏。"
+        },
+        "grade_strength": {
+          "title": "勾配への追従",
+          "desc": "下り坂では頭を上げ、上り坂では頭を下げます。"
+        }
+      },
+      "road_irregularity": {
+        "title": "路面の凹凸",
+        "intensity": {
+          "title": "強さ",
+          "desc": "路面の振動とオフロードでの揺れの強さ。"
+        },
+        "reactivity": {
+          "title": "反応速度",
+          "desc": "路面の振動の鋭さと細かさ。低い = 鋭い。"
+        }
+      },
+      "speed_shake": {
+        "title": "速度による揺れ",
+        "intensity": {
+          "title": "強さ",
+          "desc": "高速走行時に感じる揺れ全体の強さ。"
+        },
+        "smoothing_time": {
+          "title": "スムージング",
+          "desc": "時間経過による揺れの感じ方。高い = ゆっくりなめらか、低い = ぎくしゃくして落ち着きがない。"
+        },
+        "rotation": {
+          "title": "回転",
+          "desc": "揺れの中で、左右に動くだけでなく視点がどれだけ傾いたり回ったりするか。0 にすると左右の動きだけになります。"
+        },
+        "vertical": {
+          "title": "上下",
+          "desc": "揺れに加える上下の跳ねの量。"
+        },
+        "roughness": {
+          "title": "不規則さ",
+          "desc": "時間経過による揺れのむら。0 で一定、高くすると穏やかな区間と荒い区間が交互に現れます。"
+        }
+      }
+    },
+    "cabin": {
+      "title": "キャビン",
+      "idle_breathing": {
+        "title": "停車中の呼吸",
+        "vertical_amplitude": {
+          "title": "上下の振れ幅",
+          "desc": "呼吸ごとにカメラが上下する量。"
+        },
+        "pitch_amplitude_deg": {
+          "title": "うなずきの振れ幅",
+          "desc": "呼吸ごとに頭が前後に傾く量。"
+        },
+        "breathing_rate_bpm": {
+          "title": "呼吸の速さ",
+          "desc": "呼吸の速さです。"
+        },
+        "fade_start_kmh": {
+          "title": "フェード開始速度",
+          "desc": "加速したときにこのエフェクトが消え始める速度。"
+        },
+        "fade_end_kmh": {
+          "title": "フェード終了速度",
+          "desc": "このエフェクトが完全に消える速度。"
+        }
+      },
+      "engine_vibration": {
+        "title": "エンジンの振動",
+        "intensity": {
+          "title": "強さ",
+          "desc": "エンジンの唸りの強さ。"
+        }
+      },
+      "engine_start_stop": {
+        "title": "エンジン始動/停止",
+        "intensity": {
+          "title": "強さ",
+          "desc": "エンジンの始動・停止時の揺れの強さ。"
+        },
+        "duration": {
+          "title": "長さ",
+          "desc": "始動時の揺れが続く時間。停止時の揺れはこれより短く穏やかです。"
+        }
+      },
+      "natural_head_movement": {
+        "title": "自然な頭の動き",
+        "sway_intensity": {
+          "title": "揺れ",
+          "desc": "頭を静止させていても、頭が自然にゆっくり揺れる量です。"
+        },
+        "micro_intensity": {
+          "title": "微調整",
+          "desc": "頭が小さく調整するときの動きの大きさです。"
+        },
+        "micro_interval": {
+          "title": "微調整の間隔",
+          "desc": "頭が小さな調整をしてから次の調整をするまでの時間です。"
+        },
+        "posture_intensity": {
+          "title": "姿勢の変化",
+          "desc": "頭が新しい姿勢に移るときの動きの大きさです。"
+        },
+        "posture_interval": {
+          "title": "姿勢の間隔",
+          "desc": "頭が新しい姿勢に移るまで、ひとつの姿勢を保つ時間です。"
+        },
+        "roll_scale": {
+          "title": "横の傾き量",
+          "desc": "カーブでの傾き以外のすべての動きで、頭が横に傾く量です。"
+        },
+        "steering_tilt": {
+          "title": "カーブでの傾き",
+          "desc": "カーブで頭が内側へ傾く量です。速く曲がるほど大きく傾きます。"
+        }
+      },
+      "cabin_audio": {
+        "title": "キャビンオーディオ",
+        "width": {
+          "title": "広がり",
+          "desc": "スピーカーに向いた耳が、反対の耳よりどれだけ大きく聞こえるか。"
+        },
+        "head_shadow": {
+          "title": "方向感",
+          "desc": "スピーカーに背を向けた耳に、頭に遮られて音がどれだけこもって聞こえるか。"
+        },
+        "muffle": {
+          "title": "こもり",
+          "desc": "ラジオが背後にあるとき、音がどれだけこもって小さくなるか。"
+        },
+        "bass": {
+          "title": "低音",
+          "desc": "車内スピーカーが低音をどれだけ削るか。ドアの小さなスピーカーのようになります。"
+        },
+        "mid": {
+          "title": "中音",
+          "desc": "声や楽器がどれだけ際立つか。"
+        },
+        "treble": {
+          "title": "高音",
+          "desc": "車内スピーカーの明るさ。"
+        },
+        "blend": {
+          "title": "スピーカーのミックス",
+          "desc": "各ドアスピーカーがもう一方のチャンネルもどれだけ鳴らすか。"
+        },
+        "reverb": {
+          "title": "車内の反響",
+          "desc": "キャビンの壁やフロントガラスがラジオをどれだけ反射するか。"
+        },
+        "room_size": {
+          "title": "キャビンの広さ",
+          "desc": "車内の反射が続く長さ。"
+        },
+        "radio_volume": {
+          "title": "ラジオの音量",
+          "desc": "ゲームの音量に加えたラジオの大きさ。"
+        },
+        "gps": {
+          "title": "GPS音声",
+          "desc": "GPSの音声をラジオと同じくキャビンのスピーカーから鳴らし、これも頭の向きに合わせて変わります。"
+        },
+        "gps_low_cut": {
+          "title": "音声の低域カット",
+          "desc": "GPS音声の低音をどれだけ削るか。高いほど小さなスピーカーのように細くなります。"
+        },
+        "gps_high_cut": {
+          "title": "音声の高域カット",
+          "desc": "GPS音声の高音がどこで止まるか。低いほどこもります。"
+        },
+        "gps_tone": {
+          "title": "音声の音色",
+          "desc": "音色ブーストがGPS音声のどの帯域を強調するか。低いほど箱鳴り、高いほど鼻にかかった音になります。"
+        },
+        "gps_tone_boost": {
+          "title": "音色ブースト",
+          "desc": "その帯域がどれだけ目立つか。0未満で和らぎます。"
+        },
+        "gps_volume": {
+          "title": "音声の音量",
+          "desc": "ゲームの音量に加えたGPS音声の大きさ。"
+        },
+        "duck": {
+          "title": "ダッキング",
+          "desc": "GPSの音声が話している間、ナビアプリのようにラジオをどれだけ下げるか。"
+        },
+        "outside": {
+          "title": "車外",
+          "desc": "外部視点でキャビンの外から聞くラジオがどれだけこもるか。"
+        }
+      }
+    },
+    "manual": {
+      "title": "手動",
+      "manual_look": {
+        "title": "横への視線",
+        "hint": "ゲームとは別のキーです。ウインカーでのミラー確認には、ゲームのウインカーキーが必要です。",
+        "look_left_deg": {
+          "title": "左を見る角度",
+          "desc": "左を見るときに頭が回る量。"
+        },
+        "look_right_deg": {
+          "title": "右を見る角度",
+          "desc": "右を見るときに頭が回る量。"
+        },
+        "glance_left_deg": {
+          "title": "左ミラー確認の角度",
+          "desc": "左のミラーをちらっと見るときに頭が回る量。"
+        },
+        "glance_right_deg": {
+          "title": "右ミラー確認の角度",
+          "desc": "右のミラーをちらっと見るときに頭が回る量。"
+        },
+        "glance_left_pitch_deg": {
+          "title": "左ミラー確認の上下角度",
+          "desc": "左のミラーをちらっと見るときに頭が傾く量。プラス = 上、マイナス = 下。"
+        },
+        "glance_right_pitch_deg": {
+          "title": "右ミラー確認の上下角度",
+          "desc": "右のミラーをちらっと見るときに頭が傾く量。プラス = 上、マイナス = 下。"
+        },
+        "glance_left_fov_deg": {
+          "title": "左ミラー確認の視野角",
+          "desc": "左のミラーをちらっと見るときに視野角が広がる量。マイナス = 狭くなる（ズーム）。"
+        },
+        "glance_right_fov_deg": {
+          "title": "右ミラー確認の視野角",
+          "desc": "右のミラーをちらっと見るときに視野角が広がる量。マイナス = 狭くなる（ズーム）。"
+        },
+        "smoothing_time": {
+          "title": "スムージング",
+          "desc": "見る・戻る動きのなめらかさ。"
+        },
+        "pause_steering_camera": {
+          "title": "ステアリングカメラを一時停止",
+          "desc": "見ている間はステアリングカメラを一時停止し、視線を見ている先に保ちます。"
+        },
+        "mirror_on_signal": {
+          "title": "ウインカーでミラー確認",
+          "desc": "ウインカーが点いている間、その側のミラーを見ます。"
+        },
+        "require_stationary": {
+          "title": "停車中のみ",
+          "desc": "トラックが止まっているときだけ、ウインカーでミラーを見ます。"
+        },
+        "ignore_after_moving_signal": {
+          "title": "走行中は無視",
+          "desc": "走行中に出したウインカーでは、停車した後でもミラーを確認しません。"
+        }
+      },
+      "manual_zoom": {
+        "title": "手動ズーム",
+        "hint": "このキーはゲーム本来の「インテリア視点のズーム」キーとは別です。",
+        "zoom_fov_deg": {
+          "title": "ズームレベル",
+          "desc": "ズームキーを押している間にどれだけ拡大するか。低い = より拡大。"
+        },
+        "smoothing_time": {
+          "title": "スムージング",
+          "desc": "ズームイン/アウトのなめらかさ。"
+        }
+      },
+      "blindspot_viewer": {
+        "title": "死角ビュー",
+        "pos_x": {
+          "title": "左右の移動",
+          "desc": "のぞき込み中に頭が左右へ動く量。"
+        },
+        "pos_y": {
+          "title": "高さ",
+          "desc": "のぞき込み中に頭が上下へ動く量。"
+        },
+        "pos_z": {
+          "title": "前傾",
+          "desc": "のぞき込み中に頭が前へ動く量。マイナス = 前方。"
+        },
+        "yaw_deg": {
+          "title": "向き",
+          "desc": "のぞき込み中に頭が左右へ向く角度。"
+        },
+        "pitch_deg": {
+          "title": "傾き",
+          "desc": "のぞき込み中に頭が上下へ傾く角度。"
+        },
+        "roll_deg": {
+          "title": "ロール",
+          "desc": "のぞき込み中に頭が横へ傾く角度。"
+        },
+        "fov_offset_deg": {
+          "title": "視野角の変化",
+          "desc": "のぞき込み中に視野角が広がる量。マイナス = 狭くなる。"
+        },
+        "smoothing_time": {
+          "title": "スムージング",
+          "desc": "身を乗り出す・戻る動きのなめらかさ。"
+        }
+      },
+      "cabin_walk": {
+        "title": "キャビン歩行",
+        "hint": "デフォルトのレイアウトは各トラックの最も小さいスリーパーキャブに合わせてあります。その他のキャビンは調整が必要な場合があります。",
+        "require_parking_brake": {
+          "title": "パーキングブレーキを必須にする",
+          "desc": "オン：パーキングブレーキが必要で、解除すると戻ります。オフ：停車していれば十分です。"
+        }
+      }
+    }
+  },
+  "ui": {
+    "enabled": "有効",
+    "cancel": "キャンセル",
+    "slider_reset_hint": "スライダーを右クリックするとデフォルトに戻ります。",
+    "truck_badge": "{name} の設定",
+    "no_truck": "トラックが読み込まれていません",
+    "no_truck_hint": "設定を変更するにはトラックに乗ってください。",
+    "paused": "ゲーム一時停止中",
+    "paused_hint": "設定を変更するにはゲームを再開してください。",
+    "trucks": {
+      "section": "設定済みのトラック ({count})",
+      "changed": "{count} 件の設定を変更",
+      "none": "独自の設定を持つトラックはまだありません。",
+      "reset_tip": "このトラックの設定を既定値に戻します。"
+    },
+    "search": {
+      "hint": "設定を検索...",
+      "no_results": "「{query}」に一致する設定はありません。",
+      "clear_tip": "検索をクリア"
+    },
+    "tabs": {
+      "settings": "設定",
+      "about": "情報"
+    },
+    "keybind": {
+      "section": "キー割り当て",
+      "toggle_window": "ウィンドウ切替",
+      "unbound": "（未割り当て）",
+      "rebind_tip": "クリックして割り当て直します。",
+      "options_tip": "割り当てのオプション（長押し/トグル、デッドゾーンなど）。",
+      "add_tip": "別の割り当てを追加します。"
+    },
+    "reset": {
+      "section": "危険な操作",
+      "button": "このトラックをリセット",
+      "title": "リセットの確認",
+      "message": "{truck} の設定をすべてリセットしますか？",
+      "confirm": "はい、リセット",
+      "done_toast": "{truck} の設定をリセットしました。"
+    },
+    "about": {
+      "details": "詳細",
+      "version": "バージョン：**{version}**",
+      "developer": "開発者：**{author}**",
+      "links": "リンク",
+      "website": "ウェブサイト",
+      "website_desc": "ドキュメント",
+      "discord": "Discord",
+      "discord_desc": "コミュニティとサポート",
+      "github": "GitHub",
+      "github_desc": "リリースとバグ報告",
+      "youtube": "YouTube",
+      "youtube_desc": "動画と紹介",
+      "support": "支援",
+      "support_text": "MotionCab を気に入っていただけたら、開発を支援できます。",
+      "donate": "PayPal で寄付",
+      "donate_desc": "PayPal で MotionCab を支援",
+      "tips": "ヒント",
+      "tip_reset": "スライダーを右クリックするとデフォルト値に戻ります。",
+      "tip_per_truck": "設定はトラックごとに保存されます：変更は運転中のトラックにのみ適用されます。",
+      "tip_interior": "すべてのエフェクトは車内カメラでのみ動作します。",
+      "credits": "クレジット",
+      "credits_text": "SPF Framework と貢献者の皆さま。"
+    },
+    "units": {
+      "speed_system": "metric",
+      "kmh": "km/h",
+      "mph": "mph"
+    },
+    "cabin_walk": {
+      "needs_parking_brake": "席を離れるにはパーキングブレーキをかけてください。",
+      "needs_stop": "席を離れるにはトラックを停止してください。",
+      "back_to_wheel": "運転席に戻りました：トラックが駐車状態ではなくなりました。",
+      "layout": {
+        "no_truck": "キャビンを設定するにはトラックに乗ってください。",
+        "truck": "トラック",
+        "tip": {
+          "floor_z_min": "前にどこまで歩けるか（フロントガラス方向）。",
+          "floor_z_max": "後ろにどこまで歩けるか（後壁方向）。",
+          "floor_x_min": "運転席側のドアにどこまで近づけるか。",
+          "floor_x_max": "助手席側のドアにどこまで近づけるか。",
+          "stand_y": "立っているときの目の高さ。",
+          "crouch_depth": "しゃがんだときに頭が下がる量。",
+          "passenger_dx": "自分の座席を反転した位置からの横方向のずれ。",
+          "passenger_dy": "自分の座席より上か下か。",
+          "passenger_dz": "自分の座席より前か後ろか。",
+          "bunk_sit_x": "寝台のどこに座るか。",
+          "bunk_sit_y": "寝台に座ったときの目の高さ。",
+          "bunk_sit_z": "寝台の縁がどれだけ後ろにあるか。",
+          "yaw": "座ったときに見る方向。",
+          "pitch": "座ったときに上下どれだけ見るか。",
+          "has_passenger": "助手席が折りたためる、または無い場合はチェックを外します。",
+          "has_bunk": "寝台の無いデイキャブではチェックを外します。",
+          "has_aisle": "床に段差がある場合はチェック（バスの通路など）。",
+          "aisle_step_count": "通路に沿って床の高さが変わる回数。",
+          "aisle_step_z": "段差の縁がどれだけ後ろにあるか。",
+          "aisle_step_height": "その先で床がどれだけ上がるか（マイナスで下がる）。"
+        },
+        "group": {
+          "walkway": "歩行エリア",
+          "heights": "立ったときの高さ",
+          "passenger": "助手席",
+          "bunk": "寝台",
+          "steps": "段差"
+        },
+        "go": "そこへ移動",
+        "usable": "使用可能",
+        "advanced": "詳細設定",
+        "reset": "レイアウトをリセット",
+        "reset_title": "キャビンレイアウトのリセット",
+        "reset_message": "{truck} をデフォルトのレイアウトに戻しますか？",
+        "reset_confirm": "はい、リセット",
+        "floor_x_min": "左の境界",
+        "floor_x_max": "右の境界",
+        "floor_z_min": "前の境界",
+        "floor_z_max": "後ろの境界",
+        "stand_y": "高さ",
+        "crouch_depth": "しゃがむ深さ",
+        "passenger_dx": "左右",
+        "passenger_dy": "高さ",
+        "passenger_dz": "前後",
+        "passenger_yaw": "回転",
+        "passenger_pitch": "傾き",
+        "bunk_sit_x": "左右",
+        "bunk_sit_y": "高さ",
+        "bunk_sit_z": "前後",
+        "bunk_sit_yaw": "回転",
+        "bunk_sit_pitch": "傾き",
+        "aisle_step_count": "数",
+        "aisle_step_z": "段差{n}の奥行き",
+        "aisle_step_height": "段差{n}の高さ"
+      }
+    },
+    "modified": "デフォルトから変更されています。",
+    "cabin_audio": {
+      "test_voice": "GPSの音声を再生",
+      "test_voice_hint": "ゲームのGPS音声を毎回違うものを1つ再生し、運転せずに音声を調整できます。",
+      "test_voice_missing": "ゲームのサウンドにGPS音声が見つかりません。"
+    }
+  }
+}

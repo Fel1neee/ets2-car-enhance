@@ -1,0 +1,612 @@
+{
+  "language": {
+    "en": "Angielski    [English]",
+    "uk": "Ukraiński    [Українська]",
+    "de": "Niemiecki    [Deutsch]",
+    "fr": "Francuski    [Français]",
+    "es": "Hiszpański    [Español]",
+    "pl": "Polski",
+    "ru": "Rosyjski    [Русский]",
+    "pt_br": "Portugalski (Brazylia)    [Português (Brasil)]",
+    "it": "Włoski    [Italiano]",
+    "nl": "Holenderski    [Nederlands]",
+    "tr": "Turecki    [Türkçe]",
+    "cs": "Czeski    [Čeština]",
+    "zh": "Chiński (uproszczony)    [简体中文]",
+    "ja": "Japoński    [日本語]",
+    "ko": "Koreański    [한국어]"
+  },
+  "plugin": {
+    "description": "Dynamiczny ruch głowy dla ETS2 i ATS"
+  },
+  "window": {
+    "title": "Szybkie ustawienia MotionCab",
+    "desc": "Szybki dostęp do ustawień każdego efektu, jako alternatywa dla karty Ustawienia niestandardowe."
+  },
+  "keybinds": {
+    "ui_toggle": {
+      "title": "Pokaż/ukryj okno ustawień",
+      "desc": "Pokazuje lub ukrywa okno szybkich ustawień MotionCab."
+    },
+    "look_left": {
+      "title": "Spójrz w lewo",
+      "desc": "Płynnie obraca głowę mocno w lewo, aby sprawdzić ruch poprzeczny."
+    },
+    "look_right": {
+      "title": "Spójrz w prawo",
+      "desc": "Płynnie obraca głowę mocno w prawo, aby sprawdzić ruch poprzeczny."
+    },
+    "glance_left": {
+      "title": "Zerknij w lewe lusterko",
+      "desc": "Płynnie zerka w lewe lusterko, np. podczas włączania się do ruchu."
+    },
+    "glance_right": {
+      "title": "Zerknij w prawe lusterko",
+      "desc": "Płynnie zerka w prawe lusterko, np. podczas włączania się do ruchu."
+    },
+    "look_forward": {
+      "title": "Spójrz przed siebie",
+      "desc": "Płynnie obraca głowę z powrotem na wprost, kończąc każde spojrzenie."
+    },
+    "zoom": {
+      "title": "Przybliżenie",
+      "desc": "Płynnie przybliża, a potem płynnie wraca do normy."
+    },
+    "blindspot_viewer": {
+      "title": "Podgląd martwego pola",
+      "desc": "Płynnie pochyla się, aby zajrzeć za słupek szyby."
+    },
+    "cabin_walk": {
+      "stand_sit": {
+        "title": "Wstań / Usiądź",
+        "desc": "Wstaje z fotela. Stuknij, aby usiąść na miejscu, na które patrzysz, przytrzymaj, aby wrócić za kierownicę."
+      },
+      "forward": {
+        "title": "Idź do przodu",
+        "desc": "Idzie do przodu, gdy stoisz w kabinie."
+      },
+      "back": {
+        "title": "Idź do tyłu",
+        "desc": "Idzie do tyłu, gdy stoisz w kabinie."
+      },
+      "left": {
+        "title": "Krok w lewo",
+        "desc": "Robi krok w bok w lewo, gdy stoisz w kabinie."
+      },
+      "right": {
+        "title": "Krok w prawo",
+        "desc": "Robi krok w bok w prawo, gdy stoisz w kabinie."
+      },
+      "crouch": {
+        "title": "Kucnij",
+        "desc": "Kuca, gdy stoisz."
+      }
+    }
+  },
+  "settings": {
+    "enabled_desc": "Włącza lub wyłącza ten efekt.",
+    "paused_by": "Wstrzymane przez: {effects}.",
+    "pauses": "Po włączeniu wstrzymuje następujące efekty:",
+    "paused_in_use": "Wstrzymane podczas użycia {effects}.",
+    "driving": {
+      "title": "Jazda",
+      "head_motion": {
+        "title": "Ruch głowy",
+        "sway_strength": {
+          "title": "Siła kołysania",
+          "desc": "Jak mocno głowa jest popychana przy przyspieszaniu, hamowaniu lub na zakręcie."
+        },
+        "tilt_strength": {
+          "title": "Siła przechyłu",
+          "desc": "Jak mocno głowa się przechyla, gdy kabina się pochyla lub kołysze."
+        },
+        "smoothing_time": {
+          "title": "Wygładzanie",
+          "desc": "Jak szybko głowa się stabilizuje. Wyżej = wolniej i płynniej, niżej = szybciej."
+        }
+      },
+      "body_dynamics": {
+        "title": "Dynamika ciała",
+        "lean_strength": {
+          "title": "Siła wychylenia",
+          "desc": "Jak mocno głowa wychyla się do wewnątrz zakrętu."
+        },
+        "nod_strength": {
+          "title": "Siła pochylenia",
+          "desc": "Jak mocno głowa pochyla się do przodu przy hamowaniu i cofa przy przyspieszaniu."
+        },
+        "smoothing_time": {
+          "title": "Wygładzanie",
+          "desc": "Jak szybko wychylenie i pochylenie się uspokajają. Niżej = szybciej."
+        }
+      },
+      "steering_camera": {
+        "title": "Kamera kierownicy",
+        "rotation_left_deg": {
+          "title": "Zakres obrotu w lewo",
+          "desc": "Jak daleko obraca się kamera, gdy skręcisz kierownicę do oporu w lewo."
+        },
+        "rotation_right_deg": {
+          "title": "Zakres obrotu w prawo",
+          "desc": "Jak daleko obraca się kamera, gdy skręcisz kierownicę do oporu w prawo."
+        },
+        "center_zone_pct": {
+          "title": "Strefa środkowa",
+          "desc": "Jak daleko możesz obrócić kierownicę, by kamera obracała się tak samo w obie strony, jako część pełnego skrętu. Dalej każda strona obraca się według własnego zakresu."
+        },
+        "smoothing_time": {
+          "title": "Wygładzanie",
+          "desc": "Jak płynny jest obrót kamery, gdy już ruszy. Wyżej = płynniej i wolniej."
+        },
+        "delay_seconds": {
+          "title": "Opóźnienie reakcji",
+          "desc": "Jak długo kamera czeka po skręceniu kierownicy, zanim zacznie się ruszać."
+        },
+        "disable_in_reverse": {
+          "title": "Wyłącz na biegu wstecznym",
+          "desc": "Utrzymuje kamerę na środku, gdy ciężarówka jest na biegu wstecznym."
+        },
+        "disable_when_stopped": {
+          "title": "Wyłącz podczas postoju",
+          "desc": "Utrzymuje kamerę na środku, dopóki ciężarówka nie ruszy do przodu."
+        }
+      }
+    },
+    "road": {
+      "title": "Droga",
+      "suspension": {
+        "title": "Zawieszenie",
+        "vertical_strength": {
+          "title": "Siła pionowa",
+          "desc": "Jak mocno nierówności drogi podrzucają i przechylają kamerę."
+        },
+        "reactivity": {
+          "title": "Reaktywność",
+          "desc": "Jak szybko fotel się uspokaja po nierówności. Niżej = twardziej i szybciej."
+        },
+        "grade_strength": {
+          "title": "Podążanie za nachyleniem",
+          "desc": "Unosi głowę na zjazdach i opuszcza ją na podjazdach."
+        }
+      },
+      "road_irregularity": {
+        "title": "Nierówności drogi",
+        "intensity": {
+          "title": "Intensywność",
+          "desc": "Jak silne są drgania nawierzchni i kołysanie w terenie."
+        },
+        "reactivity": {
+          "title": "Reaktywność",
+          "desc": "Jak ostre i brzęczące są drgania nawierzchni. Niżej = ostrzej."
+        }
+      },
+      "speed_shake": {
+        "title": "Drgania od prędkości",
+        "intensity": {
+          "title": "Intensywność",
+          "desc": "Ogólna siła drgań odczuwanych przy szybkiej jeździe."
+        },
+        "smoothing_time": {
+          "title": "Wygładzanie",
+          "desc": "Jak drgania zmieniają się w czasie. Wyżej = wolniej i płynniej, niżej = bardziej skokowo i nerwowo."
+        },
+        "rotation": {
+          "title": "Obrót",
+          "desc": "Jak mocno widok przechyla się/obraca w ramach drgań, zamiast tylko przesuwać się na boki. Ustaw 0, aby zostawić tylko ruch na boki."
+        },
+        "vertical": {
+          "title": "Pion",
+          "desc": "Ile podskakiwania w pionie jest domieszane do drgań."
+        },
+        "roughness": {
+          "title": "Nieregularność",
+          "desc": "Jak nierówne są drgania w czasie. 0 utrzymuje je stałe; wyższe wartości dają naprzemiennie spokojne i niespokojne odcinki."
+        }
+      }
+    },
+    "cabin": {
+      "title": "Kabina",
+      "idle_breathing": {
+        "title": "Oddech na postoju",
+        "vertical_amplitude": {
+          "title": "Amplituda pionowa",
+          "desc": "Jak wysoko kamera unosi się i opada przy każdym oddechu."
+        },
+        "pitch_amplitude_deg": {
+          "title": "Amplituda pochylenia",
+          "desc": "Jak mocno głowa pochyla się do przodu/tyłu przy każdym oddechu."
+        },
+        "breathing_rate_bpm": {
+          "title": "Częstość oddechu",
+          "desc": "Jak szybko następuje oddychanie."
+        },
+        "fade_start_kmh": {
+          "title": "Prędkość początku zanikania",
+          "desc": "Prędkość, od której ten efekt zaczyna zanikać podczas przyspieszania."
+        },
+        "fade_end_kmh": {
+          "title": "Prędkość końca zanikania",
+          "desc": "Prędkość, przy której ten efekt całkowicie zanika."
+        }
+      },
+      "engine_vibration": {
+        "title": "Wibracje silnika",
+        "intensity": {
+          "title": "Intensywność",
+          "desc": "Jak silnie odczuwalne jest dudnienie silnika."
+        }
+      },
+      "engine_start_stop": {
+        "title": "Start/stop silnika",
+        "intensity": {
+          "title": "Intensywność",
+          "desc": "Jak silne jest szarpnięcie przy uruchamianiu lub gaszeniu silnika."
+        },
+        "duration": {
+          "title": "Czas trwania",
+          "desc": "Jak długo trwa szarpnięcie przy starcie. Szarpnięcie przy gaszeniu jest krótsze i łagodniejsze."
+        }
+      },
+      "natural_head_movement": {
+        "title": "Naturalny ruch głowy",
+        "sway_intensity": {
+          "title": "Kołysanie",
+          "desc": "Jak bardzo głowa sama powoli się kołysze, nawet gdy trzymasz ją nieruchomo."
+        },
+        "micro_intensity": {
+          "title": "Mikroruchy",
+          "desc": "Jak daleko porusza się głowa przy drobnej korekcie."
+        },
+        "micro_interval": {
+          "title": "Odstęp mikroruchów",
+          "desc": "Jak długo głowa czeka między dwoma drobnymi ruchami."
+        },
+        "posture_intensity": {
+          "title": "Zmiany postawy",
+          "desc": "Jak daleko przesuwa się głowa, gdy przyjmuje nową pozycję."
+        },
+        "posture_interval": {
+          "title": "Odstęp zmian postawy",
+          "desc": "Jak długo głowa utrzymuje pozycję, zanim przyjmie nową."
+        },
+        "roll_scale": {
+          "title": "Przechył na bok",
+          "desc": "Jak bardzo głowa przechyla się na bok, we wszystkich ruchach oprócz przechyłu w zakręcie."
+        },
+        "steering_tilt": {
+          "title": "Przechył przy skręcie",
+          "desc": "Jak bardzo głowa przechyla się do wnętrza zakrętu: im szybciej go pokonujesz, tym bardziej."
+        }
+      },
+      "cabin_audio": {
+        "title": "Dźwięk w kabinie",
+        "width": {
+          "title": "Szerokość",
+          "desc": "O ile głośniej słyszy głośnik ucho zwrócone w jego stronę niż drugie ucho."
+        },
+        "head_shadow": {
+          "title": "Kierunkowość",
+          "desc": "Jak głucho brzmi głośnik dla ucha odwróconego od niego, zasłoniętego głową."
+        },
+        "muffle": {
+          "title": "Tłumienie",
+          "desc": "Jak bardzo radio staje się głuche i ciche, gdy jest za tobą."
+        },
+        "bass": {
+          "title": "Basy",
+          "desc": "Jak mocno głośniki kabiny przycinają bas, jak małe głośniki w drzwiach."
+        },
+        "mid": {
+          "title": "Średnie tony",
+          "desc": "Jak bardzo wyróżniają się głosy i instrumenty."
+        },
+        "treble": {
+          "title": "Soprany",
+          "desc": "Jak jasno brzmią głośniki kabiny."
+        },
+        "blend": {
+          "title": "Mieszanie głośników",
+          "desc": "Jak bardzo każdy głośnik w drzwiach gra też drugi kanał."
+        },
+        "reverb": {
+          "title": "Echo kabiny",
+          "desc": "Jak bardzo ściany i przednia szyba kabiny odbijają radio."
+        },
+        "room_size": {
+          "title": "Wielkość kabiny",
+          "desc": "Jak długo trwają odbicia w kabinie."
+        },
+        "radio_volume": {
+          "title": "Głośność radia",
+          "desc": "Jak głośne jest radio, ponad głośność gry."
+        },
+        "gps": {
+          "title": "Głos GPS",
+          "desc": "Odtwarza głos GPS z głośników kabiny jak radio, również podążając za twoją głową."
+        },
+        "gps_low_cut": {
+          "title": "Odcięcie basów głosu",
+          "desc": "Ile basów traci głos GPS: wyżej brzmi cieniej, jak mały głośnik."
+        },
+        "gps_high_cut": {
+          "title": "Odcięcie sopranów głosu",
+          "desc": "Gdzie kończą się wysokie tony głosu GPS: niżej brzmi bardziej głucho."
+        },
+        "gps_tone": {
+          "title": "Barwa głosu",
+          "desc": "Którą część głosu GPS wydobywa podbicie: niżej brzmi pudełkowo, wyżej nosowo."
+        },
+        "gps_tone_boost": {
+          "title": "Podbicie barwy",
+          "desc": "Jak bardzo ta część głosu GPS się wyróżnia: poniżej zera ją łagodzi."
+        },
+        "gps_volume": {
+          "title": "Głośność głosu",
+          "desc": "Jak głośny jest głos GPS, ponad głośność gry."
+        },
+        "duck": {
+          "title": "Ściszanie",
+          "desc": "Jak bardzo radio cichnie, gdy mówi głos GPS, jak w aplikacji nawigacyjnej."
+        },
+        "outside": {
+          "title": "Na zewnątrz",
+          "desc": "Jak bardzo stłumione jest radio z zewnątrz kabiny, w widokach zewnętrznych."
+        }
+      }
+    },
+    "manual": {
+      "title": "Ręczne",
+      "manual_look": {
+        "title": "Spojrzenie w bok",
+        "hint": "Własne klawisze, niezależne od gry. Spojrzenie przy kierunkowskazie wymaga klawiszy kierunkowskazów w grze.",
+        "look_left_deg": {
+          "title": "Kąt spojrzenia w lewo",
+          "desc": "Jak daleko obraca się głowa, gdy patrzysz w lewo."
+        },
+        "look_right_deg": {
+          "title": "Kąt spojrzenia w prawo",
+          "desc": "Jak daleko obraca się głowa, gdy patrzysz w prawo."
+        },
+        "glance_left_deg": {
+          "title": "Kąt zerknięcia w lewo",
+          "desc": "Jak daleko obraca się głowa, gdy zerkasz w lewe lusterko."
+        },
+        "glance_right_deg": {
+          "title": "Kąt zerknięcia w prawo",
+          "desc": "Jak daleko obraca się głowa, gdy zerkasz w prawe lusterko."
+        },
+        "glance_left_pitch_deg": {
+          "title": "Pochylenie przy zerknięciu w lewo",
+          "desc": "Jak mocno pochyla się głowa podczas zerkania w lewe lusterko. Dodatnie = w górę, ujemne = w dół."
+        },
+        "glance_right_pitch_deg": {
+          "title": "Pochylenie przy zerknięciu w prawo",
+          "desc": "Jak mocno pochyla się głowa podczas zerkania w prawe lusterko. Dodatnie = w górę, ujemne = w dół."
+        },
+        "glance_left_fov_deg": {
+          "title": "FOV przy zerknięciu w lewo",
+          "desc": "Jak bardzo poszerza się pole widzenia podczas zerkania w lewe lusterko. Ujemne = węższe (przybliżenie)."
+        },
+        "glance_right_fov_deg": {
+          "title": "FOV przy zerknięciu w prawo",
+          "desc": "Jak bardzo poszerza się pole widzenia podczas zerkania w prawe lusterko. Ujemne = węższe (przybliżenie)."
+        },
+        "smoothing_time": {
+          "title": "Wygładzanie",
+          "desc": "Jak płynny jest ruch spojrzenia i powrotu."
+        },
+        "pause_steering_camera": {
+          "title": "Wstrzymaj kamerę kierownicy",
+          "desc": "Wstrzymuje kamerę kierownicy podczas patrzenia, aby widok pozostał na tym, na co patrzysz."
+        },
+        "mirror_on_signal": {
+          "title": "Spojrzenie przy kierunkowskazie",
+          "desc": "Patrzy w lusterko po stronie kierunkowskazu, dopóki jest włączony."
+        },
+        "require_stationary": {
+          "title": "Tylko na postoju",
+          "desc": "Patrzy w lusterko przy kierunkowskazie tylko wtedy, gdy ciężarówka stoi."
+        },
+        "ignore_after_moving_signal": {
+          "title": "Ignoruj podczas jazdy",
+          "desc": "Nie spoglądaj w lusterko dla kierunkowskazu włączonego w trakcie jazdy, nawet po zatrzymaniu."
+        }
+      },
+      "manual_zoom": {
+        "title": "Ręczne przybliżenie",
+        "hint": "Ten klawisz jest niezależny od klawisza gry „Przybliżenie kamery wewnętrznej”.",
+        "zoom_fov_deg": {
+          "title": "Poziom przybliżenia",
+          "desc": "Jak bardzo przybliża się widok, gdy trzymasz klawisz zoomu. Niżej = większe przybliżenie."
+        },
+        "smoothing_time": {
+          "title": "Wygładzanie",
+          "desc": "Jak płynne jest przybliżanie i oddalanie."
+        }
+      },
+      "blindspot_viewer": {
+        "title": "Podgląd martwego pola",
+        "pos_x": {
+          "title": "Przesunięcie w bok",
+          "desc": "Jak daleko głowa przesuwa się w lewo lub w prawo podczas zerknięcia."
+        },
+        "pos_y": {
+          "title": "Wysokość",
+          "desc": "Jak daleko głowa przesuwa się w górę lub w dół podczas zerknięcia."
+        },
+        "pos_z": {
+          "title": "Pochylenie do przodu",
+          "desc": "Jak daleko głowa przesuwa się do przodu podczas zerknięcia. Ujemne = do przodu."
+        },
+        "yaw_deg": {
+          "title": "Obrót",
+          "desc": "Jak bardzo głowa obraca się w lewo lub w prawo podczas zerknięcia."
+        },
+        "pitch_deg": {
+          "title": "Nachylenie",
+          "desc": "Jak bardzo głowa odchyla się w górę lub w dół podczas zerknięcia."
+        },
+        "roll_deg": {
+          "title": "Przechył",
+          "desc": "Jak bardzo głowa przechyla się na bok podczas zerknięcia."
+        },
+        "fov_offset_deg": {
+          "title": "Zmiana FOV",
+          "desc": "Jak bardzo poszerza się pole widzenia podczas zerknięcia. Ujemne = węższe."
+        },
+        "smoothing_time": {
+          "title": "Wygładzanie",
+          "desc": "Jak płynny jest ruch pochylenia i powrotu."
+        }
+      },
+      "cabin_walk": {
+        "title": "Chodzenie po kabinie",
+        "hint": "Domyślne układy są ustawione dla najmniejszej kabiny sypialnej każdej ciężarówki. Inne kabiny mogą wymagać dostosowania.",
+        "require_parking_brake": {
+          "title": "Wymagaj hamulca postojowego",
+          "desc": "Wł.: wymaga hamulca postojowego, zwolnienie go odsyła cię z powrotem. Wył.: wystarczy postój."
+        }
+      }
+    }
+  },
+  "ui": {
+    "enabled": "Włączone",
+    "cancel": "Anuluj",
+    "slider_reset_hint": "Kliknij prawym przyciskiem suwak, aby go zresetować.",
+    "truck_badge": "Ustawienia: {name}",
+    "no_truck": "Nie wczytano ciężarówki",
+    "no_truck_hint": "Wsiądź do ciężarówki, aby zmienić jej ustawienia.",
+    "paused": "Gra wstrzymana",
+    "paused_hint": "Wznów grę, aby zmienić ustawienia.",
+    "trucks": {
+      "section": "Ustawione ciężarówki ({count})",
+      "changed": "Zmienione ustawienia: {count}",
+      "none": "Żadna ciężarówka nie ma jeszcze własnych ustawień.",
+      "reset_tip": "Zresetuj ustawienia tej ciężarówki do wartości domyślnych."
+    },
+    "search": {
+      "hint": "Szukaj ustawień...",
+      "no_results": "Żadne ustawienie nie pasuje do „{query}”.",
+      "clear_tip": "Wyczyść wyszukiwanie."
+    },
+    "tabs": {
+      "settings": "Ustawienia",
+      "about": "O wtyczce"
+    },
+    "keybind": {
+      "section": "Skróty klawiszowe",
+      "toggle_window": "Pokaż okno",
+      "unbound": "(nieprzypisany)",
+      "rebind_tip": "Kliknij, aby przypisać ponownie.",
+      "options_tip": "Opcje przypisania (przytrzymanie/przełączanie, martwa strefa, ...).",
+      "add_tip": "Dodaj kolejne przypisanie."
+    },
+    "reset": {
+      "section": "Strefa zagrożenia",
+      "button": "Zresetuj tę ciężarówkę",
+      "title": "Potwierdź reset",
+      "message": "Zresetować wszystkie ustawienia dla {truck}?",
+      "confirm": "Tak, zresetuj",
+      "done_toast": "Zresetowano ustawienia dla {truck}."
+    },
+    "about": {
+      "details": "Szczegóły",
+      "version": "Wersja: **{version}**",
+      "developer": "Twórca: **{author}**",
+      "links": "Linki",
+      "website": "Strona",
+      "website_desc": "Dokumentacja",
+      "discord": "Discord",
+      "discord_desc": "Społeczność i wsparcie",
+      "github": "GitHub",
+      "github_desc": "Wydania i zgłaszanie błędów",
+      "youtube": "YouTube",
+      "youtube_desc": "Filmy i prezentacje",
+      "support": "Wsparcie",
+      "support_text": "Jeśli podoba ci się MotionCab, możesz wesprzeć jego rozwój.",
+      "donate": "Wesprzyj przez PayPal",
+      "donate_desc": "Wesprzyj MotionCab w serwisie PayPal",
+      "tips": "Wskazówki",
+      "tip_reset": "Kliknij prawym przyciskiem dowolny suwak, aby przywrócić jego wartość domyślną.",
+      "tip_per_truck": "Ustawienia są zapisywane dla każdej ciężarówki: zmiana dotyczy tylko ciężarówki, którą prowadzisz.",
+      "tip_interior": "Wszystkie efekty działają tylko w kamerze wewnętrznej.",
+      "credits": "Podziękowania",
+      "credits_text": "SPF Framework i współtwórcy."
+    },
+    "units": {
+      "speed_system": "metric",
+      "kmh": "km/h",
+      "mph": "mph"
+    },
+    "cabin_walk": {
+      "needs_parking_brake": "Zaciągnij hamulec postojowy, aby opuścić fotel.",
+      "needs_stop": "Zatrzymaj ciężarówkę, aby opuścić fotel.",
+      "back_to_wheel": "Z powrotem za kierownicą: ciężarówka nie jest już zaparkowana.",
+      "layout": {
+        "no_truck": "Wsiądź do ciężarówki, aby ustawić jej kabinę.",
+        "truck": "Ciężarówka",
+        "tip": {
+          "floor_z_min": "Jak daleko możesz iść do przodu, w stronę szyby.",
+          "floor_z_max": "Jak daleko możesz iść do tyłu, w stronę tylnej ściany.",
+          "floor_x_min": "Jak daleko możesz iść w stronę drzwi kierowcy.",
+          "floor_x_max": "Jak daleko możesz iść w stronę drzwi pasażera.",
+          "stand_y": "Wysokość twoich oczu na stojąco.",
+          "crouch_depth": "Jak nisko opada głowa podczas kucania.",
+          "passenger_dx": "W bok od odbicia twojego fotela.",
+          "passenger_dy": "Wyżej lub niżej niż twój fotel.",
+          "passenger_dz": "Bardziej z przodu lub z tyłu niż twój fotel.",
+          "bunk_sit_x": "Gdzie siadasz wzdłuż koi.",
+          "bunk_sit_y": "Wysokość twoich oczu, gdy siedzisz na koi.",
+          "bunk_sit_z": "Jak daleko z tyłu jest krawędź koi.",
+          "yaw": "Gdzie patrzysz po usadowieniu się.",
+          "pitch": "Jak bardzo patrzysz w górę lub w dół po usadowieniu się.",
+          "has_passenger": "Odznacz, jeśli fotel pasażera się składa lub go nie ma.",
+          "has_bunk": "Odznacz dla krótkiej kabiny bez koi.",
+          "has_aisle": "Zaznacz, jeśli podłoga ma stopnie, jak przejście w autobusie.",
+          "aisle_step_count": "Ile razy zmienia się wysokość podłogi wzdłuż przejścia.",
+          "aisle_step_z": "Jak daleko z tyłu jest krawędź stopnia.",
+          "aisle_step_height": "O ile podłoga za nim się podnosi (ujemnie: opada)."
+        },
+        "group": {
+          "walkway": "Obszar chodzenia",
+          "heights": "Wysokość na stojąco",
+          "passenger": "Fotel pasażera",
+          "bunk": "Koja",
+          "steps": "Stopnie"
+        },
+        "go": "Przejdź tam",
+        "usable": "Dostępne",
+        "advanced": "Zaawansowane",
+        "reset": "Resetuj układ",
+        "reset_title": "Resetuj układ kabiny",
+        "reset_message": "Wrócić do domyślnego układu dla {truck}?",
+        "reset_confirm": "Tak, resetuj",
+        "floor_x_min": "Granica lewa",
+        "floor_x_max": "Granica prawa",
+        "floor_z_min": "Granica przednia",
+        "floor_z_max": "Granica tylna",
+        "stand_y": "Wysokość",
+        "crouch_depth": "Głębokość kucania",
+        "passenger_dx": "Bok",
+        "passenger_dy": "Wysokość",
+        "passenger_dz": "Głębokość",
+        "passenger_yaw": "Obrót",
+        "passenger_pitch": "Pochylenie",
+        "bunk_sit_x": "Bok",
+        "bunk_sit_y": "Wysokość",
+        "bunk_sit_z": "Głębokość",
+        "bunk_sit_yaw": "Obrót",
+        "bunk_sit_pitch": "Pochylenie",
+        "aisle_step_count": "Liczba",
+        "aisle_step_z": "Głębokość stopnia {n}",
+        "aisle_step_height": "Wysokość stopnia {n}"
+      }
+    },
+    "modified": "Zmienione względem domyślnej wartości.",
+    "cabin_audio": {
+      "test_voice": "Odtwórz komunikat GPS",
+      "test_voice_hint": "Odtwarza jeden z komunikatów GPS z gry, za każdym razem inny, aby dostroić głos bez jazdy.",
+      "test_voice_missing": "Nie znaleziono głosu GPS w dźwiękach gry."
+    }
+  }
+}

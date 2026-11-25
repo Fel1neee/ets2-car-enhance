@@ -1,0 +1,612 @@
+{
+  "language": {
+    "en": "Englisch    [English]",
+    "uk": "Ukrainisch    [Українська]",
+    "de": "Deutsch",
+    "fr": "Französisch    [Français]",
+    "es": "Spanisch    [Español]",
+    "pl": "Polnisch    [Polski]",
+    "ru": "Russisch    [Русский]",
+    "pt_br": "Brasilianisches Portugiesisch    [Português (Brasil)]",
+    "it": "Italienisch    [Italiano]",
+    "nl": "Niederländisch    [Nederlands]",
+    "tr": "Türkisch    [Türkçe]",
+    "cs": "Tschechisch    [Čeština]",
+    "zh": "Chinesisch (vereinfacht)    [简体中文]",
+    "ja": "Japanisch    [日本語]",
+    "ko": "Koreanisch    [한국어]"
+  },
+  "plugin": {
+    "description": "Dynamische Kopfbewegung für ETS2 und ATS"
+  },
+  "window": {
+    "title": "MotionCab Schnelleinstellungen",
+    "desc": "Schneller Zugriff auf die Einstellungen aller Effekte, als Alternative zum Tab „Benutzerdefinierte Einstellungen“."
+  },
+  "keybinds": {
+    "ui_toggle": {
+      "title": "Einstellungsfenster ein-/ausblenden",
+      "desc": "Blendet das MotionCab-Schnelleinstellungsfenster ein oder aus."
+    },
+    "look_left": {
+      "title": "Nach links schauen",
+      "desc": "Dreht den Kopf sanft weit nach links, um den Querverkehr zu prüfen."
+    },
+    "look_right": {
+      "title": "Nach rechts schauen",
+      "desc": "Dreht den Kopf sanft weit nach rechts, um den Querverkehr zu prüfen."
+    },
+    "glance_left": {
+      "title": "Blick in den linken Spiegel",
+      "desc": "Wirft sanft einen Blick in den linken Spiegel, z. B. beim Einfädeln."
+    },
+    "glance_right": {
+      "title": "Blick in den rechten Spiegel",
+      "desc": "Wirft sanft einen Blick in den rechten Spiegel, z. B. beim Einfädeln."
+    },
+    "look_forward": {
+      "title": "Nach vorne schauen",
+      "desc": "Dreht den Kopf sanft wieder geradeaus und beendet jeden Blick."
+    },
+    "zoom": {
+      "title": "Zoom",
+      "desc": "Zoomt sanft heran und kehrt danach sanft zur normalen Ansicht zurück."
+    },
+    "blindspot_viewer": {
+      "title": "Toter-Winkel-Sicht",
+      "desc": "Beugt sich sanft vor, um hinter die Scheibensäule zu sehen."
+    },
+    "cabin_walk": {
+      "stand_sit": {
+        "title": "Aufstehen / Hinsetzen",
+        "desc": "Steht vom Sitz auf. Tippen, um sich auf den angeschauten Platz zu setzen, halten, um zurück ans Steuer zu gehen."
+      },
+      "forward": {
+        "title": "Vorwärts gehen",
+        "desc": "Geht vorwärts, während du in der Kabine stehst."
+      },
+      "back": {
+        "title": "Rückwärts gehen",
+        "desc": "Geht rückwärts, während du in der Kabine stehst."
+      },
+      "left": {
+        "title": "Schritt nach links",
+        "desc": "Macht einen Seitschritt nach links, während du in der Kabine stehst."
+      },
+      "right": {
+        "title": "Schritt nach rechts",
+        "desc": "Macht einen Seitschritt nach rechts, während du in der Kabine stehst."
+      },
+      "crouch": {
+        "title": "Ducken",
+        "desc": "Duckt sich im Stehen."
+      }
+    }
+  },
+  "settings": {
+    "enabled_desc": "Schaltet diesen Effekt ein oder aus.",
+    "paused_by": "Pausiert durch {effects}.",
+    "pauses": "Wenn aktiviert, pausiert dies folgende(n) Effekt(e):",
+    "paused_in_use": "Pausiert, während {effects} genutzt wird.",
+    "driving": {
+      "title": "Fahren",
+      "head_motion": {
+        "title": "Kopfbewegung",
+        "sway_strength": {
+          "title": "Schwankstärke",
+          "desc": "Wie stark dein Kopf beim Beschleunigen, Bremsen oder in Kurven hin und her geschoben wird."
+        },
+        "tilt_strength": {
+          "title": "Neigungsstärke",
+          "desc": "Wie stark sich dein Kopf neigt, wenn das Fahrerhaus kippt oder schaukelt."
+        },
+        "smoothing_time": {
+          "title": "Glättung",
+          "desc": "Wie schnell sich dein Kopf wieder beruhigt. Höher = langsamer und weicher, niedriger = direkter."
+        }
+      },
+      "body_dynamics": {
+        "title": "Körperdynamik",
+        "lean_strength": {
+          "title": "Neigung in Kurven",
+          "desc": "Wie stark sich dein Kopf in eine Kurve hineinlehnt."
+        },
+        "nod_strength": {
+          "title": "Nickstärke",
+          "desc": "Wie stark dein Kopf beim Bremsen nach vorn kippt und beim Beschleunigen zurückgeht."
+        },
+        "smoothing_time": {
+          "title": "Glättung",
+          "desc": "Wie schnell sich Neigen und Nicken beruhigen. Niedriger = direkter."
+        }
+      },
+      "steering_camera": {
+        "title": "Lenkkamera",
+        "rotation_left_deg": {
+          "title": "Drehstärke links",
+          "desc": "Wie weit sich die Kamera dreht, wenn du das Lenkrad voll nach links einschlägst."
+        },
+        "rotation_right_deg": {
+          "title": "Drehstärke rechts",
+          "desc": "Wie weit sich die Kamera dreht, wenn du das Lenkrad voll nach rechts einschlägst."
+        },
+        "center_zone_pct": {
+          "title": "Mittelzone",
+          "desc": "Wie weit du das Lenkrad drehen kannst, während die Kamera sich auf beiden Seiten gleich dreht, als Anteil des vollen Einschlags. Darüber hinaus dreht sich jede Seite mit ihrer eigenen Drehstärke."
+        },
+        "smoothing_time": {
+          "title": "Glättung",
+          "desc": "Wie weich sich die Kameradrehung anfühlt, sobald sie einsetzt. Höher = weicher und langsamer."
+        },
+        "delay_seconds": {
+          "title": "Reaktionsverzögerung",
+          "desc": "Wie lange die Kamera nach dem Lenken wartet, bevor sie sich bewegt."
+        },
+        "disable_in_reverse": {
+          "title": "Im Rückwärtsgang deaktivieren",
+          "desc": "Hält die Kamera mittig, solange der Rückwärtsgang eingelegt ist."
+        },
+        "disable_when_stopped": {
+          "title": "Im Stand deaktivieren",
+          "desc": "Hält die Kamera mittig, bis der Lkw vorwärts fährt."
+        }
+      }
+    },
+    "road": {
+      "title": "Straße",
+      "suspension": {
+        "title": "Federung",
+        "vertical_strength": {
+          "title": "Vertikale Stärke",
+          "desc": "Wie stark Bodenwellen die Kamera federn und neigen lassen."
+        },
+        "reactivity": {
+          "title": "Reaktionsfreude",
+          "desc": "Wie schnell sich der Sitz nach einer Bodenwelle beruhigt. Niedriger = straffer und direkter."
+        },
+        "grade_strength": {
+          "title": "Steigung folgen",
+          "desc": "Hebt deinen Kopf bergab und senkt ihn bergauf."
+        }
+      },
+      "road_irregularity": {
+        "title": "Fahrbahnunebenheit",
+        "intensity": {
+          "title": "Intensität",
+          "desc": "Wie stark sich das Rütteln der Fahrbahn und das Schaukeln im Gelände anfühlen."
+        },
+        "reactivity": {
+          "title": "Reaktionsfreude",
+          "desc": "Wie scharf und surrend sich das Rütteln der Fahrbahn anfühlt. Niedriger = schärfer."
+        }
+      },
+      "speed_shake": {
+        "title": "Geschwindigkeitswackeln",
+        "intensity": {
+          "title": "Intensität",
+          "desc": "Gesamtstärke des Wackelns bei schneller Fahrt."
+        },
+        "smoothing_time": {
+          "title": "Glättung",
+          "desc": "Wie sich das Wackeln über die Zeit anfühlt. Höher = langsamer und weicher, niedriger = sprunghafter und nervöser."
+        },
+        "rotation": {
+          "title": "Drehung",
+          "desc": "Wie stark sich deine Sicht beim Wackeln neigt/dreht, statt sich nur seitlich zu bewegen. Auf 0 setzen, um nur die Seitwärtsbewegung zu behalten."
+        },
+        "vertical": {
+          "title": "Vertikal",
+          "desc": "Wie viel Auf-und-ab-Federn dem Wackeln beigemischt wird."
+        },
+        "roughness": {
+          "title": "Unregelmäßigkeit",
+          "desc": "Wie ungleichmäßig sich das Wackeln über die Zeit anfühlt. 0 hält es konstant; höhere Werte erzeugen ruhige und unruhige Phasen."
+        }
+      }
+    },
+    "cabin": {
+      "title": "Fahrerhaus",
+      "idle_breathing": {
+        "title": "Atmung im Stand",
+        "vertical_amplitude": {
+          "title": "Vertikaler Ausschlag",
+          "desc": "Wie weit sich die Kamera mit jedem Atemzug hebt und senkt."
+        },
+        "pitch_amplitude_deg": {
+          "title": "Nickausschlag",
+          "desc": "Wie stark dein Kopf mit jedem Atemzug nach vorn/hinten kippt."
+        },
+        "breathing_rate_bpm": {
+          "title": "Atemfrequenz",
+          "desc": "Wie schnell geatmet wird."
+        },
+        "fade_start_kmh": {
+          "title": "Ausblendbeginn",
+          "desc": "Die Geschwindigkeit, ab der dieser Effekt beim Beschleunigen auszublenden beginnt."
+        },
+        "fade_end_kmh": {
+          "title": "Ausblendende",
+          "desc": "Die Geschwindigkeit, bei der dieser Effekt vollständig ausgeblendet ist."
+        }
+      },
+      "engine_vibration": {
+        "title": "Motorvibration",
+        "intensity": {
+          "title": "Intensität",
+          "desc": "Wie stark sich das Motorbrummen anfühlt."
+        }
+      },
+      "engine_start_stop": {
+        "title": "Motorstart/-stopp",
+        "intensity": {
+          "title": "Intensität",
+          "desc": "Wie stark sich das Rütteln beim Starten oder Abstellen des Motors anfühlt."
+        },
+        "duration": {
+          "title": "Dauer",
+          "desc": "Wie lange das Rütteln beim Start dauert. Das Rütteln beim Abstellen ist kürzer und sanfter."
+        }
+      },
+      "natural_head_movement": {
+        "title": "Natürliche Kopfbewegung",
+        "sway_intensity": {
+          "title": "Schwanken",
+          "desc": "Wie stark dein Kopf von selbst langsam schwankt, auch wenn du ihn ruhig hältst."
+        },
+        "micro_intensity": {
+          "title": "Mikrobewegungen",
+          "desc": "Wie weit sich dein Kopf bei einer kleinen Korrektur bewegt."
+        },
+        "micro_interval": {
+          "title": "Mikroanpassungs-Intervall",
+          "desc": "Wie lange dein Kopf zwischen zwei kleinen Anpassungen wartet."
+        },
+        "posture_intensity": {
+          "title": "Haltungswechsel",
+          "desc": "Wie weit sich dein Kopf verschiebt, wenn er eine neue Haltung einnimmt."
+        },
+        "posture_interval": {
+          "title": "Haltungsintervall",
+          "desc": "Wie lange dein Kopf eine Haltung hält, bevor er eine neue einnimmt."
+        },
+        "roll_scale": {
+          "title": "Seitliche Neigung",
+          "desc": "Wie stark sich dein Kopf zur Seite neigt, bei allen Bewegungen außer der Neigung in Kurven."
+        },
+        "steering_tilt": {
+          "title": "Neigung beim Lenken",
+          "desc": "Wie stark sich dein Kopf in die Kurve neigt: je schneller du sie nimmst, desto mehr."
+        }
+      },
+      "cabin_audio": {
+        "title": "Kabinenklang",
+        "width": {
+          "title": "Breite",
+          "desc": "Wie viel lauter das Ohr, das einem Lautsprecher zugewandt ist, ihn hört als das andere Ohr."
+        },
+        "head_shadow": {
+          "title": "Richtwirkung",
+          "desc": "Wie dumpf ein Lautsprecher für das abgewandte Ohr klingt, das dein Kopf abschirmt."
+        },
+        "muffle": {
+          "title": "Dämpfung",
+          "desc": "Wie dumpf und leise das Radio wird, sobald es hinter dir ist."
+        },
+        "bass": {
+          "title": "Bass",
+          "desc": "Wie stark die Kabinenlautsprecher den Bass absenken, wie kleine Türlautsprecher."
+        },
+        "mid": {
+          "title": "Mitten",
+          "desc": "Wie sehr Stimmen und Instrumente hervortreten."
+        },
+        "treble": {
+          "title": "Höhen",
+          "desc": "Wie hell die Kabinenlautsprecher klingen."
+        },
+        "blend": {
+          "title": "Lautsprechermischung",
+          "desc": "Wie viel jeder Türlautsprecher auch vom anderen Kanal spielt."
+        },
+        "reverb": {
+          "title": "Kabinenhall",
+          "desc": "Wie stark Wände und Windschutzscheibe der Kabine das Radio reflektieren."
+        },
+        "room_size": {
+          "title": "Kabinengröße",
+          "desc": "Wie lange die Reflexionen in der Kabine anhalten."
+        },
+        "radio_volume": {
+          "title": "Radiolautstärke",
+          "desc": "Wie laut das Radio ist, zusätzlich zur Lautstärke des Spiels."
+        },
+        "gps": {
+          "title": "GPS-Stimme",
+          "desc": "Spielt die GPS-Stimme wie das Radio über die Lautsprecher der Kabine, ebenfalls deinem Kopf folgend."
+        },
+        "gps_low_cut": {
+          "title": "Tiefenschnitt der Stimme",
+          "desc": "Wie viele Tiefen die GPS-Stimme verliert: höher klingt dünner, wie ein kleiner Lautsprecher."
+        },
+        "gps_high_cut": {
+          "title": "Höhenschnitt der Stimme",
+          "desc": "Wo die Höhen der GPS-Stimme enden: tiefer klingt dumpfer."
+        },
+        "gps_tone": {
+          "title": "Klang der Stimme",
+          "desc": "Welchen Teil der GPS-Stimme die Klanganhebung hervorhebt: tiefer klingt hohl, höher nasal."
+        },
+        "gps_tone_boost": {
+          "title": "Klanganhebung",
+          "desc": "Wie sehr dieser Teil der GPS-Stimme hervortritt: unter null mildert ihn."
+        },
+        "gps_volume": {
+          "title": "Lautstärke der Stimme",
+          "desc": "Wie laut die GPS-Stimme ist, zusätzlich zur Lautstärke des Spiels."
+        },
+        "duck": {
+          "title": "Absenkung",
+          "desc": "Wie stark das Radio leiser wird, während die GPS-Stimme spricht, wie in einer Navi-App."
+        },
+        "outside": {
+          "title": "Außen",
+          "desc": "Wie gedämpft das Radio von außerhalb der Kabine klingt, in den Außenansichten."
+        }
+      }
+    },
+    "manual": {
+      "title": "Manuell",
+      "manual_look": {
+        "title": "Seitenblick",
+        "hint": "Eigene Tasten, unabhängig vom Spiel. Der Blick beim Blinken braucht die Blinkertasten des Spiels.",
+        "look_left_deg": {
+          "title": "Blickwinkel links",
+          "desc": "Wie weit sich dein Kopf beim Blick nach links dreht."
+        },
+        "look_right_deg": {
+          "title": "Blickwinkel rechts",
+          "desc": "Wie weit sich dein Kopf beim Blick nach rechts dreht."
+        },
+        "glance_left_deg": {
+          "title": "Spiegelblick links",
+          "desc": "Wie weit sich dein Kopf beim Blick in den linken Spiegel dreht."
+        },
+        "glance_right_deg": {
+          "title": "Spiegelblick rechts",
+          "desc": "Wie weit sich dein Kopf beim Blick in den rechten Spiegel dreht."
+        },
+        "glance_left_pitch_deg": {
+          "title": "Neigung Spiegelblick links",
+          "desc": "Wie stark dein Kopf beim Blick in den linken Spiegel kippt. Positiv = nach oben, negativ = nach unten."
+        },
+        "glance_right_pitch_deg": {
+          "title": "Neigung Spiegelblick rechts",
+          "desc": "Wie stark dein Kopf beim Blick in den rechten Spiegel kippt. Positiv = nach oben, negativ = nach unten."
+        },
+        "glance_left_fov_deg": {
+          "title": "Sichtfeld Spiegelblick links",
+          "desc": "Wie stark sich das Sichtfeld beim Blick in den linken Spiegel weitet. Negativ = enger (Zoom)."
+        },
+        "glance_right_fov_deg": {
+          "title": "Sichtfeld Spiegelblick rechts",
+          "desc": "Wie stark sich das Sichtfeld beim Blick in den rechten Spiegel weitet. Negativ = enger (Zoom)."
+        },
+        "smoothing_time": {
+          "title": "Glättung",
+          "desc": "Wie weich die Hin- und Rückbewegung des Blicks ist."
+        },
+        "pause_steering_camera": {
+          "title": "Lenkkamera pausieren",
+          "desc": "Pausiert die Lenkkamera während eines Blicks, damit die Ansicht auf dem bleibt, was du ansiehst."
+        },
+        "mirror_on_signal": {
+          "title": "Blick beim Blinken",
+          "desc": "Blickt in den Spiegel auf der Seite des Blinkers, solange er an ist."
+        },
+        "require_stationary": {
+          "title": "Nur im Stand",
+          "desc": "Blickt beim Blinken nur in den Spiegel, wenn der Lkw steht."
+        },
+        "ignore_after_moving_signal": {
+          "title": "Während der Fahrt ignorieren",
+          "desc": "Nicht in den Spiegel schauen, wenn der Blinker während der Fahrt gesetzt wurde, auch nicht nach dem Anhalten."
+        }
+      },
+      "manual_zoom": {
+        "title": "Manueller Zoom",
+        "hint": "Diese Taste ist unabhängig von der spieleigenen Taste „Zoom der Innenansicht“.",
+        "zoom_fov_deg": {
+          "title": "Zoomstufe",
+          "desc": "Wie stark herangezoomt wird, solange die Zoomtaste gehalten wird. Niedriger = stärker gezoomt."
+        },
+        "smoothing_time": {
+          "title": "Glättung",
+          "desc": "Wie weich sich das Ein- und Auszoomen anfühlt."
+        }
+      },
+      "blindspot_viewer": {
+        "title": "Toter-Winkel-Sicht",
+        "pos_x": {
+          "title": "Seitlich",
+          "desc": "Wie weit sich dein Kopf beim Vorbeugen nach links oder rechts bewegt."
+        },
+        "pos_y": {
+          "title": "Höhe",
+          "desc": "Wie weit sich dein Kopf beim Vorbeugen nach oben oder unten bewegt."
+        },
+        "pos_z": {
+          "title": "Vorbeugen",
+          "desc": "Wie weit sich dein Kopf beim Vorbeugen nach vorne bewegt. Negativ = nach vorne."
+        },
+        "yaw_deg": {
+          "title": "Drehung",
+          "desc": "Wie weit sich dein Kopf beim Vorbeugen nach links oder rechts dreht."
+        },
+        "pitch_deg": {
+          "title": "Neigung",
+          "desc": "Wie weit sich dein Kopf beim Vorbeugen nach oben oder unten neigt."
+        },
+        "roll_deg": {
+          "title": "Rollen",
+          "desc": "Wie weit sich dein Kopf beim Vorbeugen zur Seite neigt."
+        },
+        "fov_offset_deg": {
+          "title": "Sichtfeld-Änderung",
+          "desc": "Wie stark sich das Sichtfeld beim Vorbeugen weitet. Negativ = enger."
+        },
+        "smoothing_time": {
+          "title": "Glättung",
+          "desc": "Wie weich die Vor- und Zurückbewegung ist."
+        }
+      },
+      "cabin_walk": {
+        "title": "Kabinenrundgang",
+        "hint": "Die Standardlayouts sind auf die kleinste Schlafkabine jedes Lkw abgestimmt. Andere Kabinen müssen eventuell angepasst werden.",
+        "require_parking_brake": {
+          "title": "Feststellbremse erforderlich",
+          "desc": "An: Feststellbremse nötig, Lösen schickt dich zurück. Aus: Stillstand genügt."
+        }
+      }
+    }
+  },
+  "ui": {
+    "enabled": "Aktiviert",
+    "cancel": "Abbrechen",
+    "slider_reset_hint": "Rechtsklick auf einen Regler setzt ihn auf den Standardwert zurück.",
+    "truck_badge": "Einstellungen: {name}",
+    "no_truck": "Kein LKW geladen",
+    "no_truck_hint": "Steig in einen LKW, um seine Einstellungen zu ändern.",
+    "paused": "Spiel pausiert",
+    "paused_hint": "Setze das Spiel fort, um die Einstellungen zu ändern.",
+    "trucks": {
+      "section": "Eingestellte LKW ({count})",
+      "changed": "{count} Einstellungen geändert",
+      "none": "Noch kein LKW hat eigene Einstellungen.",
+      "reset_tip": "Einstellungen dieses LKW auf die Standardwerte zurücksetzen."
+    },
+    "search": {
+      "hint": "Einstellungen durchsuchen...",
+      "no_results": "Keine Einstellung passt zu „{query}“.",
+      "clear_tip": "Suche löschen."
+    },
+    "tabs": {
+      "settings": "Einstellungen",
+      "about": "Über"
+    },
+    "keybind": {
+      "section": "Tastenbelegung",
+      "toggle_window": "Fenster umschalten",
+      "unbound": "(nicht belegt)",
+      "rebind_tip": "Klicken zum Neubelegen.",
+      "options_tip": "Belegungsoptionen (Halten/Umschalten, Totzone, ...).",
+      "add_tip": "Weitere Belegung hinzufügen."
+    },
+    "reset": {
+      "section": "Gefahrenzone",
+      "button": "Diesen LKW zurücksetzen",
+      "title": "Zurücksetzen bestätigen",
+      "message": "Alle Einstellungen von {truck} zurücksetzen?",
+      "confirm": "Ja, zurücksetzen",
+      "done_toast": "Einstellungen von {truck} zurückgesetzt."
+    },
+    "about": {
+      "details": "Details",
+      "version": "Version: **{version}**",
+      "developer": "Entwickler: **{author}**",
+      "links": "Links",
+      "website": "Website",
+      "website_desc": "Dokumentation",
+      "discord": "Discord",
+      "discord_desc": "Community und Support",
+      "github": "GitHub",
+      "github_desc": "Releases und Fehlerberichte",
+      "youtube": "YouTube",
+      "youtube_desc": "Videos und Vorführungen",
+      "support": "Unterstützen",
+      "support_text": "Wenn dir MotionCab gefällt, kannst du die Entwicklung unterstützen.",
+      "donate": "Mit PayPal spenden",
+      "donate_desc": "MotionCab auf PayPal unterstützen",
+      "tips": "Tipps",
+      "tip_reset": "Rechtsklick auf einen Regler setzt ihn auf seinen Standardwert zurück.",
+      "tip_per_truck": "Einstellungen werden pro LKW gespeichert: Eine Änderung gilt nur für den LKW, den du gerade fährst.",
+      "tip_interior": "Alle Effekte funktionieren nur in der Innenkamera.",
+      "credits": "Danksagungen",
+      "credits_text": "SPF Framework und Mitwirkende."
+    },
+    "units": {
+      "speed_system": "metric",
+      "kmh": "km/h",
+      "mph": "mph"
+    },
+    "cabin_walk": {
+      "needs_parking_brake": "Zieh die Feststellbremse an, um den Sitz zu verlassen.",
+      "needs_stop": "Halte den Lkw an, um den Sitz zu verlassen.",
+      "back_to_wheel": "Zurück ans Steuer: Der Lkw ist nicht mehr geparkt.",
+      "layout": {
+        "no_truck": "Steig in einen Lkw, um seine Kabine einzurichten.",
+        "truck": "Lkw",
+        "tip": {
+          "floor_z_min": "Wie weit du nach vorn gehen kannst, zur Windschutzscheibe.",
+          "floor_z_max": "Wie weit du nach hinten gehen kannst, zur Rückwand.",
+          "floor_x_min": "Wie weit du zur Fahrertür gehen kannst.",
+          "floor_x_max": "Wie weit du zur Beifahrertür gehen kannst.",
+          "stand_y": "Deine Augenhöhe im Stehen.",
+          "crouch_depth": "Wie weit dein Kopf beim Ducken absinkt.",
+          "passenger_dx": "Seitlich vom Spiegelbild deines Sitzes.",
+          "passenger_dy": "Höher oder tiefer als dein Sitz.",
+          "passenger_dz": "Weiter vorn oder hinten als dein Sitz.",
+          "bunk_sit_x": "Wo du entlang der Liege sitzt.",
+          "bunk_sit_y": "Deine Augenhöhe beim Sitzen auf der Liege.",
+          "bunk_sit_z": "Wie weit hinten die Kante der Liege ist.",
+          "yaw": "Wohin du im Sitzen schaust.",
+          "pitch": "Wie weit du im Sitzen nach oben oder unten schaust.",
+          "has_passenger": "Abwählen, wenn der Beifahrersitz hochgeklappt ist oder fehlt.",
+          "has_bunk": "Abwählen für ein Fahrerhaus ohne Liege.",
+          "has_aisle": "Ankreuzen, wenn der Boden Stufen hat, wie der Gang eines Busses.",
+          "aisle_step_count": "Wie oft sich die Bodenhöhe entlang des Gangs ändert.",
+          "aisle_step_z": "Wie weit hinten die Kante der Stufe liegt.",
+          "aisle_step_height": "Wie weit der Boden danach ansteigt (negativ: abfällt)."
+        },
+        "group": {
+          "walkway": "Laufbereich",
+          "heights": "Stehhöhe",
+          "passenger": "Beifahrersitz",
+          "bunk": "Liege",
+          "steps": "Stufen"
+        },
+        "go": "Hingehen",
+        "usable": "Nutzbar",
+        "advanced": "Erweitert",
+        "reset": "Aufteilung zurücksetzen",
+        "reset_title": "Kabinenaufteilung zurücksetzen",
+        "reset_message": "Zur Standardaufteilung für {truck} zurückkehren?",
+        "reset_confirm": "Ja, zurücksetzen",
+        "floor_x_min": "Linke Grenze",
+        "floor_x_max": "Rechte Grenze",
+        "floor_z_min": "Vordere Grenze",
+        "floor_z_max": "Hintere Grenze",
+        "stand_y": "Höhe",
+        "crouch_depth": "Ducktiefe",
+        "passenger_dx": "Seite",
+        "passenger_dy": "Höhe",
+        "passenger_dz": "Tiefe",
+        "passenger_yaw": "Drehung",
+        "passenger_pitch": "Neigung",
+        "bunk_sit_x": "Seite",
+        "bunk_sit_y": "Höhe",
+        "bunk_sit_z": "Tiefe",
+        "bunk_sit_yaw": "Drehung",
+        "bunk_sit_pitch": "Neigung",
+        "aisle_step_count": "Anzahl",
+        "aisle_step_z": "Stufe {n} Tiefe",
+        "aisle_step_height": "Stufe {n} Höhe"
+      }
+    },
+    "modified": "Vom Standardwert geändert.",
+    "cabin_audio": {
+      "test_voice": "GPS-Ansage abspielen",
+      "test_voice_hint": "Spielt eine der GPS-Ansagen des Spiels ab, jedes Mal eine andere, um die Stimme ohne Fahren einzustellen.",
+      "test_voice_missing": "Keine GPS-Stimme in den Sounds des Spiels gefunden."
+    }
+  }
+}
