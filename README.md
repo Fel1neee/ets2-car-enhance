@@ -36,7 +36,7 @@ Native C++ / DX11 plugin for **Euro Truck Simulator 2** that transforms passenge
 3. Launch ETS2 (64-bit, DirectX 11) with any passenger car mod.
 4. Press **`Insert`** or **`F6`** (or bind any steering wheel button in the menu) to open the overlay.
 
-### Tested Car Mods
+### Tested Car Mods & Recommended Addons
 Works best and tested primarily on high-quality car mods by **DN Modding** and **Nimit**:
 - `Lamborghini Huracán LP 580-2`
 - `Lamborghini Countach`
@@ -45,6 +45,9 @@ Works best and tested primarily on high-quality car mods by **DN Modding** and *
 - `Lexus LS500`
 - `Volkswagen Golf 7.5`
 - `Dodge Challenger / Charger Hellcat`
+
+**Recommended camera plugin (optional):**
+- **MotionCab (v1.3.0 / SPF Framework)** — dynamic cabin camera physics; pairs great with our `brake_dive`, lateral G-loads, and high-speed chassis rumble (`200+ km/h`).
 
 ### Building from Source
 All required headers/libraries (`SCS Telemetry SDK`, `MinHook`, `ImGui`) are already included in `third_party/`.
@@ -89,7 +92,7 @@ To compile, you only need **llvm-mingw** (`g++` / `clang++` for Windows x64):
 3. Запусти ETS2 (64-bit, DirectX 11) с любым модом на легковую машину.
 4. Открой меню клавишей **`Insert`** или **`F6`** (или назначь любую кнопку на руле прямо в футере меню).
 
-### Проверенные моды авто
+### Проверенные моды и рекомендуемые дополнения
 Адекватнее всего плагин работает и тестировался на модах от **DN Modding** и **Nimit**:
 - `Lamborghini Huracán LP 580-2`
 - `Lamborghini Countach`
@@ -98,6 +101,9 @@ To compile, you only need **llvm-mingw** (`g++` / `clang++` for Windows x64):
 - `Lexus LS500`
 - `Volkswagen Golf 7.5`
 - `Dodge Challenger / Charger Hellcat`
+
+**Рекомендуемый плагин на камеру (по желанию):**
+- **MotionCab (v1.3.0 / SPF Framework)** — живая физика камеры салона; отлично раскрывает клевки носом при торможении (`brake_dive`), крены в дугах и микро-вибрацию на `200+ км/ч`.
 
 ### Сборка из исходников (для разработчиков)
 Все библиотеки (`SCS Telemetry SDK`, `MinHook`, `ImGui`) уже лежат в репозитории в папке `third_party/`.
