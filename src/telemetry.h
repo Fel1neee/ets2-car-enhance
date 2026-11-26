@@ -45,6 +45,16 @@ inline const char* car_class_name_ru(CarClass c) {
     }
 }
 
+inline const char* car_class_name_en(CarClass c) {
+    switch (c) {
+        case CarClass::Civilian: return "Civilian";
+        case CarClass::Sport:    return "Sport";
+        case CarClass::Supercar: return "Supercar";
+        case CarClass::Truck:    return "Truck (Off)";
+        default:                 return "Unknown";
+    }
+}
+
 struct TelemetryState {
     std::atomic<float> speed_mps{0.0f};
     std::atomic<float> steer{0.0f};

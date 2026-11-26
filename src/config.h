@@ -55,6 +55,7 @@ struct PluginConfig {
     float mini_hud_x        = -1.0f;
     float mini_hud_y        = -1.0f;
     float mini_hud_scale    = 1.0f;
+    int   ui_lang           = 0;    // 0=EN, 1=RU
 };
 
 inline PluginConfig g_cfg;
@@ -359,6 +360,8 @@ inline void load_config() {
     g_cfg.mini_hud_scale   = read_ini_float("UI", "mini_hud_scale", 1.0f, g_ini_path);
     if (g_cfg.mini_hud_scale < 0.70f) g_cfg.mini_hud_scale = 0.70f;
     if (g_cfg.mini_hud_scale > 1.80f) g_cfg.mini_hud_scale = 1.80f;
+    g_cfg.ui_lang          = read_ini_int("UI", "ui_lang", 0, g_ini_path);
+    if (g_cfg.ui_lang < 0 || g_cfg.ui_lang > 1) g_cfg.ui_lang = 0;
 }
 
 inline void save_config() {
@@ -405,4 +408,5 @@ inline void save_config() {
     write_ini_float("UI", "mini_hud_x", g_cfg.mini_hud_x, g_ini_path);
     write_ini_float("UI", "mini_hud_y", g_cfg.mini_hud_y, g_ini_path);
     write_ini_float("UI", "mini_hud_scale", g_cfg.mini_hud_scale, g_ini_path);
+    write_ini_int("UI", "ui_lang", g_cfg.ui_lang, g_ini_path);
 }

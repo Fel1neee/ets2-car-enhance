@@ -893,7 +893,7 @@ static void draw_mini_hud() {
             IM_COL32(255, 65, 65, 255),
             IM_COL32(70, 235, 95, 255)
         };
-        const char* pedalLbls[3] = { "С", "Т", "Г" };
+        const char* pedalLbls[3] = { "C", "B", "T" };
         float pBarW = 7.0f * s;
         float pBarY0 = wp.y + 26.0f * s;
         float pBarY1 = wp.y + 104.0f * s;
@@ -914,12 +914,12 @@ static void draw_mini_hud() {
 
         // Column 2: Tire & Brake temperatures in C
         ImGui::SetCursorPos(ImVec2(96.0f * s, 29.0f * s));
-        ImGui::TextColored(ImVec4(0.75f, 0.82f, 0.95f, 1.0f), "ШИНЫ");
+        ImGui::TextColored(ImVec4(0.75f, 0.82f, 0.95f, 1.0f), "TIRES");
         ImGui::SetCursorPos(ImVec2(96.0f * s, 46.0f * s));
         ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(tire_temp_color(avgTire)), "%.0f C", avgTire);
 
         ImGui::SetCursorPos(ImVec2(96.0f * s, 74.0f * s));
-        ImGui::TextColored(ImVec4(0.75f, 0.82f, 0.95f, 1.0f), "ТОРМОЗА");
+        ImGui::TextColored(ImVec4(0.75f, 0.82f, 0.95f, 1.0f), "BRAKES");
         ImGui::SetCursorPos(ImVec2(96.0f * s, 91.0f * s));
         ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(brake_temp_color(maxBrake)), "%.0f C", maxBrake);
 
@@ -1027,6 +1027,10 @@ static void draw_mini_hud() {
     ImGui::PopStyleColor(2);
 }
 
+static inline const char* L(const char* en, const char* ru) {
+    return (g_cfg.ui_lang == 1) ? ru : en;
+}
+
 void draw_imgui_menu(ID3D11RenderTargetView* rtv, float kmh) {
     if (!g_imguiInit || (!g_menuOpen && !g_cfg.mini_hud_enabled)) return;
 
@@ -1045,8 +1049,8 @@ void draw_imgui_menu(ID3D11RenderTargetView* rtv, float kmh) {
     draw_mini_hud();
 
     if (g_menuOpen) {
-        ImGui::SetNextWindowSize(ImVec2(510, 725), ImGuiCond_FirstUseEver);
-        if (ImGui::Begin("ETS2 Car Enhance v2.1.2 by Fel1neee", &g_menuOpen, ImGuiWindowFlags_NoCollapse)) {
+        ImGui::SetNextWindowSize(ImVec2(550, 735), ImGuiCond_FirstUseEver);
+        if (ImGui::Begin("ETS2 Car Enhance v2.1.3 by Fel1neee", &g_menuOpen, ImGuiWindowFlags_NoCollapse)) {
             float thr     = g_tel.throttle.load(std::memory_order_relaxed) * 100.0f;
             float brk     = g_tel.brake.load(std::memory_order_relaxed) * 100.0f;
             float str     = g_tel.steer.load(std::memory_order_relaxed);
@@ -1060,9 +1064,10 @@ void draw_imgui_menu(ID3D11RenderTargetView* rtv, float kmh) {
             char carName[128] = {};
             get_car_name(carName, sizeof(carName));
             CarClass detCls = static_cast<CarClass>(g_tel.detected_class.load(std::memory_order_relaxed));
+            const char* clsName = (g_cfg.ui_lang == 1) ? car_class_name_ru(detCls) : car_class_name_en(detCls);
 
-            // Top toolbar: [Загрузить] [Сохранить] [Мини-HUD]   ...   [Режим: Базовый / Продвинутый]
-            if (ImGui::Button("Загрузить")) {
+            // Top toolbar: [Load] [Save] [HUD] [Blur]   ...   [EN/RU] [Basic/Advanced]
+            if (ImGui::Button(L("Load", "Загрузить"))) {
                 load_config();
                 apply_abs_level(g_cfg.abs_level);
                 apply_esp_level(g_cfg.esp_level);
@@ -1071,37 +1076,46 @@ void draw_imgui_menu(ID3D11RenderTargetView* rtv, float kmh) {
                 plugin_log(SCS_LOG_TYPE_message, "[ets2_car_enhance] Loaded config from .ini");
             }
             ImGui::SameLine();
-            if (ImGui::Button("Сохранить")) {
+            if (ImGui::Button(L("Save", "Сохранить"))) {
                 save_config();
                 plugin_log(SCS_LOG_TYPE_message, "[ets2_car_enhance] Saved config to .ini");
             }
             ImGui::SameLine();
-            if (level_button(g_cfg.mini_hud_enabled ? "Мини-HUD: ВКЛ" : "Мини-HUD: ВЫКЛ", g_cfg.mini_hud_enabled, ImVec2(118, 0))) {
+            if (level_button(g_cfg.mini_hud_enabled ? L("HUD: ON", "HUD: ВКЛ") : L("HUD: OFF", "HUD: ВЫКЛ"), g_cfg.mini_hud_enabled, ImVec2(76, 0))) {
                 g_cfg.mini_hud_enabled = !g_cfg.mini_hud_enabled;
             }
-            ImGui::SameLine(ImGui::GetWindowWidth() - 165.0f);
-            if (level_button(g_cfg.ui_advanced ? "Режим: Продвинутый" : "Режим: Базовый", g_cfg.ui_advanced, ImVec2(150, 0))) {
+            ImGui::SameLine();
+            if (level_button(g_cfg.blur_enabled ? L("Blur: ON", "Блюр: ВКЛ") : L("Blur: OFF", "Блюр: ВЫКЛ"), g_cfg.blur_enabled, ImVec2(82, 0))) {
+                g_cfg.blur_enabled = !g_cfg.blur_enabled;
+            }
+            ImGui::SameLine(ImGui::GetWindowWidth() - 190.0f);
+            if (level_button(g_cfg.ui_lang == 1 ? "RU" : "EN", true, ImVec2(36, 0))) {
+                g_cfg.ui_lang = (g_cfg.ui_lang == 1) ? 0 : 1;
+            }
+            ImGui::SameLine();
+            if (level_button(g_cfg.ui_advanced ? L("Mode: Advanced", "Режим: Продвинутый") : L("Mode: Basic", "Режим: Базовый"), g_cfg.ui_advanced, ImVec2(140, 0))) {
                 g_cfg.ui_advanced = !g_cfg.ui_advanced;
             }
 
             ImGui::Separator();
-            ImGui::Text("Авто: %s [%s] | %.0f км/ч | Держак: %.0f%% | Снос: %.1f°",
-                        carName, car_class_name_ru(detCls), kmh, gripPct, slip);
+            ImGui::Text(L("Car: %s [%s] | %.0f km/h | Grip: %.0f%% | Slip: %.1f deg",
+                          "Авто: %s [%s] | %.0f км/ч | Держак: %.0f%% | Снос: %.1f°"),
+                        carName, clsName, kmh, gripPct, slip);
             if (absAct) { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.85f, 0.2f, 1.0f), "[ABS]"); }
             if (esp)    { ImGui::SameLine(); ImGui::TextColored(ImVec4(0.2f, 0.95f, 0.4f, 1.0f), "[ESP]"); }
-            if (kState == 1)      { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.85f, 0.2f, 1.0f), "[Грань]"); }
-            else if (kState == 2) { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.3f, 0.3f, 1.0f), "[Срыв]"); }
+            if (kState == 1)      { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.85f, 0.2f, 1.0f), L("[Edge]", "[Грань]")); }
+            else if (kState == 2) { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.3f, 0.3f, 1.0f), L("[Slide]", "[Срыв]")); }
             else if (kState == 3) { ImGui::SameLine(); ImGui::TextColored(ImVec4(0.3f, 0.85f, 1.0f, 1.0f), "[Trail]"); }
-            else if (kState == 4) { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.2f, 1.0f), "[Андер]"); }
-            else if (kState == 5) { ImGui::SameLine(); ImGui::TextColored(ImVec4(0.95f, 0.4f, 0.9f, 1.0f), "[Занос]"); }
+            else if (kState == 4) { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.2f, 1.0f), L("[Under]", "[Андер]")); }
+            else if (kState == 5) { ImGui::SameLine(); ImGui::TextColored(ImVec4(0.95f, 0.4f, 0.9f, 1.0f), L("[Drift]", "[Занос]")); }
 
             if (!g_cfg.ui_advanced) {
                 // =============================================================
-                // BASIC MODE (per mockup)
+                // BASIC MODE
                 // =============================================================
                 ImGui::Spacing();
                 ImGui::BeginChild("##BasicABS", ImVec2(0, 108), true);
-                ImGui::Text("АБС и Тормоза:");
+                ImGui::Text("%s", L("ABS & Brakes:", "АБС и Тормоза:"));
                 if (level_button("OFF##abs", g_cfg.abs_level == 0, ImVec2(56, 26))) apply_abs_level(0);
                 for (int i = 1; i <= 5; ++i) {
                     ImGui::SameLine();
@@ -1109,61 +1123,71 @@ void draw_imgui_menu(ID3D11RenderTargetView* rtv, float kmh) {
                     if (level_button(lbl, g_cfg.abs_level == i, ImVec2(44, 26))) apply_abs_level(i);
                 }
                 ImGui::Spacing();
-                ImGui::Text("Диски:");
+                ImGui::Text("%s", L("Discs:", "Диски:"));
                 ImGui::SameLine();
-                if (level_button("Обычные", g_cfg.brake_type == 0, ImVec2(95, 24))) apply_brake_type(0);
+                if (level_button(L("Standard", "Обычные"), g_cfg.brake_type == 0, ImVec2(95, 24))) apply_brake_type(0);
                 ImGui::SameLine();
-                if (level_button("Спорт", g_cfg.brake_type == 1, ImVec2(85, 24))) apply_brake_type(1);
+                if (level_button(L("Sport", "Спорт"), g_cfg.brake_type == 1, ImVec2(85, 24))) apply_brake_type(1);
                 ImGui::SameLine();
-                if (level_button("Керамика", g_cfg.brake_type == 2, ImVec2(100, 24))) apply_brake_type(2);
-                const char* brkHint = (g_cfg.brake_type == 0) ? "Обычные: сразу цепляют, но плывут после 430 C"
-                                    : (g_cfg.brake_type == 1) ? "Спорт: лучше продуваются, перегрев с 560 C"
-                                                              : "Керамика: 86% на холодную (<150 C), держат до 780 C";
+                if (level_button(L("Ceramic", "Керамика"), g_cfg.brake_type == 2, ImVec2(100, 24))) apply_brake_type(2);
+                const char* brkHint = (g_cfg.brake_type == 0) ? L("Standard: instant cold bite, fades above 430 C", "Обычные: сразу цепляют, но плывут после 430 C")
+                                    : (g_cfg.brake_type == 1) ? L("Sport: better airflow cooling, fades above 560 C", "Спорт: лучше продуваются, перегрев с 560 C")
+                                                              : L("Ceramic: 86% cold bite (<150 C), holds up to 780 C", "Керамика: 86% на холодную (<150 C), держат до 780 C");
                 ImGui::TextDisabled("%s", brkHint);
                 ImGui::EndChild();
 
                 ImGui::BeginChild("##BasicESP", ImVec2(0, 74), true);
-                ImGui::Text("ТС / ЕСП (TC / ESP) — стабилизация и тяга:");
+                ImGui::Text("%s", L("TC / ESP - Stability & Traction:", "ТС / ЕСП (TC / ESP) — стабилизация и тяга:"));
                 if (level_button("OFF##esp", g_cfg.esp_level == 0, ImVec2(56, 26))) apply_esp_level(0);
                 for (int i = 1; i <= 5; ++i) {
                     ImGui::SameLine();
                     char lbl[16]; std::snprintf(lbl, sizeof(lbl), "%d##esp", i);
                     if (level_button(lbl, g_cfg.esp_level == i, ImVec2(44, 26))) apply_esp_level(i);
                 }
-                ImGui::TextDisabled("1 — даёт валить боком (скорость не падает) | 5 — жёсткий ошейник");
+                ImGui::TextDisabled("%s", L("1 - allows drifting (minimal speed loss) | 5 - strict safety net",
+                                            "1 — даёт валить боком (скорость не падает) | 5 — жёсткий ошейник"));
                 ImGui::EndChild();
 
                 ImGui::BeginChild("##BasicTire", ImVec2(0, 96), true);
-                ImGui::Text("ШИНЫ — тип резины:");
-                const char* tireLabels[4] = { "Слик", "Полуслик", "Дорожная", "Узкая дорожная" };
+                ImGui::Text("%s", L("TIRES - Compound:", "ШИНЫ — тип резины:"));
+                const char* tireLabels[4] = {
+                    L("Slick", "Слик"),
+                    L("Semi-Slick", "Полуслик"),
+                    L("Street", "Дорожная"),
+                    L("Narrow Street", "Узкая дорожная")
+                };
                 for (int i = 0; i < 4; ++i) {
                     if (i > 0) ImGui::SameLine();
-                    float bw = (i == 3) ? 128.0f : 96.0f;
+                    float bw = (i == 3) ? 132.0f : 98.0f;
                     if (level_button(tireLabels[i], g_cfg.tire_type == i, ImVec2(bw, 26))) {
                         apply_tire_type(i);
                     }
                 }
                 const char* tireDesc[4] = {
-                    "Макс. зацеп на сухой трассе, но быстрее всех греется (оптимум 80-105 C).",
-                    "Спортивный баланс: высокий держак и предсказуемое окно срыва (70-100 C).",
-                    "Живёт дольше всех и стабильна по температуре (50-95 C), но держит слабее.",
-                    "Минимальный держак: легко срывается в скольжение, для классики и дрифта."
+                    L("Max dry grip, but heats up fastest (optimal 78-105 C).",
+                      "Макс. зацеп на сухой трассе, но быстрее всех греется (оптимум 78-105 C)."),
+                    L("Sport balance: high grip and predictable slip edge (70-100 C).",
+                      "Спортивный баланс: высокий держак и предсказуемое окно срыва (70-100 C)."),
+                    L("Longest life and stable temps (50-95 C), lower peak grip.",
+                      "Живёт дольше всех и стабильна по температуре (50-95 C), но держит слабее."),
+                    L("Lowest grip: breaks traction easily, built for classics and drift.",
+                      "Минимальный держак: легко срывается в скольжение, для классики и дрифта.")
                 };
                 ImGui::TextWrapped("%s", tireDesc[g_cfg.tire_type]);
                 ImGui::EndChild();
 
                 ImGui::BeginChild("##BasicAero", ImVec2(0, 225), true);
-                ImGui::Text("АЭРОДИНАМИКА И ТИП КУЗОВА:");
+                ImGui::Text("%s", L("AERODYNAMICS & BODY CLASS:", "АЭРОДИНАМИКА И ТИП КУЗОВА:"));
                 CarClass curCls = static_cast<CarClass>(g_cfg.active_preset);
                 if (curCls == CarClass::Unknown) curCls = detCls;
 
-                if (level_button("Гражданский", curCls == CarClass::Civilian, ImVec2(110, 28))) apply_car_preset(CarClass::Civilian);
+                if (level_button(L("Civilian", "Гражданский"), curCls == CarClass::Civilian, ImVec2(115, 28))) apply_car_preset(CarClass::Civilian);
                 ImGui::SameLine();
-                if (level_button("Спорт", curCls == CarClass::Sport, ImVec2(95, 28))) apply_car_preset(CarClass::Sport);
+                if (level_button(L("Sport", "Спорт"), curCls == CarClass::Sport, ImVec2(95, 28))) apply_car_preset(CarClass::Sport);
                 ImGui::SameLine();
-                if (level_button("Спорткар", curCls == CarClass::Supercar, ImVec2(105, 28))) apply_car_preset(CarClass::Supercar);
+                if (level_button(L("Supercar", "Спорткар"), curCls == CarClass::Supercar, ImVec2(110, 28))) apply_car_preset(CarClass::Supercar);
                 ImGui::SameLine();
-                if (level_button("Тягач (Выкл)", curCls == CarClass::Truck, ImVec2(115, 28))) apply_car_preset(CarClass::Truck);
+                if (level_button(L("Truck (Off)", "Тягач (Выкл)"), curCls == CarClass::Truck, ImVec2(120, 28))) apply_car_preset(CarClass::Truck);
 
                 ImGui::Spacing();
                 ImVec2 imgPos = ImGui::GetCursorScreenPos();
@@ -1174,88 +1198,94 @@ void draw_imgui_menu(ID3D11RenderTargetView* rtv, float kmh) {
                 ImGui::SameLine();
                 ImGui::BeginGroup();
                 if (curCls == CarClass::Civilian) {
-                    ImGui::TextColored(ImVec4(0.35f, 0.75f, 1.0f, 1.0f), "Гражданский кузов");
-                    ImGui::TextWrapped("Седаны и маслкары: S-Class, Lexus LS500, Hellcat.\nПрижим: 0.08 G (300 км/ч)\nБаланс: 50%% перед / 50%% зад");
+                    ImGui::TextColored(ImVec4(0.35f, 0.75f, 1.0f, 1.0f), "%s", L("Civilian Body", "Гражданский кузов"));
+                    ImGui::TextWrapped("%s", L("Sedans & muscle cars: S-Class, Lexus LS500, Hellcat.\nDownforce: 0.08 G (at 300 km/h)\nBalance: 50%% front / 50%% rear",
+                                               "Седаны и маслкары: S-Class, Lexus LS500, Hellcat.\nПрижим: 0.08 G (300 км/ч)\nБаланс: 50%% перед / 50%% зад"));
                 } else if (curCls == CarClass::Sport) {
-                    ImGui::TextColored(ImVec4(1.0f, 0.72f, 0.25f, 1.0f), "Спорт / Купе / Хот-хэтч");
-                    ImGui::TextWrapped("Golf, Silvia, Supra, M3, RS6.\nПрижим: 0.15 G (300 км/ч)\nБаланс: 44%% перед / 56%% зад");
+                    ImGui::TextColored(ImVec4(1.0f, 0.72f, 0.25f, 1.0f), "%s", L("Sport / Coupe / Hot-Hatch", "Спорт / Купе / Хот-хэтч"));
+                    ImGui::TextWrapped("%s", L("Golf, Silvia, Supra, M3, RS6.\nDownforce: 0.15 G (at 300 km/h)\nBalance: 44%% front / 56%% rear",
+                                               "Golf, Silvia, Supra, M3, RS6.\nПрижим: 0.15 G (300 км/ч)\nБаланс: 44%% перед / 56%% зад"));
                 } else if (curCls == CarClass::Supercar) {
-                    ImGui::TextColored(ImVec4(1.0f, 0.35f, 0.45f, 1.0f), "Спорткар / Суперкар");
-                    ImGui::TextWrapped("Lamborghini, Ferrari, McLaren, GT3.\nПрижим: 0.22 G (300 км/ч)\nБаланс: 38%% перед / 62%% зад");
+                    ImGui::TextColored(ImVec4(1.0f, 0.35f, 0.45f, 1.0f), "%s", L("Supercar / Hypercar", "Спорткар / Суперкар"));
+                    ImGui::TextWrapped("%s", L("Lamborghini, Ferrari, McLaren, GT3.\nDownforce: 0.22 G (at 300 km/h)\nBalance: 38%% front / 62%% rear",
+                                               "Lamborghini, Ferrari, McLaren, GT3.\nПрижим: 0.22 G (300 км/ч)\nБаланс: 38%% перед / 62%% зад"));
                 } else {
-                    ImGui::TextColored(ImVec4(0.65f, 0.70f, 0.75f, 1.0f), "Тягач (плагин отключён)");
-                    ImGui::TextWrapped("Родная физика грузовиков и прицепов без вмешательства.");
+                    ImGui::TextColored(ImVec4(0.65f, 0.70f, 0.75f, 1.0f), "%s", L("Truck (plugin disabled)", "Тягач (плагин отключён)"));
+                    ImGui::TextWrapped("%s", L("Vanilla truck and trailer physics without interference.",
+                                               "Родная физика грузовиков и прицепов без вмешательства."));
                 }
                 ImGui::EndGroup();
 
                 ImGui::Spacing();
-                if (ImGui::Checkbox("Авто-пресет при смене машины", &g_cfg.auto_preset)) {
+                if (ImGui::Checkbox(L("Auto-preset on car change", "Авто-пресет при смене машины"), &g_cfg.auto_preset)) {
                     if (g_cfg.auto_preset && detCls != CarClass::Unknown) apply_car_preset(detCls);
                 }
                 ImGui::SameLine();
-                ImGui::TextDisabled("(Прижим сейчас: %.2f G)", dfG);
+                ImGui::TextDisabled(L("(Live downforce: %.2f G)", "(Прижим сейчас: %.2f G)"), dfG);
                 ImGui::EndChild();
             } else {
                 // =============================================================
                 // ADVANCED MODE (all sliders & fine tuning)
                 // =============================================================
-                ImGui::Text("Газ: %.0f%% | Тормоз: %.0f%% | Руль: %.2f | Прижим: %.2f G", thr, brk, str, dfG);
+                ImGui::Text(L("Throttle: %.0f%% | Brake: %.0f%% | Steer: %.2f | Downforce: %.2f G",
+                              "Газ: %.0f%% | Тормоз: %.0f%% | Руль: %.2f | Прижим: %.2f G"),
+                            thr, brk, str, dfG);
                 ImGui::Separator();
 
-                if (ImGui::CollapsingHeader("1. Размытие краёв на скорости (DX11)", ImGuiTreeNodeFlags_DefaultOpen)) {
-                    ImGui::Checkbox("Включить размытие##blur", &g_cfg.blur_enabled);
-                    ImGui::SliderFloat("Старт (км/ч)##bstart", &g_cfg.start_kmh, 50.0f, 200.0f, "%.0f");
-                    ImGui::SliderFloat("Максимум (км/ч)##bmax", &g_cfg.max_kmh, 180.0f, 400.0f, "%.0f");
-                    ImGui::SliderFloat("Сила размытия", &g_cfg.strength, 0.005f, 0.060f, "%.3f");
-                    ImGui::SliderFloat("Чёткий центр", &g_cfg.clear_radius, 0.20f, 0.55f, "%.2f");
-                    ImGui::SliderFloat("Виньетка", &g_cfg.vignette, 0.0f, 0.40f, "%.2f");
-                    ImGui::SliderInt("Качество (сэмплы)", &g_cfg.samples, 4, 16);
+                if (ImGui::CollapsingHeader(L("1. Speed Motion Blur (DX11)", "1. Размытие краёв на скорости (DX11)"), ImGuiTreeNodeFlags_DefaultOpen)) {
+                    ImGui::Checkbox(L("Enable Blur##blur", "Включить размытие##blur"), &g_cfg.blur_enabled);
+                    ImGui::SliderFloat(L("Start (km/h)##bstart", "Старт (км/ч)##bstart"), &g_cfg.start_kmh, 50.0f, 200.0f, "%.0f");
+                    ImGui::SliderFloat(L("Max (km/h)##bmax", "Максимум (км/ч)##bmax"), &g_cfg.max_kmh, 180.0f, 400.0f, "%.0f");
+                    ImGui::SliderFloat(L("Strength", "Сила размытия"), &g_cfg.strength, 0.005f, 0.060f, "%.3f");
+                    ImGui::SliderFloat(L("Clear Center", "Чёткий центр"), &g_cfg.clear_radius, 0.20f, 0.55f, "%.2f");
+                    ImGui::SliderFloat(L("Vignette", "Виньетка"), &g_cfg.vignette, 0.0f, 0.40f, "%.2f");
+                    ImGui::SliderInt(L("Quality (samples)", "Качество (сэмплы)"), &g_cfg.samples, 4, 16);
                 }
 
-                if (ImGui::CollapsingHeader("2. Аэродинамический прижим (Downforce)", ImGuiTreeNodeFlags_DefaultOpen)) {
-                    ImGui::Checkbox("Включить прижим##df", &g_cfg.downforce_enabled);
-                    ImGui::SliderFloat("Старт (км/ч)##dstart", &g_cfg.downforce_start_kmh, 50.0f, 160.0f, "%.0f");
-                    ImGui::SliderFloat("Прижим на 300 км/ч (G)", &g_cfg.downforce_g_at_300, 0.05f, 1.20f, "%.2f G");
-                    ImGui::SliderFloat("Лимит прижима (макс. G)", &g_cfg.downforce_max_g, 0.15f, 1.50f, "%.2f G");
-                    ImGui::SliderFloat("Баланс прижима (% перед)", &g_cfg.aero_front_pct, 25.0f, 70.0f, "%.0f%%");
-                    ImGui::SliderFloat("Анти-подскок на стыках", &g_cfg.anti_bounce, 0.0f, 0.80f, "%.2f");
+                if (ImGui::CollapsingHeader(L("2. Aero Downforce", "2. Аэродинамический прижим (Downforce)"), ImGuiTreeNodeFlags_DefaultOpen)) {
+                    ImGui::Checkbox(L("Enable Downforce##df", "Включить прижим##df"), &g_cfg.downforce_enabled);
+                    ImGui::SliderFloat(L("Start (km/h)##dstart", "Старт (км/ч)##dstart"), &g_cfg.downforce_start_kmh, 50.0f, 160.0f, "%.0f");
+                    ImGui::SliderFloat(L("Downforce at 300 km/h (G)", "Прижим на 300 км/ч (G)"), &g_cfg.downforce_g_at_300, 0.05f, 1.20f, "%.2f G");
+                    ImGui::SliderFloat(L("Max Downforce (G)", "Лимит прижима (макс. G)"), &g_cfg.downforce_max_g, 0.15f, 1.50f, "%.2f G");
+                    ImGui::SliderFloat(L("Aero Balance (% front)", "Баланс прижима (% перед)"), &g_cfg.aero_front_pct, 25.0f, 70.0f, "%.0f%%");
+                    ImGui::SliderFloat(L("Anti-Bounce", "Анти-подскок на стыках"), &g_cfg.anti_bounce, 0.0f, 0.80f, "%.2f");
                 }
 
-                if (ImGui::CollapsingHeader("3. Стабилизатор ESP / ABS / TC", ImGuiTreeNodeFlags_DefaultOpen)) {
-                    ImGui::Checkbox("Включить ESP / ABS / TC##esp", &g_cfg.assist_enabled);
-                    ImGui::SliderFloat("Старт (км/ч)##astart", &g_cfg.assist_start_kmh, 20.0f, 120.0f, "%.0f");
-                    ImGui::SliderFloat("Сила ESP (вращение)", &g_cfg.esp_strength, 0.0f, 2.5f, "%.2f");
-                    ImGui::SliderFloat("Сила ESP (боковой снос)", &g_cfg.slip_esp_strength, 0.0f, 2.5f, "%.2f");
-                    ImGui::SliderFloat("Усиление на тормозе (ABS)", &g_cfg.abs_brake_boost, 0.0f, 3.0f, "%.2f");
-                    ImGui::SliderFloat("Усиление на газу (TC)", &g_cfg.tc_throttle_boost, 1.0f, 2.5f, "%.2f");
-                    ImGui::SliderFloat("Макс. гашение (рад/с^2)", &g_cfg.max_yaw_decel, 0.5f, 5.0f, "%.1f");
-                    ImGui::SliderFloat("Потеря тяги ESP (G)", &g_cfg.esp_brake_drag, 0.0f, 0.50f, "%.2f");
-                    ImGui::SliderFloat("Клевок при торможении", &g_cfg.brake_dive, 0.0f, 0.60f, "%.2f");
-                    ImGui::SliderFloat("Стабилизация руля (скорость)", &g_cfg.speed_steer_damp, 0.0f, 2.0f, "%.2f");
-                    ImGui::SliderFloat("Вибрация кузова (160+)", &g_cfg.speed_rumble, 0.0f, 1.0f, "%.2f");
+                if (ImGui::CollapsingHeader(L("3. ESP / ABS / TC Stabilizer", "3. Стабилизатор ESP / ABS / TC"), ImGuiTreeNodeFlags_DefaultOpen)) {
+                    ImGui::Checkbox(L("Enable ESP / ABS / TC##esp", "Включить ESP / ABS / TC##esp"), &g_cfg.assist_enabled);
+                    ImGui::SliderFloat(L("Start (km/h)##astart", "Старт (км/ч)##astart"), &g_cfg.assist_start_kmh, 20.0f, 120.0f, "%.0f");
+                    ImGui::SliderFloat(L("ESP Yaw Damping", "Сила ESP (вращение)"), &g_cfg.esp_strength, 0.0f, 2.5f, "%.2f");
+                    ImGui::SliderFloat(L("ESP Slip Align", "Сила ESP (боковой снос)"), &g_cfg.slip_esp_strength, 0.0f, 2.5f, "%.2f");
+                    ImGui::SliderFloat(L("ABS Brake Boost", "Усиление на тормозе (ABS)"), &g_cfg.abs_brake_boost, 0.0f, 3.0f, "%.2f");
+                    ImGui::SliderFloat(L("TC Throttle Boost", "Усиление на газу (TC)"), &g_cfg.tc_throttle_boost, 1.0f, 2.5f, "%.2f");
+                    ImGui::SliderFloat(L("Max Yaw Decel (rad/s^2)", "Макс. гашение (рад/с^2)"), &g_cfg.max_yaw_decel, 0.5f, 5.0f, "%.1f");
+                    ImGui::SliderFloat(L("ESP Speed Scrub (G)", "Потеря тяги ESP (G)"), &g_cfg.esp_brake_drag, 0.0f, 0.50f, "%.2f");
+                    ImGui::SliderFloat(L("Brake Dive", "Клевок при торможении"), &g_cfg.brake_dive, 0.0f, 0.60f, "%.2f");
+                    ImGui::SliderFloat(L("Speed Steer Damp", "Стабилизация руля (скорость)"), &g_cfg.speed_steer_damp, 0.0f, 2.0f, "%.2f");
+                    ImGui::SliderFloat(L("Chassis Rumble (160+)", "Вибрация кузова (160+)"), &g_cfg.speed_rumble, 0.0f, 1.0f, "%.2f");
                 }
 
-                if (ImGui::CollapsingHeader("4. Шинная модель (Pacejka + Круг Камма)", ImGuiTreeNodeFlags_DefaultOpen)) {
-                    ImGui::Checkbox("Включить шинную модель##tire", &g_cfg.tire_enabled);
-                    ImGui::SliderFloat("Зацеп шин (боковой держак)", &g_cfg.tire_grip, 0.0f, 1.50f, "%.2f");
-                    ImGui::SliderFloat("Круг Камма (Trail / Занос)", &g_cfg.kamm_strength, 0.0f, 1.50f, "%.2f");
+                if (ImGui::CollapsingHeader(L("4. Tire Model (Pacejka + Kamm Circle)", "4. Шинная модель (Pacejka + Круг Камма)"), ImGuiTreeNodeFlags_DefaultOpen)) {
+                    ImGui::Checkbox(L("Enable Tire Model##tire", "Включить шинную модель##tire"), &g_cfg.tire_enabled);
+                    ImGui::SliderFloat(L("Lateral Tire Grip", "Зацеп шин (боковой держак)"), &g_cfg.tire_grip, 0.0f, 1.50f, "%.2f");
+                    ImGui::SliderFloat(L("Kamm Circle (Trail / Drift)", "Круг Камма (Trail / Занос)"), &g_cfg.kamm_strength, 0.0f, 1.50f, "%.2f");
                 }
             }
 
             // Shared footer (both Basic and Advanced): mini-HUD scale, wheel button bind & reset
             ImGui::Separator();
             ImGui::SetNextItemWidth(160.0f);
-            ImGui::SliderFloat("Размер мини-HUD", &g_cfg.mini_hud_scale, 0.70f, 1.80f, "%.2fx");
+            ImGui::SliderFloat(L("Mini-HUD Scale", "Размер мини-HUD"), &g_cfg.mini_hud_scale, 0.70f, 1.80f, "%.2fx");
             if (g_bindingJoyBtn) {
-                ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.2f, 1.0f), "Нажми любую кнопку на руле...");
+                ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.2f, 1.0f), "%s", L("Press any wheel button...", "Нажми любую кнопку на руле..."));
                 ImGui::SameLine();
-                if (ImGui::Button("Отмена")) g_bindingJoyBtn = false;
+                if (ImGui::Button(L("Cancel", "Отмена"))) g_bindingJoyBtn = false;
             } else {
-                ImGui::Text("Кнопка меню: b%d (Insert / F6)", g_cfg.menu_joy_btn);
+                ImGui::Text(L("Menu key: b%d (Insert / F6)", "Кнопка меню: b%d (Insert / F6)"), g_cfg.menu_joy_btn);
                 ImGui::SameLine();
-                if (ImGui::Button("Назначить на руле")) g_bindingJoyBtn = true;
+                if (ImGui::Button(L("Bind Wheel Button", "Назначить на руле"))) g_bindingJoyBtn = true;
                 ImGui::SameLine();
-                if (ImGui::Button("Сброс")) reset_defaults();
+                if (ImGui::Button(L("Reset", "Сброс"))) reset_defaults();
             }
         }
         ImGui::End();
