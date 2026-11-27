@@ -153,31 +153,6 @@ void __fastcall hkVehicleStep(void* vehicle, void* arg) {
         return;
     }
 
-    // Real dt via QueryPerformanceCounter for frame-rate independent thermal model
-    static LARGE_INTEGER s_qpcFreq{};
-    static LARGE_INTEGER s_prevQpc{};
-    static float s_tireTemp[4]  = { 22.0f, 22.0f, 22.0f, 22.0f };
-    static float s_brakeTemp[4] = { 22.0f, 22.0f, 22.0f, 22.0f };
-    float ambTemp = g_tel.ambient_temp.load(std::memory_order_relaxed);
-    if (g_tel.reset_thermals.exchange(false, std::memory_order_relaxed)) {
-        for (int i = 0; i < 4; ++i) {
-            s_tireTemp[i]  = ambTemp;
-            s_brakeTemp[i] = ambTemp;
-            g_tel.dbg_tire_temp[i].store(ambTemp, std::memory_order_relaxed);
-            g_tel.dbg_brake_temp[i].store(ambTemp, std::memory_order_relaxed);
-        }
-    }
-    if (s_qpcFreq.QuadPart == 0) {
-        QueryPerformanceFrequency(&s_qpcFreq);
-        QueryPerformanceCounter(&s_prevQpc);
-    }
-    LARGE_INTEGER nowQpc{};
-    QueryPerformanceCounter(&nowQpc);
-    float dt = static_cast<float>(nowQpc.QuadPart - s_prevQpc.QuadPart) / static_cast<float>(s_qpcFreq.QuadPart);
-    s_prevQpc = nowQpc;
-    if (dt < 0.001f) dt = 0.001f;
-    if (dt > 0.05f)  dt = 0.05f;
-
     // Verify 2..4 wheeled vehicle (car chassis; skips multi-axle trailers)
     auto* vbytes = static_cast<uint8_t*>(vehicle);
     void* vdata = *reinterpret_cast<void**>(vbytes + 0x200);
@@ -214,6 +189,32 @@ void __fastcall hkVehicleStep(void* vehicle, void* arg) {
     float playerSpeedMps = std::fabs(g_tel.speed_mps.load(std::memory_order_relaxed));
     if (std::fabs(actorHorizMps - playerSpeedMps) > 8.0f) return;
 
+    // Real dt via QueryPerformanceCounter ONLY for filtered player vehicle (ignores AI traffic!)
+    static LARGE_INTEGER s_qpcFreq{};
+    static LARGE_INTEGER s_prevQpc{};
+    static float s_tireTemp[4]  = { 22.0f, 22.0f, 22.0f, 22.0f };
+    static float s_brakeTemp[4] = { 22.0f, 22.0f, 22.0f, 22.0f };
+    static void* s_lastPlayerVeh = nullptr;
+    float ambTemp = g_tel.ambient_temp.load(std::memory_order_relaxed);
+    if (g_tel.reset_thermals.exchange(false, std::memory_order_relaxed)) {
+        for (int i = 0; i < 4; ++i) {
+            s_tireTemp[i]  = ambTemp;
+            s_brakeTemp[i] = ambTemp;
+            g_tel.dbg_tire_temp[i].store(ambTemp, std::memory_order_relaxed);
+            g_tel.dbg_brake_temp[i].store(ambTemp, std::memory_order_relaxed);
+        }
+    }
+    if (s_qpcFreq.QuadPart == 0) {
+        QueryPerformanceFrequency(&s_qpcFreq);
+        QueryPerformanceCounter(&s_prevQpc);
+    }
+    LARGE_INTEGER nowQpc{};
+    QueryPerformanceCounter(&nowQpc);
+    float dt = static_cast<float>(nowQpc.QuadPart - s_prevQpc.QuadPart) / static_cast<float>(s_qpcFreq.QuadPart);
+    s_prevQpc = nowQpc;
+    if (dt < 0.001f) dt = 0.001f;
+    if (dt > 0.05f)  dt = 0.05f;
+
     float speedMps = actorHorizMps;
     float speedKmh = speedMps * 3.6f;
 
@@ -235,7 +236,7 @@ void __fastcall hkVehicleStep(void* vehicle, void* arg) {
     if (!g_loggedFirst.exchange(true, std::memory_order_relaxed)) {
         char buf[192];
         std::snprintf(buf, sizeof(buf),
-            "[ets2_car_enhance] v1.7 first tick: wheels=%u physxMass=%.4f fwd=(%.2f,%.2f)",
+            "[ets2_car_enhance] v2.1.4 first tick: wheels=%u physxMass=%.4f fwd=(%.2f,%.2f)",
             wheelCount, mass, fwdX, fwdZ);
         plugin_log(SCS_LOG_TYPE_message, buf);
     }
@@ -248,13 +249,17 @@ void __fastcall hkVehicleStep(void* vehicle, void* arg) {
     static bool  s_hasPrevVel = false;
     static float s_gLatSmooth  = 0.0f;
     static float s_gLongSmooth = 0.0f;
+    if (s_lastPlayerVeh != vehicle) {
+        s_lastPlayerVeh = vehicle;
+        s_hasPrevVel = false;
+    }
     if (s_hasPrevVel && dt > 0.0005f) {
         float ax = (linVel.x - s_prevLinVel.x) / dt;
         float az = (linVel.z - s_prevLinVel.z) / dt;
         float aFwd   = ax * fwdX   + az * fwdZ;
         float aRight = ax * rightX + az * rightZ;
-        float rawGLong = (-aFwd / 9.81f) * 2.2f;
-        float rawGLat  = (-aRight / 9.81f) * 2.2f;
+        float rawGLong = (-aFwd / 9.81f) * 1.25f;
+        float rawGLat  = (-aRight / 9.81f) * 1.25f;
         if (rawGLong >  3.0f) rawGLong =  3.0f;
         if (rawGLong < -3.0f) rawGLong = -3.0f;
         if (rawGLat  >  3.0f) rawGLat  =  3.0f;
@@ -349,12 +354,13 @@ void __fastcall hkVehicleStep(void* vehicle, void* arg) {
     float wy = std::isfinite(angVel.y) ? angVel.y : 0.0f;
     g_tel.dbg_yaw_rate.store(wy, std::memory_order_relaxed);
 
-    // Compute longitudinal & lateral velocity in car frame -> true slip angle
+    // Compute longitudinal & lateral velocity in car frame -> true slip angle (works even in deep 80 deg slides!)
     float vLong = linVel.x * fwdX + linVel.z * fwdZ;
     float vLat  = linVel.x * rightX + linVel.z * rightZ;
     float slipDeg = 0.0f;
-    if (vLong > 5.0f) {
-        slipDeg = std::atan2(vLat, vLong) * 57.29578f;
+    if (speedMps > 5.0f && vLong > -1.0f) {
+        float denom = (vLong > 0.5f) ? vLong : 0.5f;
+        slipDeg = std::atan2(vLat, denom) * 57.29578f;
     }
     g_tel.dbg_slip_deg.store(slipDeg, std::memory_order_relaxed);
 
@@ -422,7 +428,7 @@ void __fastcall hkVehicleStep(void* vehicle, void* arg) {
         }
     }
 
-    if (g_cfg.assist_enabled && speedKmh >= g_cfg.assist_start_kmh && groundedWheels >= 2 && vLong > 5.0f) {
+    if (g_cfg.assist_enabled && speedKmh >= g_cfg.assist_start_kmh && groundedWheels >= 2 && speedMps > 5.0f && vLong > -1.0f) {
         float steer = steerAbs;
 
         float gainMult = 1.0f;
@@ -575,7 +581,7 @@ void __fastcall hkVehicleStep(void* vehicle, void* arg) {
     float reportGrip = 1.0f;
     int   kammState  = 0;
 
-    if (g_cfg.tire_enabled && speedKmh >= 40.0f && groundedWheels >= 2 && vLong > 5.0f) {
+    if (g_cfg.tire_enabled && speedKmh >= 40.0f && groundedWheels >= 2 && speedMps > 5.0f && vLong > -1.0f) {
         // Temperature grip modifier (depends on TireType)
         float avgTireT = 0.25f * (s_tireTemp[0] + s_tireTemp[1] + s_tireTemp[2] + s_tireTemp[3]);
         float optLow = 60.0f, optHigh = 95.0f;
@@ -741,7 +747,7 @@ DWORD WINAPI phys_init_thread(LPVOID) {
         g_physHooked.store(true);
         char buf[160];
         std::snprintf(buf, sizeof(buf),
-            "[ets2_car_enhance] v1.7 physics hook active at %p (Axle Aero + Slip-Angle ESP)", g_vstepAddr);
+            "[ets2_car_enhance] v2.1.4 physics hook active at %p (Axle Aero + Slip-Angle ESP)", g_vstepAddr);
         plugin_log(SCS_LOG_TYPE_message, buf);
     } else {
         plugin_log(SCS_LOG_TYPE_warning, "[ets2_car_enhance] Failed to enable vehicle_step hook");

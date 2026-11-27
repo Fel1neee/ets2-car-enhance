@@ -236,16 +236,18 @@ inline CarClass classify_vehicle(
     }
 
     // 1. Trucks (by >4 wheels, diesel low RPM limit, or truck brand/model)
+    if (wheel_count > 4) return CarClass::Truck;
+    if (rpm_limit > 100.0f && rpm_limit < 3600.0f) return CarClass::Truck;
+
     const char* truckKeys[] = {
-        "scania", "volvo", "daf", "iveco", "renault", "freightliner", "kenworth",
+        "scania", "daf", "iveco", "freightliner", "kenworth",
         "peterbilt", "mack", "western", "international", "actros", "arocs", "antos",
-        "axor", "tgx", "tgs", "man ", "stralis", "s-way", "s_way", "kamaz", "maz", "ural"
+        "axor", "tgx", "tgs", " man ", "stralis", "s-way", "s_way", "kamaz", "maz", "ural",
+        "fh16", "fh 16", "volvo fh", "volvo fm", "renault t", "renault magnum", "renault premium"
     };
     for (const char* k : truckKeys) {
         if (contains_ci(combined, k)) return CarClass::Truck;
     }
-    if (wheel_count > 4) return CarClass::Truck;
-    if (rpm_limit > 100.0f && rpm_limit < 3600.0f) return CarClass::Truck;
 
     // 2. Supercars / Hypercars
     const char* superKeys[] = {

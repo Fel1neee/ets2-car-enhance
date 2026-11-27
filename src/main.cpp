@@ -71,7 +71,7 @@ static SCSAPI_VOID on_configuration(const scs_event_t, const void* const event_i
     g_tel.detected_class.store(static_cast<int>(cls), std::memory_order_relaxed);
     g_tel.reset_thermals.store(true, std::memory_order_relaxed);
 
-    if (g_cfg.auto_preset) {
+    if (g_cfg.auto_preset && !g_cfg.ui_advanced) {
         apply_car_preset(cls);
     }
 
@@ -209,7 +209,7 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
     dx11_blur_start();
     physics_downforce_start();
 
-    plugin_log(SCS_LOG_TYPE_message, "[ets2_car_enhance] v1.7 initialized (Axle Aero Balance + Slip-Angle ESP)");
+    plugin_log(SCS_LOG_TYPE_message, "[ets2_car_enhance] v2.1.4 initialized (Aero + Tire/Brake Thermal + DX11 HUD)");
     return SCS_RESULT_ok;
 }
 

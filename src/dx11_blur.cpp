@@ -526,7 +526,15 @@ void hook_device_context() {
 }
 
 bool ensure_pipeline(IDXGISwapChain* sc) {
-    if (g_dev && g_vs && g_ps) return true;
+    if (g_dev && g_vs && g_ps) {
+        ID3D11Device* scDev = nullptr;
+        if (SUCCEEDED(sc->GetDevice(__uuidof(ID3D11Device), reinterpret_cast<void**>(&scDev))) && scDev) {
+            bool same = (scDev == g_dev);
+            scDev->Release();
+            if (same) return true;
+        }
+        release_all_d3d();
+    }
 
     if (FAILED(sc->GetDevice(__uuidof(ID3D11Device), reinterpret_cast<void**>(&g_dev))) || !g_dev) {
         return false;
@@ -616,16 +624,19 @@ bool ensure_pipeline(IDXGISwapChain* sc) {
 }
 
 void poll_joy_and_hotkeys() {
-    bool f6  = (GetAsyncKeyState(VK_F6) & 0x8000) != 0;
-    bool ins = (GetAsyncKeyState(VK_INSERT) & 0x8000) != 0;
-    if ((f6 && !g_prevF6) || (ins && !g_prevIns)) {
+    if (g_hwnd && GetForegroundWindow() != g_hwnd) return;
+
+    bool ctrl = (GetAsyncKeyState(VK_CONTROL) & 0x8000) != 0;
+    bool f6   = (GetAsyncKeyState(VK_F6) & 0x8000) != 0;
+    bool ins  = (GetAsyncKeyState(VK_INSERT) & 0x8000) != 0;
+    if (((f6 && !ctrl) && !g_prevF6) || (ins && !g_prevIns)) {
         g_menuOpen = !g_menuOpen;
     }
     g_prevF6  = f6;
     g_prevIns = ins;
 
     bool f9 = (GetAsyncKeyState(VK_F9) & 0x8000) != 0;
-    if (f9 && !g_prevF9) {
+    if (f9 && !ctrl && !g_prevF9) {
         g_cfg.blur_enabled = !g_cfg.blur_enabled;
         plugin_log(SCS_LOG_TYPE_message, g_cfg.blur_enabled
             ? "[ets2_car_enhance] Speed blur ON (F9)"
@@ -785,6 +796,8 @@ static bool level_button(const char* label, bool active, const ImVec2& sz) {
     return clicked;
 }
 
+static bool g_resetMiniHudPos = false;
+
 static void draw_mini_hud() {
     if (!g_cfg.mini_hud_enabled) return;
 
@@ -796,10 +809,12 @@ static void draw_mini_hud() {
     float hudH = 132.0f * s;
 
     ImGuiIO& io = ImGui::GetIO();
+    ImGuiCond posCond = g_resetMiniHudPos ? ImGuiCond_Always : ImGuiCond_FirstUseEver;
+    g_resetMiniHudPos = false;
     if (g_cfg.mini_hud_x < 0.0f || g_cfg.mini_hud_y < 0.0f) {
-        ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f - hudW * 0.5f, io.DisplaySize.y - hudH - 14.0f), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f - hudW * 0.5f, io.DisplaySize.y - hudH - 14.0f), posCond);
     } else {
-        ImGui::SetNextWindowPos(ImVec2(g_cfg.mini_hud_x, g_cfg.mini_hud_y), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowPos(ImVec2(g_cfg.mini_hud_x, g_cfg.mini_hud_y), posCond);
     }
     ImGui::SetNextWindowSize(ImVec2(hudW, hudH), ImGuiCond_Always);
 
@@ -1050,7 +1065,7 @@ void draw_imgui_menu(ID3D11RenderTargetView* rtv, float kmh) {
 
     if (g_menuOpen) {
         ImGui::SetNextWindowSize(ImVec2(550, 735), ImGuiCond_FirstUseEver);
-        if (ImGui::Begin("ETS2 Car Enhance v2.1.3 by Fel1neee", &g_menuOpen, ImGuiWindowFlags_NoCollapse)) {
+        if (ImGui::Begin("ETS2 Car Enhance v2.1.4 by Fel1neee", &g_menuOpen, ImGuiWindowFlags_NoCollapse)) {
             float thr     = g_tel.throttle.load(std::memory_order_relaxed) * 100.0f;
             float brk     = g_tel.brake.load(std::memory_order_relaxed) * 100.0f;
             float str     = g_tel.steer.load(std::memory_order_relaxed);
@@ -1069,10 +1084,13 @@ void draw_imgui_menu(ID3D11RenderTargetView* rtv, float kmh) {
             // Top toolbar: [Load] [Save] [HUD] [Blur]   ...   [EN/RU] [Basic/Advanced]
             if (ImGui::Button(L("Load", "Загрузить"))) {
                 load_config();
-                apply_abs_level(g_cfg.abs_level);
-                apply_esp_level(g_cfg.esp_level);
-                apply_tire_type(g_cfg.tire_type);
-                apply_brake_type(g_cfg.brake_type);
+                if (!g_cfg.ui_advanced) {
+                    apply_abs_level(g_cfg.abs_level);
+                    apply_esp_level(g_cfg.esp_level);
+                    apply_tire_type(g_cfg.tire_type);
+                    apply_brake_type(g_cfg.brake_type);
+                }
+                g_resetMiniHudPos = true;
                 plugin_log(SCS_LOG_TYPE_message, "[ets2_car_enhance] Loaded config from .ini");
             }
             ImGui::SameLine();
@@ -1103,11 +1121,11 @@ void draw_imgui_menu(ID3D11RenderTargetView* rtv, float kmh) {
                         carName, clsName, kmh, gripPct, slip);
             if (absAct) { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.85f, 0.2f, 1.0f), "[ABS]"); }
             if (esp)    { ImGui::SameLine(); ImGui::TextColored(ImVec4(0.2f, 0.95f, 0.4f, 1.0f), "[ESP]"); }
-            if (kState == 1)      { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.85f, 0.2f, 1.0f), L("[Edge]", "[Грань]")); }
-            else if (kState == 2) { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.3f, 0.3f, 1.0f), L("[Slide]", "[Срыв]")); }
+            if (kState == 1)      { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.85f, 0.2f, 1.0f), "%s", L("[Edge]", "[Грань]")); }
+            else if (kState == 2) { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.3f, 0.3f, 1.0f), "%s", L("[Slide]", "[Срыв]")); }
             else if (kState == 3) { ImGui::SameLine(); ImGui::TextColored(ImVec4(0.3f, 0.85f, 1.0f, 1.0f), "[Trail]"); }
-            else if (kState == 4) { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.2f, 1.0f), L("[Under]", "[Андер]")); }
-            else if (kState == 5) { ImGui::SameLine(); ImGui::TextColored(ImVec4(0.95f, 0.4f, 0.9f, 1.0f), L("[Drift]", "[Занос]")); }
+            else if (kState == 4) { ImGui::SameLine(); ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.2f, 1.0f), "%s", L("[Under]", "[Андер]")); }
+            else if (kState == 5) { ImGui::SameLine(); ImGui::TextColored(ImVec4(0.95f, 0.4f, 0.9f, 1.0f), "%s", L("[Drift]", "[Занос]")); }
 
             if (!g_cfg.ui_advanced) {
                 // =============================================================
@@ -1285,7 +1303,10 @@ void draw_imgui_menu(ID3D11RenderTargetView* rtv, float kmh) {
                 ImGui::SameLine();
                 if (ImGui::Button(L("Bind Wheel Button", "Назначить на руле"))) g_bindingJoyBtn = true;
                 ImGui::SameLine();
-                if (ImGui::Button(L("Reset", "Сброс"))) reset_defaults();
+                if (ImGui::Button(L("Reset", "Сброс"))) {
+                    reset_defaults();
+                    g_resetMiniHudPos = true;
+                }
             }
         }
         ImGui::End();

@@ -12,7 +12,9 @@ $root = $PSScriptRoot
 $buildDir = Join-Path $root "build"
 if (!(Test-Path $buildDir)) { New-Item -ItemType Directory -Path $buildDir | Out-Null }
 
+$prefixFlag = "-ffile-prefix-map=$root=."
 $inc = @(
+    $prefixFlag,
     "-I$root\src",
     "-I$root\third_party\scs_sdk\include",
     "-I$root\third_party\minhook-master\include",
@@ -30,7 +32,7 @@ $mhSrc = @(
 )
 foreach ($f in $mhSrc) {
     $obj = Join-Path $buildDir ([IO.Path]::GetFileNameWithoutExtension($f) + ".o")
-    if (!(Test-Path $obj)) { & gcc -O2 -I"$root\third_party\minhook-master\include" -c $f -o $obj }
+    if (!(Test-Path $obj)) { & gcc -O2 $prefixFlag -I"$root\third_party\minhook-master\include" -c $f -o $obj }
     $objFiles += $obj
 }
 
@@ -44,7 +46,7 @@ $imguiSrc = @(
 )
 foreach ($f in $imguiSrc) {
     $obj = Join-Path $buildDir ([IO.Path]::GetFileNameWithoutExtension($f) + ".o")
-    if (!(Test-Path $obj)) { & g++ -std=c++17 -O2 -I"$root\third_party\imgui-master" -I"$root\third_party\imgui-master\backends" -c $f -o $obj }
+    if (!(Test-Path $obj)) { & g++ -std=c++17 -O2 $prefixFlag -I"$root\third_party\imgui-master" -I"$root\third_party\imgui-master\backends" -c $f -o $obj }
     $objFiles += $obj
 }
 
@@ -57,7 +59,7 @@ $src = @(
 $libs = @("-ld3d11", "-ld3dcompiler", "-ldxgi", "-ldwmapi", "-lwinmm", "-luser32", "-lgdi32", "-static-libgcc", "-static-libstdc++")
 $outDll = Join-Path $buildDir "ets2_car_enhance.dll"
 
-& g++ -std=c++17 -O2 -shared @inc @src @objFiles -o $outDll @libs
+& g++ -std=c++17 -O2 -s -shared @inc @src @objFiles -o $outDll @libs
 Write-Host "Built: $outDll"
 
 if (Test-Path $GamePluginsDir) {
